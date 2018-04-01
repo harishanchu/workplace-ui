@@ -1,0 +1,13 @@
+.fixed-header {
+  position: fixed;
+  z-index: 2;
+  /*transform: translate3d(0%, 0%, 1px);
+  transition: all 0.25s ease;*/
+}
+
+//@todo: fix this
+.main-toolbar-right-item {
+  flex-shrink: 1;
+  flex-basis: 40px;
+  left: -221px;
+}

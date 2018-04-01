@@ -1,0 +1,45 @@
+<div class="timesheet-container mat-elevation-z8">
+  <div class="timesheet-header">
+    <h4>Log work</h4>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource">
+
+    <ng-container *ngFor="let column of displayedColumns">
+      <ng-container *ngIf="column != 'actions'" [matColumnDef]="column">
+        <mat-header-cell *matHeaderCellDef> {{column | titlecase}}</mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
+      </ng-container>
+    </ng-container>
+
+    <!-- actions -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>
+        <button mat-icon-button color="primary" (click)="addNew()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-header-cell>
+
+      <mat-cell *matCellDef="let row; let i=index;">
+        <button mat-icon-button color="accent" (click)="editEntry(i, row)">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+        </button>
+
+        <button mat-icon-button color="accent" (click)="deleteEntry(i,row)">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+
+  <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'">
+    No items to display
+  </div>
+
+</div>

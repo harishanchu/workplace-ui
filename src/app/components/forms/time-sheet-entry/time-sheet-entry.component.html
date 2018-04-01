@@ -1,0 +1,48 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon>access_time</mat-icon>
+        Log work
+      </mat-panel-title>
+      <mat-panel-description>
+        Add new time sheet entry
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <form>
+      <mat-form-field>
+        <mat-select placeholder="Status" [formControl]="statusControl" required>
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{status.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="statusControl.hasError('required')">Please choose a status</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="Project" [formControl]="projectControl" required>
+          <mat-option *ngFor="let project of projects" [value]="project">
+            {{project.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="statusControl.hasError('required')">Please choose a project</mat-error>
+      </mat-form-field>
+      <br>
+
+      <div class="slider-field">
+      <span class="slider-field-label"> Duration:</span>
+      <mat-slider thumb-label=true min=1 max=600 class="time-slider"></mat-slider>
+      <span class="slider-field-extension">Minutes</span>
+      </div>
+
+      <mat-form-field class="full-width">
+        <textarea matInput placeholder="Comment"></textarea>
+      </mat-form-field>
+
+      <div class="form-actions">
+        <button mat-raised-button>Reset</button>
+        <button mat-raised-button color="primary">Save</button>
+      </div>
+    </form>
+  </mat-expansion-panel>
+</mat-accordion>

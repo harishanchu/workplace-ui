@@ -1,0 +1,50 @@
+@import "../../../styles/themeing";
+
+$microMenuWidth: 64px;
+$fullMenuWidth: 221px;
+
+.main-side-nav-container {
+  ::ng-deep .mat-sidenav-content {
+    transition: margin-left 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+    margin-left: $fullMenuWidth !important;
+  }
+
+  .main-side-nav {
+    display: flex;
+    flex-direction: column;
+    width: $fullMenuWidth;
+    transition: width 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    .nav-top {
+      flex-grow: 1;
+      padding-top: 0;
+    }
+
+    .brand {
+      height: 64px;
+      background: mat-color(map-get($theme, primary));
+      color: mat-color(map-get($theme, primary), default-contrast);
+      @media (max-width: 599px) {
+        height: 56px;
+      }
+    }
+  }
+
+  &.micro {
+    .main-side-nav {
+      width: $microMenuWidth;
+    }
+    ::ng-deep .mat-sidenav-content {
+      margin-left: $microMenuWidth !important;
+    }
+
+    //@todo: main toolbar flex fix; fixed with left margin;
+    ::ng-deep .main-toolbar-right-item {
+      left: -$microMenuWidth;
+    }
+  }
+
+  #main-content {
+    margin-top: 70px;
+  }
+}

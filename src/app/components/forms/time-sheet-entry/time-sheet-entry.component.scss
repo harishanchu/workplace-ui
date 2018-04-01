@@ -1,0 +1,32 @@
+.time-slider {
+  width: 100%;
+}
+
+mat-expansion-panel {
+  margin: 5px!important;
+
+  mat-panel-title {
+    mat-icon {
+      font-size: 17px;
+      height: 17px;
+      width: 17px;
+      margin-right: 5px;
+    }
+  }
+
+  .form-actions {
+    text-align: right;
+  }
+
+  mat-form-field,
+  .slider-field {
+    margin: 6px 4px;
+  }
+
+  .slider-field {
+    .slider-field-label,
+    .slider-field-extension {
+      color: rgba(0, 0, 0, 0.54);
+    }
+  }
+}
