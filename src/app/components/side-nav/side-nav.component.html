@@ -1,10 +1,6 @@
 <mat-sidenav-container class="main-side-nav-container" [ngClass]="{'micro': menuMode == 'micro' }" autosize>
-  <mat-sidenav #sidenav class="main-side-nav" mode="side" opened fixedInViewport>
+  <mat-sidenav #sidenav class="main-side-nav" mode="side" opened fixedInViewport fixedTopGap=48>
     <mat-nav-list class="nav-top">
-      <mat-list-item class="brand mat-elevation-z4">
-        <mat-icon matListIcon>extension</mat-icon>
-        <span matLine>{{appName}}</span>
-      </mat-list-item>
       <a mat-list-item routerLink="{{navItem.url}}" *ngFor="let navItem of navItemList">
         <mat-icon matListIcon>{{navItem.icon}}</mat-icon>
         <span matLine> {{ navItem.title }}</span>
@@ -18,9 +14,8 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-main-toolbar></app-main-toolbar>
     <div id="main-content">
-    <router-outlet></router-outlet>
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

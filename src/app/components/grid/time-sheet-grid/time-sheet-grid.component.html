@@ -1,6 +1,5 @@
-<div class="timesheet-container mat-elevation-z8">
+<div class="timesheet-container">
   <div class="timesheet-header">
-    <h4>Log work</h4>
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
     </mat-form-field>
@@ -18,9 +17,7 @@
     <!-- actions -->
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>
-        <button mat-icon-button color="primary" (click)="addNew()">
-          <mat-icon>add</mat-icon>
-        </button>
+        Actions
       </mat-header-cell>
 
       <mat-cell *matCellDef="let row; let i=index;">

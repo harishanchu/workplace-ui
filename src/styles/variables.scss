@@ -11,3 +11,8 @@ $warn:    mat-palette($mat-red);
 
 // Create the theme object (a Sass map containing all of the palettes).
 $theme: mat-light-theme($primary, $accent, $warn);
+
+$microMenuWidth: 65.1px;
+$fullMenuWidth: 221px;
+$topbarHeight: 48px;
+$primaryBorder: 1.1px solid rgba(0,0,0,0.12);

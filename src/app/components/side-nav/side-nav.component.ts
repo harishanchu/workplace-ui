@@ -8,7 +8,6 @@ import {Component, OnInit} from '@angular/core';
 export class SideNavComponent implements OnInit {
   private navItemList;
   private menuMode: string;
-  private appName: string;
 
   constructor() {
     this.navItemList = [
@@ -16,7 +15,6 @@ export class SideNavComponent implements OnInit {
       {title: 'Dashboard', url: '/dashboard', icon: 'dashboard'}
     ];
     this.menuMode = 'full';
-    this.appName = 'My Deck';
   }
 
   ngOnInit() {

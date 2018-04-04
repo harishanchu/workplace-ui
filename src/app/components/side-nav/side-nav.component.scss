@@ -1,8 +1,5 @@
 @import "../../../styles/themeing";
 
-$microMenuWidth: 64px;
-$fullMenuWidth: 221px;
-
 .main-side-nav-container {
   ::ng-deep .mat-sidenav-content {
     transition: margin-left 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -13,20 +10,12 @@ $fullMenuWidth: 221px;
     display: flex;
     flex-direction: column;
     width: $fullMenuWidth;
+    border-right: $primaryBorder;
     transition: width 400ms cubic-bezier(0.25, 0.8, 0.25, 1);
 
     .nav-top {
       flex-grow: 1;
-      padding-top: 0;
-    }
-
-    .brand {
-      height: 64px;
-      background: mat-color(map-get($theme, primary));
-      color: mat-color(map-get($theme, primary), default-contrast);
-      @media (max-width: 599px) {
-        height: 56px;
-      }
+      //padding-top: 0;
     }
   }
 
@@ -45,6 +34,6 @@ $fullMenuWidth: 221px;
   }
 
   #main-content {
-    margin-top: 70px;
+    margin-top: $topbarHeight;
   }
 }

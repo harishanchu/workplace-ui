@@ -6,8 +6,10 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./main-toolbar.component.scss']
 })
 export class MainToolbarComponent implements OnInit {
+  private appName: string;
 
   constructor() {
+    this.appName = 'My deck';
   }
 
   ngOnInit() {

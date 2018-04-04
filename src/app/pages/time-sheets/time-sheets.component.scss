@@ -1,0 +1,19 @@
+@import "../../../styles/themeing";
+
+mat-toolbar {
+  border-bottom: $primaryBorder;
+  background: rgb(255, 255, 255);
+}
+
+.action-bar-title {
+  font-weight: 400;
+  letter-spacing: .005em;
+  font-size: 18px;
+  line-height: 20px;
+  margin-left: 8px;
+  color: rgb(0, 0, 0);
+}
+
+.action-bar-tools {
+  margin-left: 56px;
+}
