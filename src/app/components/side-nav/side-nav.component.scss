@@ -19,6 +19,10 @@
     }
   }
 
+  .nav-collapse-button mat-icon{
+    transition: all 200ms ease;
+  }
+
   &.micro {
     .main-side-nav {
       width: $microMenuWidth;
@@ -30,6 +34,10 @@
     //@todo: main toolbar flex fix; fixed with left margin;
     ::ng-deep .main-toolbar-right-item {
       left: -$microMenuWidth;
+    }
+
+    .nav-collapse-button mat-icon{
+      transform: rotate(180deg);
     }
   }
 
