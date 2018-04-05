@@ -13,7 +13,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -29,7 +29,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSliderModule,
     MatCardModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   exports: [
     MatSidenavModule,
@@ -43,7 +44,8 @@ import {MatTableModule} from '@angular/material/table';
     MatSliderModule,
     MatCardModule,
     MatExpansionModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ]
 })
 export class MaterialModule {

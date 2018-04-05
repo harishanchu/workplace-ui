@@ -30,7 +30,7 @@ export class TimeSheetGridComponent implements OnInit {
 }
 
 export interface Element {
-  id: string,
+  id: string;
   status: string;
   project: string;
   duration: number;
@@ -39,7 +39,7 @@ export interface Element {
 }
 
 const ELEMENT_DATA: Element[] = [
-  /*{id: '1', status: 'completed', project: 'internal', duration: 30, comment: 'My work log', date: new Date()},
+  {id: '1', status: 'completed', project: 'internal', duration: 30, comment: 'My work log', date: new Date()},
   {id: '2', status: 'completed', project: 'general', duration: 20, comment: 'Just another work log', date: new Date()},
-  {id: '3', status: 'completed', project: 'general', duration: 20, comment: 'Just another work log', date: new Date()}*/
+  {id: '3', status: 'completed', project: 'general', duration: 20, comment: 'Just another work log', date: new Date()}
 ];
