@@ -1,6 +1,43 @@
 <div class="container">
-  <h3 mat-dialog-title>Log work</h3>
-  <form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
+  <h3 mat-dialog-title>{{data.title}}</h3>
+
+  <form>
+    <div fxLayout="row">
+      <mat-form-field class="form-item" fxFlex="50">
+        <mat-select placeholder="Status" [formControl]="formControl" required>
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{status.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.hasError('required')">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-item" fxFlex="50">
+        <mat-select placeholder="Project" [formControl]="formControl" required>
+          <mat-option *ngFor="let project of projects" [value]="project">
+            {{project.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formControl.hasError('required')">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="slider-field form-item time-slider" fxLayout="row" fxLayoutAlign="center center">
+      <span class="slider-field-label"> Duration:</span>
+      <mat-slider thumb-label=true min=1 max=600 fxFlex></mat-slider>
+      <span class="slider-field-extension">minutes</span>
+    </div>
+
+    <mat-form-field class="full-width form-item">
+      <textarea matInput placeholder="Comment"></textarea>
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+      <button mat-raised-button matDialogClose>Cancel</button>
+      <button mat-raised-button color="primary">Save</button>
+    </div>
+  </form>
+  <!--<form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
 
     <div class="form">
       <mat-form-field color="accent">
@@ -9,7 +46,7 @@
       </mat-form-field>
     </div>
 
-    <!--Textarea for demo purposes-->
+    &lt;!&ndash;Textarea for demo purposes&ndash;&gt;
     <div class="form">
       <mat-form-field color="accent">
         <textarea matInput #input class="form-control" placeholder="Title" [(ngModel)]="data.title" name="title" required ></textarea>
@@ -17,7 +54,7 @@
       </mat-form-field>
     </div>
 
-    <!--Contains mat-hint for characters count and has maxLengt set-->
+    &lt;!&ndash;Contains mat-hint for characters count and has maxLengt set&ndash;&gt;
     <div class="form">
       <mat-form-field color="accent">
         <input matInput #inputstate class="form-control" placeholder="State" [(ngModel)]="data.state" name="state" maxlength="10" required >
@@ -48,5 +85,5 @@
       <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
       <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
     </div>
-  </form>
+  </form>-->
 </div>

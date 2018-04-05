@@ -14,6 +14,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatExpansionModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ],
   exports: [
     MatSidenavModule,
@@ -45,7 +47,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatCardModule,
     MatExpansionModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    MatGridListModule
   ]
 })
 export class MaterialModule {

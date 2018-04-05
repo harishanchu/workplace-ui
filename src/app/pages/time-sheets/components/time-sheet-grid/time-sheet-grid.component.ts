@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from '@angular/material';
+import {MatDialog} from '@angular/material';
+
+import {TimeSheetEntryComponent} from '../time-sheet-entry/time-sheet-entry.component';
 
 @Component({
   selector: 'app-time-sheet-grid',
@@ -16,13 +19,25 @@ export class TimeSheetGridComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor() {
+  constructor(public dialog: MatDialog) {
   }
 
   ngOnInit() {
   }
 
   editEntry() {
+    const dialogRef = this.dialog.open(TimeSheetEntryComponent, {
+      data: {title: 'Edit time sheet entry'}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        // After dialog is closed we're doing frontend updates
+        // For add we're just pushing a new row inside DataService
+        // this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
+        // this.refreshTable();
+      }
+    });
   }
 
   deleteEntry() {
