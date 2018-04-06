@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
@@ -9,19 +9,19 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 })
 export class TimeSheetEntryComponent implements OnInit {
   private formControl = new FormControl('', [Validators.required]);
-
-  statuses = [
+  private statuses = [
     {name: 'Completed', value: 'completed'},
     {name: 'In Progress', value: 'inProgress'}
   ];
-
-  projects = [
+  private projects = [
     {name: 'General', value: 'general'},
     {name: 'Internal', value: 'internal'}
   ];
+  private title;
 
   constructor(public dialogRef: MatDialogRef<TimeSheetEntryComponent>,
               @Inject(MAT_DIALOG_DATA) public data) {
+    this.title = data.title;
   }
 
   ngOnInit() {

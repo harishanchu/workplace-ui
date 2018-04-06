@@ -3,8 +3,23 @@
       <mat-icon class="brand-icon" matListIcon>extension</mat-icon>
       <span>{{appName}}</span>
     <div class="flex-spacer"></div>
-    <button mat-icon-button class="avatar-button">
+    <button mat-icon-button class="avatar-button" [matMenuTriggerFor]="accountMenu">
       <ngx-avatar value="H" size="30"></ngx-avatar>
     </button>
   </mat-toolbar-row>
 </mat-toolbar>
+
+<mat-menu #accountMenu="matMenu">
+  <button mat-menu-item>
+    <mat-icon>dialpad</mat-icon>
+    <span>Redial</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable alerts</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>power_settings_new</mat-icon>
+    <span>Logout</span>
+  </button>
+</mat-menu>

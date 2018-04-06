@@ -3,8 +3,18 @@
     <div class="action-bar-title">
       {{title}}
     </div>
-    <div class="action-bar-tools">
+    <div class="action-bar-tools" fxLayout="row">
       <button mat-button color="primary" (click)="addNew()"><mat-icon>add_circle_outline</mat-icon> Add new</button>
+      <span class="separator"></span>
+      <div class="date-switcher">
+        <button mat-icon-button>
+          <mat-icon mat-button color="primary">keyboard_arrow_left</mat-icon>
+        </button>
+        <span class="date-switcher-date">Today</span>
+        <button mat-icon-button>
+          <mat-icon mat-button color="primary">keyboard_arrow_right</mat-icon>
+        </button>
+      </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
