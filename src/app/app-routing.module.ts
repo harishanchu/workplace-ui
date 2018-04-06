@@ -1,12 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
+
 import {TimeSheetsComponent} from './pages/time-sheets/time-sheets.component';
 import {DsashboardComponent} from './pages/dsashboard/dsashboard.component';
+import {LoginComponent} from './pages/auth/login/login.component';
+import {AuthGuard, GuestGuard} from './guards/index';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'time-sheets', pathMatch: 'full' },
-  { path: 'time-sheets', component: TimeSheetsComponent},
-  { path: 'dashboard', component: DsashboardComponent}
+  {path: '', redirectTo: 'time-sheets', pathMatch: 'full', canActivate: [AuthGuard]},
+  {path: 'login', component: LoginComponent, canActivate: [GuestGuard]},
+  {path: 'time-sheets', component: TimeSheetsComponent, canActivate: [AuthGuard]},
+  {path: 'dashboard', component: DsashboardComponent, canActivate: [AuthGuard]},
+
+  {path: '**', redirectTo: ''}
 ];
 
 @NgModule({

@@ -19,7 +19,7 @@
     }
   }
 
-  .nav-collapse-button mat-icon{
+  .nav-collapse-button mat-icon {
     transition: all 200ms ease;
   }
 
@@ -36,7 +36,7 @@
       left: -$microMenuWidth;
     }
 
-    .nav-collapse-button mat-icon{
+    .nav-collapse-button mat-icon {
       transform: rotate(180deg);
     }
   }

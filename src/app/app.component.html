@@ -1,2 +1,9 @@
-<app-main-toolbar></app-main-toolbar>
-<app-side-nav></app-side-nav>
+<ng-container *ngIf="isLoggedIn$ | async">
+  <app-main-toolbar></app-main-toolbar>
+  <app-side-nav></app-side-nav>
+</ng-container>
+
+<ng-container id="main-content" *ngIf="!(isLoggedIn$ | async)">
+  <router-outlet></router-outlet>
+</ng-container>
+
