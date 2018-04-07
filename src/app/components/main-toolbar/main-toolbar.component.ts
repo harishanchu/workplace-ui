@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
+import {Router} from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
 
@@ -11,7 +12,7 @@ import {AuthService} from '../../services/auth.service';
 export class MainToolbarComponent implements OnInit {
   private appName: string;
 
-  constructor(private globals: Globals, private authService: AuthService) {
+  constructor(private globals: Globals, private authService: AuthService, private router: Router) {
   }
 
   ngOnInit() {
@@ -19,5 +20,6 @@ export class MainToolbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }

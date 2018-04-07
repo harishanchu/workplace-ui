@@ -1,6 +1,6 @@
 @import "../../../../styles/themeing";
 
-.login-container {
+.register-container {
   height: 100vh;
 
   .svg-bg {
@@ -38,14 +38,16 @@
 
     mat-card-content {
       padding: 48px 0 0;
-
-      .forgot-btn {
-        margin-right: -16px;
-      }
     }
 
     mat-card-actions {
       margin-right: 0;
+      margin-left: 0;
+
+      .guide-msg {
+        color: #757575;
+        font-size: 12px;
+      }
     }
 
     mat-progress-bar {

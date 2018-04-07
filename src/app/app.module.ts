@@ -24,7 +24,7 @@ import {DsashboardComponent} from './pages/dsashboard/dsashboard.component';
 import {TimeSheetEntryComponent} from './pages/time-sheets/components/time-sheet-entry/time-sheet-entry.component';
 import {TimeSheetGridComponent} from './pages/time-sheets/components/time-sheet-grid/time-sheet-grid.component';
 import {LoginComponent} from './pages/auth/login/login.component';
-import { ValidationService } from './services/validation.service';
+import { RegisterComponent } from './pages/auth/register/register.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,8 @@ import { ValidationService } from './services/validation.service';
     DsashboardComponent,
     TimeSheetEntryComponent,
     TimeSheetGridComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -56,8 +57,7 @@ import { ValidationService } from './services/validation.service';
     AuthGuard,
     AuthService,
     GuestGuard,
-    Globals,
-    ValidationService
+    Globals
   ],
   entryComponents: [
     TimeSheetEntryComponent

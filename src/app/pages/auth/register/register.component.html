@@ -1,4 +1,4 @@
-<div class="login-container" fxLayout="row" fxLayoutAlign="center center">
+<div class="register-container" fxLayout="row" fxLayoutAlign="center center">
 
   <div class="svg-bg" aria-hidden="true">
     <svg jsname="BUfzDd" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" preserveAspectRatio="xMinYMin slice"
@@ -30,13 +30,18 @@
       </mat-card-header>
 
       <div class="form-header">
-        <h1>Sign in</h1>
-        <p>With your {{globals.appName}} Account</p>
+        <h1>Register</h1>
+        <p>Create your {{globals.appName}} Account</p>
       </div>
 
-      <form (ngSubmit)="login()" [formGroup]="form">
+      <form (ngSubmit)="register()" [formGroup]="form">
 
         <mat-card-content fxLayout="column">
+
+          <mat-form-field>
+            <input autofocus type="text" matInput placeholder="Name" formControlName="name">
+            <mat-error *ngIf="hasError('name'); let error">{{error}}</mat-error>
+          </mat-form-field>
 
           <mat-form-field>
             <input autofocus type="text" matInput placeholder="Email" formControlName="email">
@@ -48,15 +53,18 @@
             <mat-error *ngIf="hasError('password'); let error">{{error}}</mat-error>
           </mat-form-field>
 
-          <a routerLink="." mat-button color="primary" fxFlexAlign="end" class="forgot-btn">Forgot password?</a>
+          <mat-form-field>
+            <input type="password" matInput placeholder="Confirm password" formControlName="confirmPassword">
+            <mat-error *ngIf="hasError('confirmPassword'); let error">{{error}}</mat-error>
+          </mat-form-field>
 
         </mat-card-content>
 
         <mat-card-actions>
 
           <div fxLayout="row" fxLayoutAlign="space-between center" lass="second-row">
-            <a routerLink="/register" mat-button color="primary">Create account</a>
-            <button type="submit" mat-raised-button color="primary" fxFlexAlign="end">Login</button>
+            <div><span class="guide-msg">Already have an account?</span><a routerLink="/login" mat-button color="primary">Login</a></div>
+            <button type="submit" mat-raised-button color="primary" fxFlexAlign="end">Register</button>
           </div>
 
         </mat-card-actions>

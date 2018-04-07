@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 // import { User } from './user';
@@ -12,18 +11,19 @@ export class AuthService {
     return this.loggedIn.asObservable(); // {2}
   }
 
-  constructor(private router: Router) {
+  constructor() {
   }
 
   login(/*user: User*/) {
     // if (user.userName !== '' && user.password != '' ) { // {3}
     this.loggedIn.next(true);
-    this.router.navigate(['/']);
     // }
   }
 
   logout() {                            // {4}
     this.loggedIn.next(false);
-    this.router.navigate(['/login']);
+  }
+
+  register(user) {
   }
 }
