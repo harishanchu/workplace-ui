@@ -4,6 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import './rxjs-operators';
 
@@ -13,6 +14,7 @@ import {AppComponent} from './app.component';
 import {AuthGuard, GuestGuard} from './guards/index';
 import {AuthInterceptor} from './helpers/index';
 import {AuthService} from './services/auth.service';
+import {Globals} from './globals';
 
 import {MaterialModule} from './material.module';
 import {MainToolbarModule} from './components/main-toolbar/main-toolbar.module';
@@ -22,6 +24,7 @@ import {DsashboardComponent} from './pages/dsashboard/dsashboard.component';
 import {TimeSheetEntryComponent} from './pages/time-sheets/components/time-sheet-entry/time-sheet-entry.component';
 import {TimeSheetGridComponent} from './pages/time-sheets/components/time-sheet-grid/time-sheet-grid.component';
 import {LoginComponent} from './pages/auth/login/login.component';
+import { ValidationService } from './services/validation.service';
 
 @NgModule({
   declarations: [
@@ -36,6 +39,7 @@ import {LoginComponent} from './pages/auth/login/login.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     MaterialModule,
     AppRoutingModule,
     MainToolbarModule,
@@ -51,7 +55,9 @@ import {LoginComponent} from './pages/auth/login/login.component';
     },
     AuthGuard,
     AuthService,
-    GuestGuard
+    GuestGuard,
+    Globals,
+    ValidationService
   ],
   entryComponents: [
     TimeSheetEntryComponent

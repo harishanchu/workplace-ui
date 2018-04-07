@@ -15,6 +15,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+
 
 @NgModule({
   imports: [
@@ -32,7 +34,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatTableModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule
   ],
   exports: [
     MatSidenavModule,
@@ -48,7 +51,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatExpansionModule,
     MatTableModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    MatProgressBarModule
   ]
 })
 export class MaterialModule {

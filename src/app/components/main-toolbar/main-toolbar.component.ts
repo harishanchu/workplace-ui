@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Globals} from '../../globals';
+
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -8,11 +11,13 @@ import {Component, OnInit} from '@angular/core';
 export class MainToolbarComponent implements OnInit {
   private appName: string;
 
-  constructor() {
-    this.appName = 'My deck';
+  constructor(private globals: Globals, private authService: AuthService) {
   }
 
   ngOnInit() {
   }
 
+  logout() {
+    this.authService.logout();
+  }
 }

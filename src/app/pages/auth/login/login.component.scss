@@ -1,0 +1,76 @@
+@import "../../../../styles/themeing";
+
+.login-container {
+  height: 100vh;
+
+  .svg-bg {
+    bottom: 0;
+    direction: ltr;
+    left: 0;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  mat-form-field {
+    ::ng-deep .mat-form-field-underline {
+      background-color: rgba(0,0,0,0.12);
+    }
+  }
+
+  mat-card {
+    height: auto;
+    min-height: 390px;
+    width: 370px;
+    padding: 48px 40px 36px;
+
+    .brand-header {
+      color: mat-color(mat-palette($mat-lime));
+    }
+
+    mat-card-title {
+      font-size: 20px;
+      margin: 0 -8px 12px;
+    }
+
+    mat-card-content {
+      padding: 48px 0 0;
+
+      .forgot-btn {
+        margin-right: -16px;
+      }
+    }
+
+    mat-card-actions {
+      margin-right: 0;
+    }
+
+    mat-progress-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      &+div {
+        pointer-events: none;
+        opacity: 0.7;
+      }
+    }
+  }
+
+  .login-header {
+    h1 {
+      margin: 0;
+      padding-top: 16px;
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    p {
+      font-size: 14px;
+      font-weight: 400;
+      padding: 4px 0 3px;
+      margin: 0;
+    }
+  }
+}

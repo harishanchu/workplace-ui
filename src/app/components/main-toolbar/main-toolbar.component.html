@@ -1,7 +1,7 @@
 <mat-toolbar class="fixed-header mat-elevation-z4" color="primary">
   <mat-toolbar-row>
     <mat-icon class="brand-icon" matListIcon>extension</mat-icon>
-    <span>{{appName}}</span>
+    <span>{{globals.appName}}</span>
     <div class="flex-spacer"></div>
     <button mat-icon-button class="avatar-button" [matMenuTriggerFor]="accountMenu">
       <ngx-avatar value="H" size="30"></ngx-avatar>
@@ -18,7 +18,7 @@
     <mat-icon>notifications_off</mat-icon>
     <span>Disable alerts</span>
   </button>
-  <button mat-menu-item>
+  <button mat-menu-item (click)="logout()">
     <mat-icon>power_settings_new</mat-icon>
     <span>Logout</span>
   </button>
