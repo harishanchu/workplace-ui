@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
       const self = this;
 
       setTimeout(function () {
-        self.authService.login();
+        self.authService.attemptAuth();
         self.router.navigate(['/']);
       }, 2000);
     }

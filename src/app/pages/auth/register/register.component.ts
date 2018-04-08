@@ -7,6 +7,7 @@ import {AuthService} from '../../../services/auth.service';
 import {ValidationMixin} from '../../../mixins/index';
 import {Util} from '../../../helpers/util';
 import {matchValidator} from '../../../validators/index';
+import {NotificationService} from '../../../services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,8 @@ export class RegisterComponent implements OnInit {
   private loading = false;
 
   constructor(private router: Router, private globals: Globals,
-              private authService: AuthService, private fb: FormBuilder) {
+              private authService: AuthService, private fb: FormBuilder,
+              private notificationService: NotificationService) {
     this.form = fb.group({
       'name': ['', Validators.required],
       'email': ['', Validators.required],

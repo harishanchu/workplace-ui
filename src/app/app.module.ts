@@ -12,7 +12,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 
 import {AuthGuard, GuestGuard} from './guards/index';
-import {AuthInterceptor} from './helpers/index';
+import {AppHttpInterceptor} from './helpers/app-http.interceptor';
 import {AuthService} from './services/auth.service';
 import {Globals} from './globals';
 
@@ -25,6 +25,7 @@ import {TimeSheetEntryComponent} from './pages/time-sheets/components/time-sheet
 import {TimeSheetGridComponent} from './pages/time-sheets/components/time-sheet-grid/time-sheet-grid.component';
 import {LoginComponent} from './pages/auth/login/login.component';
 import { RegisterComponent } from './pages/auth/register/register.component';
+import { NotificationService } from './services/notification.service';
 
 @NgModule({
   declarations: [
@@ -51,13 +52,14 @@ import { RegisterComponent } from './pages/auth/register/register.component';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
+      useClass: AppHttpInterceptor,
       multi: true
     },
     AuthGuard,
     AuthService,
     GuestGuard,
-    Globals
+    Globals,
+    NotificationService
   ],
   entryComponents: [
     TimeSheetEntryComponent
