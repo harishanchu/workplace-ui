@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('my-deck App', () => {
+describe('Workplace App', () => {
   let page: AppPage;
 
   beforeEach(() => {
