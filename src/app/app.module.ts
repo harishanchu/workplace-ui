@@ -4,7 +4,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import { HttpClientModule } from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 
 import './rxjs-operators';
 
@@ -24,8 +24,10 @@ import {DsashboardComponent} from './pages/dsashboard/dsashboard.component';
 import {TimeSheetEntryComponent} from './pages/time-sheets/components/time-sheet-entry/time-sheet-entry.component';
 import {TimeSheetGridComponent} from './pages/time-sheets/components/time-sheet-grid/time-sheet-grid.component';
 import {LoginComponent} from './pages/auth/login/login.component';
-import { RegisterComponent } from './pages/auth/register/register.component';
-import { NotificationService } from './services/notification.service';
+import {RegisterComponent} from './pages/auth/register/register.component';
+import {NotificationService} from './services/notification.service';
+import {HomeLayoutComponent} from './layouts/home-layout/home-layout.component';
+import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { NotificationService } from './services/notification.service';
     TimeSheetEntryComponent,
     TimeSheetGridComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeLayoutComponent,
+    GuestLayoutComponent
   ],
   imports: [
     BrowserModule,

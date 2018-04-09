@@ -6,14 +6,29 @@ import {DsashboardComponent} from './pages/dsashboard/dsashboard.component';
 import {LoginComponent} from './pages/auth/login/login.component';
 import {RegisterComponent} from './pages/auth/register/register.component';
 import {AuthGuard, GuestGuard} from './guards/index';
+import {HomeLayoutComponent} from './layouts/home-layout/home-layout.component';
+import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.component';
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent, canActivate: [GuestGuard]},
-  {path: 'register', component: RegisterComponent, canActivate: [GuestGuard]},
-  {path: 'time-sheets', component: TimeSheetsComponent, canActivate: [AuthGuard]},
-  {path: 'dashboard', component: DsashboardComponent, canActivate: [AuthGuard]},
-
-  {path: '', redirectTo: 'time-sheets', pathMatch: 'full'},
+  {
+    path: '',
+    component: HomeLayoutComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {path: '', redirectTo: 'time-sheets', pathMatch: 'full'},
+      {path: 'time-sheets', component: TimeSheetsComponent},
+      {path: 'dashboard', component: DsashboardComponent}
+    ]
+  },
+  {
+    path: '',
+    component: GuestLayoutComponent,
+    canActivate: [GuestGuard],
+    children: [
+      {path: 'login', component: LoginComponent},
+      {path: 'register', component: RegisterComponent}
+    ]
+  },
   {path: '**', redirectTo: ''}
 ];
 

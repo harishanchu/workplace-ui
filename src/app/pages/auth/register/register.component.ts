@@ -36,8 +36,19 @@ export class RegisterComponent implements OnInit {
     if (this.form.valid) {
       this.loading = true;
       const self = this;
+      const user = Object.assign({}, this.form.value);
+      delete user.confirmPassword;
 
-      this.authService.register(this.form.value);
+
+      this.authService.register(user).subscribe(
+        data => {
+          this.router.navigate(['/login']);
+        },
+        error => {
+          this.notificationService.error(error.error.error.message);
+          this.loading = false;
+        }
+      );
     }
   }
 

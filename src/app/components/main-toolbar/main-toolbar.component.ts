@@ -3,6 +3,7 @@ import {Globals} from '../../globals';
 import {Router} from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -12,14 +13,21 @@ import {AuthService} from '../../services/auth.service';
 export class MainToolbarComponent implements OnInit {
   private appName: string;
 
-  constructor(private globals: Globals, private authService: AuthService, private router: Router) {
+  constructor(private globals: Globals, private authService: AuthService, private router: Router,
+              private notificationService: NotificationService) {
   }
 
   ngOnInit() {
   }
 
   logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
+    this.authService.logout().subscribe(
+      data => {
+        this.router.navigate(['/login']);
+      },
+      error => {
+        this.notificationService.error(error.error.error.message);
+      }
+    );
   }
 }

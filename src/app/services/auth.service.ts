@@ -17,7 +17,7 @@ export class AuthService {
     return this.loggedIn.asObservable(); // {2}
   }
 
-  constructor(http: HttpClient) {
+  constructor(private http: HttpClient) {
   }
 
   getAuthData() {
@@ -29,20 +29,32 @@ export class AuthService {
   }
 
 
-  attemptAuth(email: string, password: string)/*: Observable*/ {
+  attemptAuth(creds: { email: string, password: string }): Observable<any> {
+    return this.http.post('users/login', creds).map(user => {
+        // Save token
 
-   /* return this.http.post('users', arguments).map(user => {
+        debugger;
+        this.loggedIn.next(true);
 
-    });*/
-    // if (user.userName !== '' && user.password != '' ) { // {3}
-    this.loggedIn.next(true);
-    // }
+        return true;
+      }
+    );
   }
 
-  logout() {                            // {4}
-    this.loggedIn.next(false);
+  logout() {
+    return this.http.post('users/logout', null).map(res => {
+        // clear token from store
+
+      
+        this.loggedIn.next(false);
+      }
+    );
   }
 
   register(user) {
+    return this.http.post('users', user).map(response => {
+        return response;
+      }
+    );
   }
 }
