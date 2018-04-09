@@ -1,5 +1,5 @@
 export class Storage {
-  private store: window.sessionStorage | window.localStorage;
+  private store: any;
 
   constructor(private session?: boolean) {
     this.initialize();

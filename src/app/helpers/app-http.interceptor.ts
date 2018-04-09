@@ -11,10 +11,10 @@ export class AppHttpInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const headers = {'Content-Type': 'application/json'};
-
-    return this.authService.isLoggedIn
+    return next.handle(request);
+    /*return this.authService.isLoggedIn
       .take(1)
-      .mergeMap((isLoggedIn: boolean) => {
+      .map((isLoggedIn: boolean) => {
         if (!isLoggedIn) {
           headers['Authorization'] = this.authService.getAuthToken();
         }
@@ -24,6 +24,6 @@ export class AppHttpInterceptor implements HttpInterceptor {
         });
 
         return next.handle(request);
-      });
+      });*/
   }
 }

@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'time-sheets', component: TimeSheetsComponent, canActivate: [AuthGuard]},
   {path: 'dashboard', component: DsashboardComponent, canActivate: [AuthGuard]},
 
-  {path: '', redirectTo: 'time-sheets', pathMatch: 'full', canActivate: [AuthGuard]},
+  {path: '', redirectTo: 'time-sheets', pathMatch: 'full'},
   {path: '**', redirectTo: ''}
 ];
 
