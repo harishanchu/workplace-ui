@@ -23,7 +23,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
       });
   }
 
-  formHeaders(isLoggedIn: boolean): Object {
+  formHeaders(isLoggedIn: boolean):  {[name: string]: string | string[]} {
     const headers = {'Content-Type': 'application/json'};
 
     if (isLoggedIn) {

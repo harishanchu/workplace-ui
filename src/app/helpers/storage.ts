@@ -31,4 +31,8 @@ export class Storage {
 
     this.store.setItem(key, value);
   }
+
+  remove(key: string) {
+    this.store.removeItem(key);
+  }
 }

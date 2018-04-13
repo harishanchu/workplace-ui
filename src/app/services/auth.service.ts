@@ -8,7 +8,7 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
-  private loggedIn = new BehaviorSubject<boolean>(false); // {1}
+  private loggedIn;
   private store = new Storage();
   private authStorageKey = 'auth';
 
@@ -18,22 +18,42 @@ export class AuthService {
   }
 
   constructor(private http: HttpClient) {
+    this.loggedIn = new BehaviorSubject<boolean>(this.isvalidAuthDataPresent());
+  }
+
+  isvalidAuthDataPresent() {
+    const authData = this.getAuthData();
+
+    return !!authData.accessToken;
   }
 
   getAuthData() {
     return this.store.get(this.authStorageKey) || {};
   }
 
+  /**
+   * Store authentication information to local storage.
+   */
+  setAuthData(authObj) {
+    this.store.set(this.authStorageKey, authObj);
+  }
+
+  /**
+   * Delete authentication information from storage.
+   */
+  clearAuthData() {
+    this.store.remove(this.authStorageKey);
+  }
+
   getAuthToken() {
-    return this.getAuthData().token || null;
+    return this.getAuthData().accessToken || null;
   }
 
 
   attemptAuth(creds: { email: string, password: string }): Observable<any> {
-    return this.http.post('users/login', creds).map(user => {
+    return this.http.post('users/login', creds).map(resp => {
         // Save token
-
-        debugger;
+        this.setAuthData(resp);
         this.loggedIn.next(true);
 
         return true;
@@ -42,10 +62,9 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.post('users/logout', null).map(res => {
+    return this.http.delete('users/logout').map(res => {debugger;
         // clear token from store
-
-      
+        this.clearAuthData();
         this.loggedIn.next(false);
       }
     );
