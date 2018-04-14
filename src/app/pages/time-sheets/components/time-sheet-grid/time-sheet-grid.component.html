@@ -7,32 +7,34 @@
 
   <mat-table #table [dataSource]="dataSource">
 
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      color="primary">&nbsp;
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      color="primary">&nbsp;
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Rest of the Columns -->
     <ng-container *ngFor="let column of displayedColumns">
-      <ng-container *ngIf="column != 'actions'" [matColumnDef]="column">
+      <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
         <mat-header-cell *matHeaderCellDef> {{column | titlecase}}</mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
       </ng-container>
     </ng-container>
 
-    <!-- actions -->
-    <ng-container matColumnDef="actions">
-      <mat-header-cell *matHeaderCellDef>
-        Actions
-      </mat-header-cell>
-
-      <mat-cell *matCellDef="let row; let i=index;">
-        <button mat-icon-button color="accent" (click)="editEntry(i, row)">
-          <mat-icon aria-label="Edit">edit</mat-icon>
-        </button>
-
-        <button mat-icon-button color="accent" (click)="deleteEntry(i,row)">
-          <mat-icon aria-label="Delete">delete</mat-icon>
-        </button>
-      </mat-cell>
-    </ng-container>
-
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
   </mat-table>
 
   <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'">

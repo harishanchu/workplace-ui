@@ -1,6 +1,11 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {Util} from '../../../../helpers/util';
+import {ValidationMixin} from '../../../../mixins/validation.mixin';
+import {TimeSheetEntry} from '../../../../models/time-sheet-entry';
+import {TimeSheetService} from '../../../../services/time-sheet.service';
+import {NotificationService} from '../../../../services/notification.service';
 
 @Component({
   selector: 'app-time-sheet-entry',
@@ -8,7 +13,13 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
   styleUrls: ['./time-sheet-entry.component.scss']
 })
 export class TimeSheetEntryComponent implements OnInit {
-  private formControl = new FormControl('', [Validators.required]);
+  private title;
+  private form: FormGroup;
+  private clients = [
+    {name: 'Internal', value: 'internal'},
+    {name: 'Client 1', value: 'client1'},
+    {name: 'Client 2', value: 'client2'}
+  ];
   private statuses = [
     {name: 'Completed', value: 'completed'},
     {name: 'In Progress', value: 'inProgress'}
@@ -17,30 +28,37 @@ export class TimeSheetEntryComponent implements OnInit {
     {name: 'General', value: 'general'},
     {name: 'Internal', value: 'internal'}
   ];
-  private title;
 
   constructor(public dialogRef: MatDialogRef<TimeSheetEntryComponent>,
-              @Inject(MAT_DIALOG_DATA) public data) {
+              @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder,
+              private timeSheetService: TimeSheetService, private notificationService: NotificationService) {
     this.title = data.title;
+    this.form = fb.group({
+      'client': ['', Validators.required],
+      'project': ['', Validators.required],
+      'status': ['', Validators.required],
+      'duration': [1, Validators.required],
+      'comment': ['']
+    });
   }
 
   ngOnInit() {
   }
 
-  getErrorMessage() {
-    return this.formControl.hasError('required') ? 'This field required' : '';
-  }
-
-  submit() {
-    // emppty stuff
-  }
-
-  onNoClick(): void {
-    // this.dialogRef.close();
-  }
-
-  public confirmAdd(): void {
-    // this.dataService.addIssue(this.data);
+  public addTimeSheet(): void {
+    if (this.form.valid) {
+      this.timeSheetService.addTimeSheet(<TimeSheetEntry>this.form.value).subscribe(
+        data => {
+          // this.router.navigate([this.returnUrl]);
+          console.log('time sheet saved')
+        },
+        error => {
+          this.notificationService.error(error.error.error.message);
+        }
+      );
+    }
   }
 
 }
+
+Util.mixin(TimeSheetEntryComponent, [ValidationMixin]);

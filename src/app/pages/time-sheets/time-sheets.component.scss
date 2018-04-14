@@ -4,10 +4,7 @@ mat-toolbar {
   border-bottom: $primaryBorder;
   background: rgb(255, 255, 255);
 }
-
-.action-bar-tools {
-  margin-left: 56px;
-
+.action-bar {
   .action-bar-title {
     font-weight: 400;
     letter-spacing: .005em;
@@ -17,17 +14,21 @@ mat-toolbar {
     color: rgb(0, 0, 0);
   }
 
-  .date-switcher {
-    .date-switcher-date {
-      font-size: 14px;
-      font-weight: 500;
-      line-height: 36px;
-    }
-  }
+  .action-bar-tools {
+    margin-left: 56px;
 
-  .separator {
-    border-left: 1px solid #d3d3d3;
-    height: 30px;
-    margin: 5px 0;
+    .date-switcher {
+      .date-switcher-date {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 36px;
+      }
+    }
+
+    .separator {
+      border-left: 1px solid #d3d3d3;
+      height: 30px;
+      margin: 5px 0;
+    }
   }
 }

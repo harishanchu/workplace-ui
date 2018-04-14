@@ -36,6 +36,7 @@ export class AuthService {
    */
   setAuthData(authObj) {
     this.store.set(this.authStorageKey, authObj);
+    this.loggedIn.next(true);
   }
 
   /**
@@ -43,6 +44,7 @@ export class AuthService {
    */
   clearAuthData() {
     this.store.remove(this.authStorageKey);
+    this.loggedIn.next(false);
   }
 
   getAuthToken() {
@@ -54,7 +56,6 @@ export class AuthService {
     return this.http.post('users/login', creds).map(resp => {
         // Save token
         this.setAuthData(resp);
-        this.loggedIn.next(true);
 
         return true;
       }
@@ -62,10 +63,9 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.delete('users/logout').map(res => {debugger;
+    return this.http.delete('users/logout').map(res => {
         // clear token from store
         this.clearAuthData();
-        this.loggedIn.next(false);
       }
     );
   }

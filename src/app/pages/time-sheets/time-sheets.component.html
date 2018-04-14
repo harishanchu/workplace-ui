@@ -1,14 +1,9 @@
 <mat-toolbar>
-  <mat-toolbar-row>
+  <mat-toolbar-row class="action-bar">
     <div class="action-bar-title">
       {{title}}
     </div>
     <div class="action-bar-tools" fxLayout="row">
-      <button mat-button color="primary" (click)="addNew()">
-        <mat-icon>add_circle_outline</mat-icon>
-        Add new
-      </button>
-      <span class="separator"></span>
       <div class="date-switcher">
         <button mat-icon-button>
           <mat-icon mat-button color="primary">keyboard_arrow_left</mat-icon>
@@ -18,7 +13,24 @@
           <mat-icon mat-button color="primary">keyboard_arrow_right</mat-icon>
         </button>
       </div>
+
+      <span class="separator"></span>
+
+      <button mat-button color="primary" (click)="addNewEntry()">
+        <mat-icon aria-label="add">add_circle_outline</mat-icon>
+        Add new
+      </button>
+
+      <button mat-button color="primary" (click)="editEntry()" [disabled]="grid.selection.selected.length !== 1">
+        <mat-icon aria-label="Edit">edit</mat-icon>
+        Edit
+      </button>
+
+      <button mat-button color="primary" (click)="deleteEntry()" [disabled]="grid.selection.selected.length === 0">
+        <mat-icon aria-label="Delete">delete</mat-icon>
+        Delete
+      </button>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<app-time-sheet-grid></app-time-sheet-grid>
+<app-time-sheet-grid #timeSheetGrid></app-time-sheet-grid>

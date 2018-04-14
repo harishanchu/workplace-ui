@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
-import {MatDialog} from '@angular/material';
+import {MatDialog, MatTableDataSource} from '@angular/material';
+import {SelectionModel} from '@angular/cdk/collections';
 
 import {TimeSheetEntryComponent} from '../time-sheet-entry/time-sheet-entry.component';
 
@@ -10,8 +10,9 @@ import {TimeSheetEntryComponent} from '../time-sheet-entry/time-sheet-entry.comp
   styleUrls: ['./time-sheet-grid.component.scss']
 })
 export class TimeSheetGridComponent implements OnInit {
-  displayedColumns = ['project', 'comment', 'duration', 'actions'];
+  displayedColumns = ['select', 'client', 'project', 'comment', 'duration'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
+  selection = new SelectionModel<Element>(true, []);
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -19,33 +20,36 @@ export class TimeSheetGridComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor(public dialog: MatDialog) {
+  constructor() {
   }
 
   ngOnInit() {
   }
 
-  editEntry() {
-    const dialogRef = this.dialog.open(TimeSheetEntryComponent, {
-      data: {title: 'Edit time sheet entry'}
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 1) {
-        // After dialog is closed we're doing frontend updates
-        // For add we're just pushing a new row inside DataService
-        // this.exampleDatabase.dataChange.value.push(this.dataService.getDialogData());
-        // this.refreshTable();
-      }
-    });
+  /**
+   * Whether the number of selected elements matches the total number of rows.
+   *
+   * @returns {boolean}
+   */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
   }
 
-  deleteEntry() {
+  /**
+   * Selects all rows if they are not all selected; otherwise clear selection.
+   */
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.dataSource.data.forEach(row => this.selection.select(row));
   }
 }
 
 export interface Element {
   id: string;
+  client: string;
   status: string;
   project: string;
   duration: number;
@@ -54,7 +58,7 @@ export interface Element {
 }
 
 const ELEMENT_DATA: Element[] = [
-  {id: '1', status: 'completed', project: 'internal', duration: 30, comment: 'My work log', date: new Date()},
-  {id: '2', status: 'completed', project: 'general', duration: 20, comment: 'Just another work log', date: new Date()},
-  {id: '3', status: 'completed', project: 'general', duration: 20, comment: 'Just another work log', date: new Date()}
+  {id: '1', client: 'Internal', status: 'Completed', project: 'Internal', duration: 30, comment: 'My work log', date: new Date()},
+  {id: '2', client: 'Client 1', status: 'Completed', project: 'General', duration: 20, comment: 'Just another work log', date: new Date()},
+  {id: '3', client: 'Client 2', status: 'Completed', project: 'General', duration: 20, comment: 'Just another work log', date: new Date()}
 ];

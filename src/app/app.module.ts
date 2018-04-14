@@ -28,6 +28,7 @@ import {RegisterComponent} from './pages/auth/register/register.component';
 import {NotificationService} from './services/notification.service';
 import {HomeLayoutComponent} from './layouts/home-layout/home-layout.component';
 import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.component';
+import { TimeSheetService } from './services/time-sheet.service';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.componen
     AuthService,
     GuestGuard,
     Globals,
-    NotificationService
+    NotificationService,
+    TimeSheetService
   ],
   entryComponents: [
     TimeSheetEntryComponent

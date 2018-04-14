@@ -1,35 +1,47 @@
 <div class="container">
   <h3 mat-dialog-title>{{title}}</h3>
 
-  <form>
+  <form (ngSubmit)="addTimeSheet()" [formGroup]="form">
     <div fxLayout="row">
-      <mat-form-field class="form-item" fxFlex="50">
-        <mat-select placeholder="Status" [formControl]="formControl" required>
-          <mat-option *ngFor="let status of statuses" [value]="status">
-            {{status.name}}
+      <mat-form-field class="form-item">
+        <mat-select placeholder="Client" formControlName="client">
+          <mat-option *ngFor="let client of clients" [value]="client">
+            {{client.name}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="formControl.hasError('required')">{{getErrorMessage()}}</mat-error>
+        <mat-error *ngIf="hasError('client'); let error">{{error}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="form-item" fxFlex="50">
-        <mat-select placeholder="Project" [formControl]="formControl" required>
+      <mat-form-field class="form-item">
+        <mat-select placeholder="Project" formControlName="project">
           <mat-option *ngFor="let project of projects" [value]="project">
             {{project.name}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="formControl.hasError('required')">{{getErrorMessage()}}</mat-error>
+        <mat-error *ngIf="hasError('project'); let error">{{error}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="form-item">
+        <mat-select placeholder="Status" formControlName="status">
+          <mat-option *ngFor="let status of statuses" [value]="status">
+            {{status.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('status'); let error">{{error}}</mat-error>
       </mat-form-field>
     </div>
 
-    <div class="slider-field form-item time-slider" fxLayout="row" fxLayoutAlign="center center">
-      <span class="slider-field-label"> Duration:</span>
-      <mat-slider thumb-label=true min=1 max=600 fxFlex></mat-slider>
-      <span class="slider-field-extension">minutes</span>
+    <div class="form-item">
+      <div class="slider-field time-slider" fxLayout="row" fxLayoutAlign="center center">
+        <span class="slider-field-label"> Duration:</span>
+        <mat-slider thumb-label=true min=1 max=600 fxFlex formControlName="duration"></mat-slider>
+        <span class="slider-field-extension">minutes</span>
+      </div>
+      <mat-error *ngIf="hasError('duration'); let error">{{error}}</mat-error>
     </div>
 
     <mat-form-field class="full-width form-item">
-      <textarea matInput placeholder="Comment"></textarea>
+      <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
     </mat-form-field>
 
     <div mat-dialog-actions>
@@ -37,53 +49,4 @@
       <button mat-raised-button color="primary">Save</button>
     </div>
   </form>
-  <!--<form class="mat-dialog-content" (ngSubmit)="submit" #formControl="ngForm">
-
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #input class="form-control" placeholder="Id" [(ngModel)]="data.id" name="id" required >
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-    </div>
-
-    &lt;!&ndash;Textarea for demo purposes&ndash;&gt;
-    <div class="form">
-      <mat-form-field color="accent">
-        <textarea matInput #input class="form-control" placeholder="Title" [(ngModel)]="data.title" name="title" required ></textarea>
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-    </div>
-
-    &lt;!&ndash;Contains mat-hint for characters count and has maxLengt set&ndash;&gt;
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput #inputstate class="form-control" placeholder="State" [(ngModel)]="data.state" name="state" maxlength="10" required >
-        <mat-error *ngIf="formControl.invalid">{{getErrorMessage()}}</mat-error>
-        <mat-hint align="end">{{inputstate.value?.length || 0}}/10</mat-hint>
-      </mat-form-field>
-    </div>
-
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="Url" [(ngModel)]="data.url" name="url">
-      </mat-form-field>
-    </div>
-
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="Created at" [(ngModel)]="data.created_at" name="created_at">
-      </mat-form-field>
-    </div>
-
-    <div class="form">
-      <mat-form-field color="accent">
-        <input matInput placeholder="Updated at" [(ngModel)]="data.updated_at" name="updated_at">
-      </mat-form-field>
-    </div>
-
-    <div mat-dialog-actions>
-      <button mat-button [type]="submit" [disabled]="!formControl.valid" [mat-dialog-close]="1" (click)="confirmAdd()">Save</button>
-      <button mat-button (click)="onNoClick()" tabindex="-1">Cancel</button>
-    </div>
-  </form>-->
 </div>
