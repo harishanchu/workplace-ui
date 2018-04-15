@@ -1,44 +1,46 @@
-<div class="timesheet-container">
-  <div class="timesheet-header">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-  </div>
+<div class="timesheet-grid-container">
+  <mat-spinner diameter=40 *ngIf="loading"></mat-spinner>
+  <div *ngIf="!loading">
+    <div class="timesheet-grid-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="dataSource">
 
-  <mat-table #table [dataSource]="dataSource">
-
-    <!-- Checkbox Column -->
-    <ng-container matColumnDef="select">
-      <mat-header-cell *matHeaderCellDef>
-        <mat-checkbox (change)="$event ? masterToggle() : null"
-                      [checked]="selection.hasValue() && isAllSelected()"
-                      [indeterminate]="selection.hasValue() && !isAllSelected()"
-                      color="primary">&nbsp;
-        </mat-checkbox>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()"
-                      (change)="$event ? selection.toggle(row) : null"
-                      [checked]="selection.isSelected(row)"
-                      color="primary">&nbsp;
-        </mat-checkbox>
-      </mat-cell>
-    </ng-container>
-
-    <!-- Rest of the Columns -->
-    <ng-container *ngFor="let column of displayedColumns">
-      <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
-        <mat-header-cell *matHeaderCellDef> {{column | titlecase}}</mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <mat-header-cell *matHeaderCellDef>
+          <mat-checkbox (change)="$event ? masterToggle() : null"
+                        [checked]="selection.hasValue() && isAllSelected()"
+                        [indeterminate]="selection.hasValue() && !isAllSelected()"
+                        color="primary">&nbsp;
+          </mat-checkbox>
+        </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <mat-checkbox (click)="$event.stopPropagation()"
+                        (change)="$event ? selection.toggle(row) : null"
+                        [checked]="selection.isSelected(row)"
+                        color="primary">&nbsp;
+          </mat-checkbox>
+        </mat-cell>
       </ng-container>
-    </ng-container>
 
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
-  </mat-table>
+      <!-- Rest of the Columns -->
+      <ng-container *ngFor="let column of displayedColumns">
+        <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef> {{column | titlecase}}</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
+        </ng-container>
+      </ng-container>
 
-  <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'">
-    No items to display
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
+    </mat-table>
+
+    <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'">
+      No items to display
+    </div>
   </div>
 
 </div>

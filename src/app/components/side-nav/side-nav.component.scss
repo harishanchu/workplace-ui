@@ -43,5 +43,6 @@
 
   #main-content {
     margin-top: $topbarHeight;
+    height: calc(100vh - #{$topbarHeight});
   }
 }

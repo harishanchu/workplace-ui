@@ -23,7 +23,7 @@
 
       <mat-form-field class="form-item">
         <mat-select placeholder="Status" formControlName="status">
-          <mat-option *ngFor="let status of statuses" [value]="status">
+          <mat-option *ngFor="let status of statuses" [value]="status.value">
             {{status.name}}
           </mat-option>
         </mat-select>

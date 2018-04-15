@@ -1,12 +1,13 @@
 /* Structure */
-.timesheet-container {
-  display: flex;
-  flex-direction: column;
-  min-width: 300px;
+.timesheet-grid-container {
   padding: 5px;
+
+  mat-spinner {
+    margin: auto;
+  }
 }
 
-.timesheet-header {
+.timesheet-grid-header {
   min-height: 64px;
   padding: 8px 24px 0;
 }

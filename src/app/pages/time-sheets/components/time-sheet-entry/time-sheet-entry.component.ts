@@ -15,9 +15,10 @@ import {AppService} from '../../../../services/app.service';
 })
 export class TimeSheetEntryComponent implements OnInit {
   private title;
+  private date;
   private form: FormGroup;
-  private clients = [];
-  private projects = [];
+  private clients = <any>[];
+  private projects = <any>[];
   private statuses = [
     {name: 'Completed', value: 'completed'},
     {name: 'In Progress', value: 'inProgress'}
@@ -30,13 +31,27 @@ export class TimeSheetEntryComponent implements OnInit {
               private notificationService: NotificationService,
               private appService: AppService) {
     this.title = data.title;
+    this.date = data.date;
     this.form = fb.group({
       'client': ['', Validators.required],
       'projectId': ['', Validators.required],
       'status': ['', Validators.required],
       'duration': [1, Validators.required],
-      'comment': ['']
+      'comment': [''],
+      'taskId': ['']
     });
+
+    if (this.data.formData) {
+      const value = (({projectId, status, duration, comment, taskId, clientId}) => ({
+        projectId,
+        status,
+        duration,
+        comment,
+        taskId,
+        client: clientId
+      }))(this.data.formData);
+      this.form.setValue(value);
+    }
   }
 
   ngOnInit() {
@@ -55,7 +70,16 @@ export class TimeSheetEntryComponent implements OnInit {
 
   public addTimeSheet(): void {
     if (this.form.valid) {
-      this.timeSheetService.addTimeSheet(<TimeSheet>this.form.value).subscribe(
+      const timeSheet: TimeSheet = (({projectId, status, duration, comment, taskId}, date) => ({
+        projectId,
+        status,
+        duration,
+        comment,
+        taskId,
+        date
+      }))(this.form.value, this.date);
+
+      this.timeSheetService.createTimeSheet(<TimeSheet>timeSheet).subscribe(
         data => {
           // this.router.navigate([this.returnUrl]);
           console.log('time sheet saved')

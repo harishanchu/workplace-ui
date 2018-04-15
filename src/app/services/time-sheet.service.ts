@@ -1,25 +1,41 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TimeSheet} from '../models/time-sheet';
-import {AuthService} from './auth.service';
 
 @Injectable()
 export class TimeSheetService {
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
   }
 
-  addTimeSheet(timeSheetEntry: TimeSheet) {
-    return this.http.post('time-sheets', timeSheetEntry).map(response => {
+  createTimeSheet(timeSheetEntry: TimeSheet) {
+    return this.http.post(`users/me/time-sheets`, timeSheetEntry).map(response => {
       return response;
     });
   }
 
-  getCurrentUserTimeSheets(date: string) {
-    const userId = this.authService.getAuthUserId();
+  getCurrentUserTimeSheets(selectedDate: Date, includeDetails) {
+    const params: any = {filter: {where: {date: selectedDate.toISOString().slice(0, 10)}}};
 
-    return this.http.get(`users/${userId}/time-sheets`).map(response => {
-      debugger;
+    if (includeDetails) {
+      params.filter.include = {task: {project: 'client'}};
+    }
+
+    params.filter = JSON.stringify(params.filter);
+
+    return this.http.get(`users/me/time-sheets`,
+      {params}).map((response: any[]) => {
+      return response.map(({date, taskId, task, duration, status}) => ({
+        date,
+        taskId,
+        projectId: task.projectId,
+        project: task.project.name,
+        clientId: task.project.clientId,
+        client: task.project.client.name,
+        comment: task.comment,
+        duration,
+        status
+      }));
     });
   }
 }

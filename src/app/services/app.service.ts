@@ -8,7 +8,7 @@ export class AppService {
   }
 
   getClients(includeProjects = false) {
-    const params = {};
+    const params: any = {};
 
     if (includeProjects) {
       params.filter = JSON.stringify({include: 'projects'});

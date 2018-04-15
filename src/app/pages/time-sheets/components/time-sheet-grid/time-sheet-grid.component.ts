@@ -12,9 +12,10 @@ import {TimeSheetService} from '../../../../services/time-sheet.service';
   styleUrls: ['./time-sheet-grid.component.scss']
 })
 export class TimeSheetGridComponent implements OnInit {
-  displayedColumns = ['select', 'client', 'project', 'comment', 'duration'];
-  dataSource = new MatTableDataSource();
-  selection = new SelectionModel<TimeSheet>(true, []);
+  private displayedColumns = ['select', 'client', 'project', 'comment', 'status', 'duration'];
+  private dataSource = new MatTableDataSource();
+  private selection = new SelectionModel<TimeSheet>(true, []);
+  private loading = false;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -43,13 +44,24 @@ export class TimeSheetGridComponent implements OnInit {
    * Selects all rows if they are not all selected; otherwise clear selection.
    */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+    if (this.isAllSelected()) {
+      this.selection.clear();
+    } else {
+      this.dataSource.data.forEach((row: TimeSheet) => this.selection.select(row));
+    }
   }
 
 
   loadTimeSheetForSelectedDate(date: Date) {
-    this.timeSheetService.getCurrentUserTimeSheets() {}
+    this.loading = true;
+    this.timeSheetService.getCurrentUserTimeSheets(date, true)
+      .subscribe(timeSheets => {
+          this.dataSource.data = timeSheets;
+        },
+        err => {
+        },
+        () => {
+          this.loading = false;
+        });
   }
 }
