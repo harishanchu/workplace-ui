@@ -27,10 +27,6 @@ export class AuthService {
     return !!authData.accessToken;
   }
 
-  getAuthData() {
-    return this.store.get(this.authStorageKey) || {};
-  }
-
   /**
    * Store authentication information to local storage.
    */
@@ -45,10 +41,6 @@ export class AuthService {
   clearAuthData() {
     this.store.remove(this.authStorageKey);
     this.loggedIn.next(false);
-  }
-
-  getAuthToken() {
-    return this.getAuthData().accessToken || null;
   }
 
 
@@ -75,5 +67,18 @@ export class AuthService {
         return response;
       }
     );
+  }
+
+  getAuthData() {
+    return this.store.get(this.authStorageKey) || {};
+  }
+
+
+  getAuthToken() {
+    return this.getAuthData().accessToken || null;
+  }
+
+  getAuthUserId() {
+    return this.getAuthData().user.id;
   }
 }

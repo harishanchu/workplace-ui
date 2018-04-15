@@ -3,6 +3,8 @@ import {MatDialog, MatTableDataSource} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 
 import {TimeSheetEntryComponent} from '../time-sheet-entry/time-sheet-entry.component';
+import {TimeSheet} from '../../../../models/time-sheet';
+import {TimeSheetService} from '../../../../services/time-sheet.service';
 
 @Component({
   selector: 'app-time-sheet-grid',
@@ -11,8 +13,8 @@ import {TimeSheetEntryComponent} from '../time-sheet-entry/time-sheet-entry.comp
 })
 export class TimeSheetGridComponent implements OnInit {
   displayedColumns = ['select', 'client', 'project', 'comment', 'duration'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  selection = new SelectionModel<Element>(true, []);
+  dataSource = new MatTableDataSource();
+  selection = new SelectionModel<TimeSheet>(true, []);
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -20,7 +22,7 @@ export class TimeSheetGridComponent implements OnInit {
     this.dataSource.filter = filterValue;
   }
 
-  constructor() {
+  constructor(private timeSheetService: TimeSheetService) {
   }
 
   ngOnInit() {
@@ -45,20 +47,9 @@ export class TimeSheetGridComponent implements OnInit {
       this.selection.clear() :
       this.dataSource.data.forEach(row => this.selection.select(row));
   }
-}
 
-export interface Element {
-  id: string;
-  client: string;
-  status: string;
-  project: string;
-  duration: number;
-  comment: string;
-  date: object;
-}
 
-const ELEMENT_DATA: Element[] = [
-  {id: '1', client: 'Internal', status: 'Completed', project: 'Internal', duration: 30, comment: 'My work log', date: new Date()},
-  {id: '2', client: 'Client 1', status: 'Completed', project: 'General', duration: 20, comment: 'Just another work log', date: new Date()},
-  {id: '3', client: 'Client 2', status: 'Completed', project: 'General', duration: 20, comment: 'Just another work log', date: new Date()}
-];
+  loadTimeSheetForSelectedDate(date: Date) {
+    this.timeSheetService.getCurrentUserTimeSheets() {}
+  }
+}

@@ -20,6 +20,7 @@ export class TimeSheetsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.grid.loadTimeSheetForSelectedDate(this.date);
   }
 
   addNewEntry() {
@@ -64,19 +65,15 @@ export class TimeSheetsComponent implements OnInit {
 
   swithDate(unit) {
     this.date.setDate(this.date.getDate() + unit);
-    this.loadTimeSheetForSelectedDate();
+    this.grid.loadTimeSheetForSelectedDate(this.date);
   }
 
   onDatePick(event: MatDatepickerInputEvent<Date>) {
     this.date = event.value;
-    this.loadTimeSheetForSelectedDate();
+    this.grid.loadTimeSheetForSelectedDate(this.date);
   }
 
   formatDate() {
     return this.datePipe.transform(this.date, 'LLL dd yyyy');
-  }
-
-  loadTimeSheetForSelectedDate() {
-
   }
 }

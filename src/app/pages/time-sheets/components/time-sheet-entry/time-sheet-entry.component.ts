@@ -3,9 +3,10 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Util} from '../../../../helpers/util';
 import {ValidationMixin} from '../../../../mixins/validation.mixin';
-import {TimeSheetEntry} from '../../../../models/time-sheet-entry';
+import {TimeSheet} from '../../../../models/time-sheet';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
 import {NotificationService} from '../../../../services/notification.service';
+import {AppService} from '../../../../services/app.service';
 
 @Component({
   selector: 'app-time-sheet-entry',
@@ -15,27 +16,23 @@ import {NotificationService} from '../../../../services/notification.service';
 export class TimeSheetEntryComponent implements OnInit {
   private title;
   private form: FormGroup;
-  private clients = [
-    {name: 'Internal', value: 'internal'},
-    {name: 'Client 1', value: 'client1'},
-    {name: 'Client 2', value: 'client2'}
-  ];
+  private clients = [];
+  private projects = [];
   private statuses = [
     {name: 'Completed', value: 'completed'},
     {name: 'In Progress', value: 'inProgress'}
   ];
-  private projects = [
-    {name: 'General', value: 'general'},
-    {name: 'Internal', value: 'internal'}
-  ];
 
   constructor(public dialogRef: MatDialogRef<TimeSheetEntryComponent>,
-              @Inject(MAT_DIALOG_DATA) public data, private fb: FormBuilder,
-              private timeSheetService: TimeSheetService, private notificationService: NotificationService) {
+              @Inject(MAT_DIALOG_DATA) public data,
+              private fb: FormBuilder,
+              private timeSheetService: TimeSheetService,
+              private notificationService: NotificationService,
+              private appService: AppService) {
     this.title = data.title;
     this.form = fb.group({
       'client': ['', Validators.required],
-      'project': ['', Validators.required],
+      'projectId': ['', Validators.required],
       'status': ['', Validators.required],
       'duration': [1, Validators.required],
       'comment': ['']
@@ -43,11 +40,22 @@ export class TimeSheetEntryComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.appService.getClients(true).subscribe(clients => {
+      this.clients = clients;
+    });
+  }
+
+  populateProjectsBasedOnClient(event) {
+    const client = event.value;
+
+    if (client) {
+      this.projects = client.projects;
+    }
   }
 
   public addTimeSheet(): void {
     if (this.form.valid) {
-      this.timeSheetService.addTimeSheet(<TimeSheetEntry>this.form.value).subscribe(
+      this.timeSheetService.addTimeSheet(<TimeSheet>this.form.value).subscribe(
         data => {
           // this.router.navigate([this.returnUrl]);
           console.log('time sheet saved')

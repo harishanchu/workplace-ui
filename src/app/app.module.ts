@@ -31,6 +31,7 @@ import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.componen
 import {TimeSheetService} from './services/time-sheet.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapter} from '@angular/material';
 import {DatePipe} from '@angular/common';
+import { AppService } from './services/app.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import {DatePipe} from '@angular/common';
     Globals,
     NotificationService,
     TimeSheetService,
-    DatePipe
+    DatePipe,
+    AppService
   ],
   entryComponents: [
     TimeSheetEntryComponent
