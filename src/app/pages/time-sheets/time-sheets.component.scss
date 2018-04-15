@@ -23,6 +23,12 @@ mat-toolbar {
         font-weight: 500;
         line-height: 36px;
       }
+      .date-switcher-input {
+        width: 0!important;
+        padding: 0!important;
+        border:none!important;
+        height: 0!important;
+      }
     }
 
     .separator {

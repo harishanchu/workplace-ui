@@ -28,7 +28,9 @@ import {RegisterComponent} from './pages/auth/register/register.component';
 import {NotificationService} from './services/notification.service';
 import {HomeLayoutComponent} from './layouts/home-layout/home-layout.component';
 import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.component';
-import { TimeSheetService } from './services/time-sheet.service';
+import {TimeSheetService} from './services/time-sheet.service';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapter} from '@angular/material';
+import {DatePipe} from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -60,12 +62,20 @@ import { TimeSheetService } from './services/time-sheet.service';
       useClass: AppHttpInterceptor,
       multi: true
     },
+    {
+      provide: DateAdapter, useClass: NativeDateAdapter
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: MAT_NATIVE_DATE_FORMATS
+    },
     AuthGuard,
     AuthService,
     GuestGuard,
     Globals,
     NotificationService,
-    TimeSheetService
+    TimeSheetService,
+    DatePipe
   ],
   entryComponents: [
     TimeSheetEntryComponent

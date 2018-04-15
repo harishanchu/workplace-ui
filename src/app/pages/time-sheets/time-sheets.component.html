@@ -5,11 +5,12 @@
     </div>
     <div class="action-bar-tools" fxLayout="row">
       <div class="date-switcher">
-        <button mat-icon-button>
+        <button mat-icon-button (click)="swithDate(-1)">
           <mat-icon mat-button color="primary">keyboard_arrow_left</mat-icon>
         </button>
-        <span class="date-switcher-date">Today</span>
-        <button mat-icon-button>
+        <span class="date-switcher-date" (click)="picker.open()"><input  [matDatepicker]="picker" class="date-switcher-input" [max]="maxDate" [value]="date" (dateInput)="onDatePick($event)">{{formatDate()}}</span>
+        <mat-datepicker #picker></mat-datepicker>
+        <button mat-icon-button [disabled]="isMaximumDateReached()" (click)="swithDate(1)">
           <mat-icon mat-button color="primary">keyboard_arrow_right</mat-icon>
         </button>
       </div>

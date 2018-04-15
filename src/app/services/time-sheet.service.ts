@@ -11,6 +11,6 @@ export class TimeSheetService {
   addTimeSheet (timeSheetEntry: TimeSheetEntry) {
     return this.http.post('time-sheets', timeSheetEntry).map(response => {
       return response;
-    };
+    });
   }
 }

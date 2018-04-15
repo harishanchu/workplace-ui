@@ -18,6 +18,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 
 @NgModule({
@@ -39,7 +41,9 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatMenuModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatSidenavModule,
@@ -58,7 +62,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatMenuModule,
     MatProgressBarModule,
     MatSnackBarModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatDatepickerModule
   ]
 })
 export class MaterialModule {

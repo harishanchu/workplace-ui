@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog} from '@angular/material';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {MatDatepickerInputEvent, MatDialog} from '@angular/material';
 
 import {TimeSheetEntryComponent} from './components/time-sheet-entry/time-sheet-entry.component';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-time-sheets',
@@ -11,8 +12,10 @@ import {TimeSheetEntryComponent} from './components/time-sheet-entry/time-sheet-
 export class TimeSheetsComponent implements OnInit {
   private title: string;
   @ViewChild('timeSheetGrid') private grid;
+  @Input('date') private date: Date = new Date();
+  private maxDate: Date = new Date();
 
-  constructor(public dialog: MatDialog) {
+  constructor(public dialog: MatDialog, private datePipe: DatePipe) {
     this.title = 'Time Sheets';
   }
 
@@ -37,7 +40,6 @@ export class TimeSheetsComponent implements OnInit {
   }
 
 
-
   editEntry() {
     const dialogRef = this.dialog.open(TimeSheetEntryComponent, {
       data: {title: 'Edit time sheet entry'}
@@ -54,5 +56,27 @@ export class TimeSheetsComponent implements OnInit {
   }
 
   deleteEntry() {
+  }
+
+  isMaximumDateReached() {
+    return this.maxDate.toDateString() === this.date.toDateString();
+  }
+
+  swithDate(unit) {
+    this.date.setDate(this.date.getDate() + unit);
+    this.loadTimeSheetForSelectedDate();
+  }
+
+  onDatePick(event: MatDatepickerInputEvent<Date>) {
+    this.date = event.value;
+    this.loadTimeSheetForSelectedDate();
+  }
+
+  formatDate() {
+    return this.datePipe.transform(this.date, 'LLL dd yyyy');
+  }
+
+  loadTimeSheetForSelectedDate() {
+
   }
 }
