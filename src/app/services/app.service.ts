@@ -19,4 +19,9 @@ export class AppService {
     });
   }
 
+  getProjects() {
+    return this.http.get('projects').map(res => {
+      return res;
+    });
+  }
 }

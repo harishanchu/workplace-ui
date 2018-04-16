@@ -1,18 +1,21 @@
 <div class="container">
   <h3 mat-dialog-title>{{title}}</h3>
 
-  <form (ngSubmit)="addTimeSheet()" [formGroup]="form">
+  <form (ngSubmit)="saveTimeSheet()" [formGroup]="form">
+    <h4>Task details</h4>
+
     <div fxLayout="row">
-      <mat-form-field class="form-item">
-        <mat-select placeholder="Client" formControlName="client" (selectionChange)="populateProjectsBasedOnClient($event)">
-          <mat-option *ngFor="let client of clients" [value]="client">
+      <mat-form-field class="form-item" fxFlex>
+        <mat-select placeholder="Client" formControlName="client"
+                    (selectionChange)="populateProjectsBasedOnClient()">
+          <mat-option *ngFor="let client of clients" [value]="client.id">
             {{client.name}}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="hasError('client'); let error">{{error}}</mat-error>
       </mat-form-field>
 
-      <mat-form-field class="form-item">
+      <mat-form-field class="form-item" fxFlex>
         <mat-select placeholder="Project" formControlName="projectId">
           <mat-option *ngFor="let project of projects" [value]="project.id">
             {{project.name}}
@@ -20,16 +23,25 @@
         </mat-select>
         <mat-error *ngIf="hasError('projectId'); let error">{{error}}</mat-error>
       </mat-form-field>
-
-      <mat-form-field class="form-item">
-        <mat-select placeholder="Status" formControlName="status">
-          <mat-option *ngFor="let status of statuses" [value]="status.value">
-            {{status.name}}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="hasError('status'); let error">{{error}}</mat-error>
-      </mat-form-field>
     </div>
+
+
+    <mat-form-field class="full-width form-item">
+      <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
+      <mat-error *ngIf="hasError('comment'); let error">{{error}}</mat-error>
+    </mat-form-field>
+
+    <h4>Log work</h4>
+
+
+    <mat-form-field class="form-item full-width">
+      <mat-select placeholder="Status" formControlName="status">
+        <mat-option *ngFor="let status of statuses" [value]="status.value">
+          {{status.name}}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="hasError('status'); let error">{{error}}</mat-error>
+    </mat-form-field>
 
     <div class="form-item">
       <div class="slider-field time-slider" fxLayout="row" fxLayoutAlign="center center">
@@ -39,10 +51,6 @@
       </div>
       <mat-error *ngIf="hasError('duration'); let error">{{error}}</mat-error>
     </div>
-
-    <mat-form-field class="full-width form-item">
-      <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
-    </mat-form-field>
 
     <div mat-dialog-actions>
       <button mat-raised-button matDialogClose>Cancel</button>

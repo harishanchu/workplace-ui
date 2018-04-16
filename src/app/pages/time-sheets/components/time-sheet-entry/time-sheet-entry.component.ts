@@ -17,8 +17,11 @@ export class TimeSheetEntryComponent implements OnInit {
   private title;
   private date;
   private form: FormGroup;
+  private editFormData;
+  private type: string;
   private clients = <any>[];
   private projects = <any>[];
+  private projectsUnfiltered = <any>[];
   private statuses = [
     {name: 'Completed', value: 'completed'},
     {name: 'In Progress', value: 'inProgress'}
@@ -31,7 +34,7 @@ export class TimeSheetEntryComponent implements OnInit {
               private notificationService: NotificationService,
               private appService: AppService) {
     this.title = data.title;
-    this.date = data.date;
+    this.type = data.type;
     this.form = fb.group({
       'client': ['', Validators.required],
       'projectId': ['', Validators.required],
@@ -41,34 +44,47 @@ export class TimeSheetEntryComponent implements OnInit {
       'taskId': ['']
     });
 
-    if (this.data.formData) {
-      const value = (({projectId, status, duration, comment, taskId, clientId}) => ({
-        projectId,
-        status,
-        duration,
-        comment,
-        taskId,
-        client: clientId
-      }))(this.data.formData);
-      this.form.setValue(value);
+    if (this.type === 'update') {
+      this.editFormData = this.data.formData;
+      this.disableTaskEditing();
+      this.date = this.editFormData.date;
+      this.loadTimeSheetDataToForm(this.editFormData);
+    } else {
+      this.date = data.date;
     }
   }
 
   ngOnInit() {
-    this.appService.getClients(true).subscribe(clients => {
+    this.appService.getClients(false).subscribe(clients => {
       this.clients = clients;
+    });
+
+    this.loadComboStores();
+  }
+
+  loadComboStores() {
+    this.appService.getProjects().subscribe(projects => {
+      this.projectsUnfiltered = projects;
+
+      /**
+       * If client is already selected filter projects list
+       * (In case of edit client will be loaded already).
+       */
+      this.populateProjectsBasedOnClient();
     });
   }
 
-  populateProjectsBasedOnClient(event) {
-    const client = event.value;
+  populateProjectsBasedOnClient() {
+    const client = this.form.controls.client.value;
 
     if (client) {
-      this.projects = client.projects;
+      this.projects = this.projectsUnfiltered.filter(function (project) {
+        return project.clientId === client;
+      });
     }
   }
 
-  public addTimeSheet(): void {
+  public saveTimeSheet(): void {
     if (this.form.valid) {
       const timeSheet: TimeSheet = (({projectId, status, duration, comment, taskId}, date) => ({
         projectId,
@@ -79,18 +95,50 @@ export class TimeSheetEntryComponent implements OnInit {
         date
       }))(this.form.value, this.date);
 
-      this.timeSheetService.createTimeSheet(<TimeSheet>timeSheet).subscribe(
-        data => {
-          // this.router.navigate([this.returnUrl]);
-          console.log('time sheet saved')
-        },
-        error => {
-          this.notificationService.error(error.error.error.message);
-        }
-      );
+
+      if (this.type === 'new') {
+        // Create new time sheet;
+        this.timeSheetService.createTimeSheet(<TimeSheet>timeSheet).subscribe(
+          data => {
+            // @todo: add newly added item to grid.
+            this.dialogRef.close();
+          },
+          error => {
+            this.notificationService.error(error.error.error.message);
+          }
+        );
+      } else {
+        // Update time sheet;
+        this.timeSheetService.updateTimeSheet(<TimeSheet>timeSheet).subscribe(
+          data => {
+            // @todo: refresh updates to grid.
+            this.dialogRef.close();
+          },
+          error => {
+            this.notificationService.error(error.error.error.message);
+          }
+        );
+      }
     }
   }
 
+  loadTimeSheetDataToForm(data) {
+    const value = (({projectId, status, duration, comment, taskId, clientId}) => ({
+      projectId,
+      status,
+      duration,
+      comment,
+      taskId,
+      client: clientId
+    }))(data);
+    this.form.setValue(value);
+  }
+
+  disableTaskEditing() {
+    this.form.controls.client.disable();
+    this.form.controls.comment.disable();
+    this.form.controls.projectId.disable();
+  }
 }
 
 Util.mixin(TimeSheetEntryComponent, [ValidationMixin]);

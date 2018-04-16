@@ -14,6 +14,10 @@ export class TimeSheetService {
     });
   }
 
+  updateTimeSheet () {
+
+  }
+
   getCurrentUserTimeSheets(selectedDate: Date, includeDetails) {
     const params: any = {filter: {where: {date: selectedDate.toISOString().slice(0, 10)}}};
 

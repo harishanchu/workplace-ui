@@ -27,7 +27,8 @@ export class TimeSheetsComponent implements OnInit {
     const dialogRef = this.dialog.open(TimeSheetEntryComponent, {
       data: {
         title: 'Add new time sheet entry',
-        date: this.date
+        date: this.date,
+        type: 'new'
       }
     });
 
@@ -44,7 +45,11 @@ export class TimeSheetsComponent implements OnInit {
 
   editEntry(timeSheet) {
     const dialogRef = this.dialog.open(TimeSheetEntryComponent, {
-      data: {title: 'Edit time sheet entry', formData: timeSheet}
+      data: {
+        title: 'Edit time sheet entry',
+        formData: timeSheet,
+        type: 'update'
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
