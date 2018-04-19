@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Util} from '../../../../helpers/util';
 import {ValidationMixin} from '../../../../mixins/validation.mixin';
 import {TimeSheet} from '../../../../models/time-sheet';
+import {Task} from '../../../../models/task';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
 import {NotificationService} from '../../../../services/notification.service';
 import {AppService} from '../../../../services/app.service';
@@ -18,6 +19,7 @@ export class TimeSheetEntryComponent implements OnInit {
   private date;
   private form: FormGroup;
   private editFormData;
+  private gridCmp;
   private type: string;
   private clients = <any>[];
   private projects = <any>[];
@@ -35,13 +37,13 @@ export class TimeSheetEntryComponent implements OnInit {
               private appService: AppService) {
     this.title = data.title;
     this.type = data.type;
+    this.gridCmp = data.gridCmp;
     this.form = fb.group({
-      'client': ['', Validators.required],
+      'clientId': ['', Validators.required],
       'projectId': ['', Validators.required],
       'status': ['', Validators.required],
       'duration': [1, Validators.required],
-      'comment': [''],
-      'taskId': ['']
+      'comment': ['']
     });
 
     if (this.type === 'update') {
@@ -75,67 +77,100 @@ export class TimeSheetEntryComponent implements OnInit {
   }
 
   populateProjectsBasedOnClient() {
-    const client = this.form.controls.client.value;
+    const clientId = this.form.controls.clientId.value;
 
-    if (client) {
+    if (clientId) {
       this.projects = this.projectsUnfiltered.filter(function (project) {
-        return project.clientId === client;
+        return project.clientId === clientId;
       });
     }
   }
 
-  public saveTimeSheet(): void {
+  public onSaveTimeSheetClick(): void {
     if (this.form.valid) {
-      const timeSheet: TimeSheet = (({projectId, status, duration, comment, taskId}, date) => ({
-        projectId,
-        status,
-        duration,
-        comment,
-        taskId,
-        date
-      }))(this.form.value, this.date);
+      const formValues = this.form.value;
+      const timeSheet: TimeSheet = {
+        status: formValues.status,
+        duration: formValues.duration
+      };
 
 
       if (this.type === 'new') {
-        // Create new time sheet;
-        this.timeSheetService.createTimeSheet(<TimeSheet>timeSheet).subscribe(
-          data => {
-            // @todo: add newly added item to grid.
-            this.dialogRef.close();
-          },
-          error => {
-            this.notificationService.error(error.error.error.message);
-          }
-        );
+        timeSheet.date = this.date;
+
+        if (!timeSheet.taskId) {
+          const task = {
+            projectId: formValues.projectId,
+            comment: formValues.comment
+          };
+
+          this.createTask(task, function (error, data) {
+            if (error) {
+              this.notificationService.error(error.error.error.message);
+            } else {
+              timeSheet.taskId = data.id;
+
+              this.createTimeSheet(timeSheet);
+            }
+          });
+        } else {
+          this.createTimeSheet(timeSheet);
+        }
       } else {
-        // Update time sheet;
-        this.timeSheetService.updateTimeSheet(<TimeSheet>timeSheet).subscribe(
-          data => {
-            // @todo: refresh updates to grid.
-            this.dialogRef.close();
-          },
-          error => {
-            this.notificationService.error(error.error.error.message);
-          }
-        );
+        timeSheet.taskId = this.editFormData.taskId;
+        this.updateTimeSheet(timeSheet);
       }
     }
   }
 
+  createTask(task: Task, callback) {
+    this.timeSheetService.createTask(<Task>task).subscribe(
+      data => {
+        return callback.call(this, null, data);
+      },
+      callback.bind(this)
+    );
+  }
+
+  createTimeSheet(timeSheet: TimeSheet) {
+    // Create new time sheet;
+    this.timeSheetService.createTimeSheet(<TimeSheet>timeSheet).subscribe(
+      data => {
+        this.gridCmp.appendItem(data);
+        this.dialogRef.close();
+      },
+      error => {
+        this.notificationService.error(error.error.error.message);
+      }
+    );
+  }
+
+  updateTimeSheet(timeSheet: TimeSheet) {
+    // Update time sheet;
+    this.timeSheetService.updateTimeSheet(this.editFormData.id, <TimeSheet>timeSheet).subscribe(
+      data => {
+        this.gridCmp.updateItem(this.editFormData, data);
+        this.dialogRef.close();
+      },
+      error => {
+        this.notificationService.error(error.error.error.message);
+      }
+    );
+  }
+
+
   loadTimeSheetDataToForm(data) {
-    const value = (({projectId, status, duration, comment, taskId, clientId}) => ({
-      projectId,
-      status,
-      duration,
-      comment,
-      taskId,
-      client: clientId
-    }))(data);
-    this.form.setValue(value);
+    this.form.setValue({
+      projectId: data.projectId,
+      status: data.status,
+      duration: data.duration,
+      comment: data.comment,
+      clientId: data.clientId
+    });
   }
 
   disableTaskEditing() {
-    this.form.controls.client.disable();
+    this.form.controls.clientId.disable();
     this.form.controls.comment.disable();
     this.form.controls.projectId.disable();
   }

@@ -1,18 +1,18 @@
 <div class="container">
   <h3 mat-dialog-title>{{title}}</h3>
 
-  <form (ngSubmit)="saveTimeSheet()" [formGroup]="form">
+  <form (ngSubmit)="onSaveTimeSheetClick()" [formGroup]="form">
     <h4>Task details</h4>
 
     <div fxLayout="row">
       <mat-form-field class="form-item" fxFlex>
-        <mat-select placeholder="Client" formControlName="client"
+        <mat-select placeholder="Client" formControlName="clientId"
                     (selectionChange)="populateProjectsBasedOnClient()">
           <mat-option *ngFor="let client of clients" [value]="client.id">
             {{client.name}}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="hasError('client'); let error">{{error}}</mat-error>
+        <mat-error *ngIf="hasError('clientId'); let error">{{error}}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="form-item" fxFlex>

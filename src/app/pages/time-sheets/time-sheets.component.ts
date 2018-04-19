@@ -3,6 +3,9 @@ import {MatDatepickerInputEvent, MatDialog} from '@angular/material';
 
 import {TimeSheetEntryComponent} from './components/time-sheet-entry/time-sheet-entry.component';
 import {DatePipe} from '@angular/common';
+import {TimeSheet} from '../../models/time-sheet';
+import {TimeSheetService} from '../../services/time-sheet.service';
+import {NotificationService} from '../../services/notification.service';
 
 @Component({
   selector: 'app-time-sheets',
@@ -15,7 +18,9 @@ export class TimeSheetsComponent implements OnInit {
   @Input('date') private date: Date = new Date();
   private maxDate: Date = new Date();
 
-  constructor(public dialog: MatDialog, private datePipe: DatePipe) {
+  constructor(public dialog: MatDialog, private datePipe: DatePipe,
+              private timeSheetService: TimeSheetService,
+              private notificationService: NotificationService) {
     this.title = 'Time Sheets';
   }
 
@@ -28,7 +33,8 @@ export class TimeSheetsComponent implements OnInit {
       data: {
         title: 'Add new time sheet entry',
         date: this.date,
-        type: 'new'
+        type: 'new',
+        gridCmp: this.grid
       }
     });
 
@@ -48,7 +54,8 @@ export class TimeSheetsComponent implements OnInit {
       data: {
         title: 'Edit time sheet entry',
         formData: timeSheet,
-        type: 'update'
+        type: 'update',
+        gridCmp: this.grid
       }
     });
 
@@ -62,7 +69,15 @@ export class TimeSheetsComponent implements OnInit {
     });
   }
 
-  deleteEntry() {
+  deleteEntry(timeSheetId) {
+    this.timeSheetService.deleteTimeSheet(timeSheetId).subscribe(
+      data => {
+        this.grid.refreshGrid();
+      },
+      error => {
+        this.notificationService.error(error.error.error.message);
+      }
+    );
   }
 
   isMaximumDateReached() {

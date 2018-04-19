@@ -31,7 +31,7 @@
           Edit
         </button>
 
-        <button mat-button color="primary" (click)="deleteEntry(grid.selection.selected)" [disabled]="grid.selection.selected.length === 0">
+        <button mat-button color="primary" (click)="deleteEntry(grid.selection.selected[0].id)" [disabled]="grid.selection.selected.length !== 1">
           <mat-icon aria-label="Delete">delete</mat-icon>
           Delete
         </button>

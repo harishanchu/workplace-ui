@@ -1,11 +1,17 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TimeSheet} from '../models/time-sheet';
+import {Task} from '../models/task';
 
 @Injectable()
 export class TimeSheetService {
-
   constructor(private http: HttpClient) {
+  }
+
+  createTask(task: Task) {
+    return this.http.post(`users/me/tasks`, task).map(response => {
+      return response;
+    });
   }
 
   createTimeSheet(timeSheetEntry: TimeSheet) {
@@ -14,8 +20,16 @@ export class TimeSheetService {
     });
   }
 
-  updateTimeSheet () {
+  updateTimeSheet (id, timeSheetEntry: TimeSheet) {
+    return this.http.put(`users/me/time-sheets/${id}`, timeSheetEntry).map(response => {
+      return response;
+    });
+  }
 
+  deleteTimeSheet (timeSheetId) {
+    return this.http.delete(`users/me/time-sheets/${timeSheetId}`).map(response => {
+      return response;
+    });
   }
 
   getCurrentUserTimeSheets(selectedDate: Date, includeDetails) {
@@ -29,7 +43,8 @@ export class TimeSheetService {
 
     return this.http.get(`users/me/time-sheets`,
       {params}).map((response: any[]) => {
-      return response.map(({date, taskId, task, duration, status}) => ({
+      return response.map(({id, date, taskId, task, duration, status}) => ({
+        id,
         date,
         taskId,
         projectId: task.projectId,

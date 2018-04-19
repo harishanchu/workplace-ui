@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatTableDataSource} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 
@@ -16,6 +16,8 @@ export class TimeSheetGridComponent implements OnInit {
   private dataSource = new MatTableDataSource();
   private selection = new SelectionModel<TimeSheet>(true, []);
   private loading = false;
+  private date;
+  @ViewChild('table') private table;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -53,6 +55,7 @@ export class TimeSheetGridComponent implements OnInit {
 
 
   loadTimeSheetForSelectedDate(date: Date) {
+    this.date = date;
     this.loading = true;
     this.timeSheetService.getCurrentUserTimeSheets(date, true)
       .subscribe(timeSheets => {
@@ -63,5 +66,18 @@ export class TimeSheetGridComponent implements OnInit {
         () => {
           this.loading = false;
         });
+  }
+
+  appendItem (item) {
+    this.refreshGrid();
+  }
+
+  updateItem (oldValue, updatedValue) {
+    this.refreshGrid();
+  }
+
+  refreshGrid () {
+    this.selection.clear();
+    this.loadTimeSheetForSelectedDate(this.date);
   }
 }

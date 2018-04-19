@@ -1,7 +1,7 @@
 export interface TimeSheet {
   id?: any;
   userId?: any;
-  projectId: any;
+  projectId?: any;
   taskId?: any;
   user?: any;
   client?: any;
@@ -10,5 +10,5 @@ export interface TimeSheet {
   status: any;
   date?: any;
   duration: any;
-  comment: any;
+  comment?: any;
 }
