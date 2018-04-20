@@ -33,6 +33,9 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapte
 import {DatePipe} from '@angular/common';
 import { AppService } from './services/app.service';
 import { OpenTasksListComponent } from './pages/time-sheets/components/open-tasks-list/open-tasks-list.component';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+import { AdminSideNavComponent } from './components/admin-side-nav/admin-side-nav.component';
+import { AuthAdminGuard } from './guards/auth-admin.guard';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,9 @@ import { OpenTasksListComponent } from './pages/time-sheets/components/open-task
     RegisterComponent,
     HomeLayoutComponent,
     GuestLayoutComponent,
-    OpenTasksListComponent
+    OpenTasksListComponent,
+    AdminLayoutComponent,
+    AdminSideNavComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +84,8 @@ import { OpenTasksListComponent } from './pages/time-sheets/components/open-task
     NotificationService,
     TimeSheetService,
     DatePipe,
-    AppService
+    AppService,
+    AuthAdminGuard
   ],
   entryComponents: [
     TimeSheetEntryComponent,

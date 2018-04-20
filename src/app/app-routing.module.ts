@@ -8,6 +8,8 @@ import {RegisterComponent} from './pages/auth/register/register.component';
 import {AuthGuard, GuestGuard} from './guards/index';
 import {HomeLayoutComponent} from './layouts/home-layout/home-layout.component';
 import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.component';
+import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
+import {AuthAdminGuard} from './guards/auth-admin.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +19,14 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'time-sheets', pathMatch: 'full'},
       {path: 'time-sheets', component: TimeSheetsComponent},
+      {path: 'dashboard', component: DsashboardComponent}
+    ]
+  },
+  {
+    path: 'admin',
+    component: AdminLayoutComponent,
+    canActivate: [AuthAdminGuard],
+    children: [
       {path: 'dashboard', component: DsashboardComponent}
     ]
   },

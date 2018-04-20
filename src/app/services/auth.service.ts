@@ -81,4 +81,8 @@ export class AuthService {
   getAuthUserId() {
     return this.getAuthData().user.id;
   }
+
+  isAdmin() {
+    return (this.getAuthData().user.roles).indexOf('admin') > -1;
+  }
 }
