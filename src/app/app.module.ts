@@ -32,6 +32,7 @@ import {TimeSheetService} from './services/time-sheet.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapter} from '@angular/material';
 import {DatePipe} from '@angular/common';
 import { AppService } from './services/app.service';
+import { OpenTasksListComponent } from './pages/time-sheets/components/open-tasks-list/open-tasks-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { AppService } from './services/app.service';
     LoginComponent,
     RegisterComponent,
     HomeLayoutComponent,
-    GuestLayoutComponent
+    GuestLayoutComponent,
+    OpenTasksListComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +82,8 @@ import { AppService } from './services/app.service';
     AppService
   ],
   entryComponents: [
-    TimeSheetEntryComponent
+    TimeSheetEntryComponent,
+    OpenTasksListComponent
   ],
   bootstrap: [AppComponent]
 })

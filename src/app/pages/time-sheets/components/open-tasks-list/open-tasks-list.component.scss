@@ -1,0 +1,17 @@
+/* Structure */
+.task-grid-container {
+  padding: 5px;
+  width: 400px;
+
+  mat-spinner {
+    margin: auto;
+  }
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.mat-column-select {
+  overflow: visible;
+}

@@ -1,0 +1,27 @@
+<div class="task-grid-container">
+  <mat-spinner diameter=40 *ngIf="loading"></mat-spinner>
+  <div *ngIf="!loading">
+    <h3 mat-dialog-title>Choose a task</h3>
+    <mat-table #table [dataSource]="dataSource">
+      <!-- Columns -->
+      <ng-container *ngFor="let column of displayedColumns">
+        <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef> {{column | titlecase}}</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
+        </ng-container>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="dialogRef.close(row)"></mat-row>
+    </mat-table>
+
+    <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'">
+      You don't have any open task.
+    </div>
+
+    <div mat-dialog-actions align="end">
+      <button mat-button matDialogClose>Go back</button>
+    </div>
+  </div>
+
+</div>

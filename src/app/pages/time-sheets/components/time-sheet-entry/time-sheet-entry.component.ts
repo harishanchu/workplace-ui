@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material';
 import {Util} from '../../../../helpers/util';
 import {ValidationMixin} from '../../../../mixins/validation.mixin';
 import {TimeSheet} from '../../../../models/time-sheet';
@@ -8,6 +8,7 @@ import {Task} from '../../../../models/task';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
 import {NotificationService} from '../../../../services/notification.service';
 import {AppService} from '../../../../services/app.service';
+import {OpenTasksListComponent} from '../open-tasks-list/open-tasks-list.component';
 
 @Component({
   selector: 'app-time-sheet-entry',
@@ -21,6 +22,7 @@ export class TimeSheetEntryComponent implements OnInit {
   private editFormData;
   private gridCmp;
   private type: string;
+  private taskId;
   private clients = <any>[];
   private projects = <any>[];
   private projectsUnfiltered = <any>[];
@@ -34,7 +36,8 @@ export class TimeSheetEntryComponent implements OnInit {
               private fb: FormBuilder,
               private timeSheetService: TimeSheetService,
               private notificationService: NotificationService,
-              private appService: AppService) {
+              private appService: AppService,
+              public dialog: MatDialog) {
     this.title = data.title;
     this.type = data.type;
     this.gridCmp = data.gridCmp;
@@ -50,6 +53,7 @@ export class TimeSheetEntryComponent implements OnInit {
       this.editFormData = this.data.formData;
       this.disableTaskEditing();
       this.date = this.editFormData.date;
+      this.taskId = this.editFormData.taskId;
       this.loadTimeSheetDataToForm(this.editFormData);
     } else {
       this.date = data.date;
@@ -91,7 +95,8 @@ export class TimeSheetEntryComponent implements OnInit {
       const formValues = this.form.value;
       const timeSheet: TimeSheet = {
         status: formValues.status,
-        duration: formValues.duration
+        duration: formValues.duration,
+        taskId: this.taskId
       };
 
 
@@ -117,7 +122,7 @@ export class TimeSheetEntryComponent implements OnInit {
           this.createTimeSheet(timeSheet);
         }
       } else {
-        timeSheet.taskId = this.editFormData.taskId;
+        timeSheet.taskId = this.taskId;
         this.updateTimeSheet(timeSheet);
       }
     }
@@ -169,10 +174,52 @@ export class TimeSheetEntryComponent implements OnInit {
     });
   }
 
+  loadTaskData({clientId, projectId, comment}) {
+    this.form.controls.clientId.setValue(clientId);
+    this.form.controls.projectId.setValue(projectId);
+    this.form.controls.comment.setValue(comment);
+    this.populateProjectsBasedOnClient();
+  }
+
   disableTaskEditing() {
     this.form.controls.clientId.disable();
     this.form.controls.comment.disable();
     this.form.controls.projectId.disable();
+  }
+
+  resetTaskFields() {
+    this.form.controls.clientId.reset();
+    this.form.controls.comment.reset();
+    this.form.controls.projectId.reset();
+  }
+
+  enableTaskEditing() {
+    this.resetTaskFields();
+
+    this.form.controls.clientId.enable();
+    this.form.controls.comment.enable();
+    this.form.controls.projectId.enable();
+  }
+
+  showOpenTasks() {
+    const dialogRef = this.dialog.open(OpenTasksListComponent, {
+      data: {}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result !== "") {
+        this.taskId = result.id;
+        this.loadTaskData(result);
+        this.disableTaskEditing();
+      } else {
+        this.removeLinkedTask();
+      }
+    });
+  }
+
+  removeLinkedTask() {
+    this.taskId = undefined;
+    this.enableTaskEditing();
   }
 }
 

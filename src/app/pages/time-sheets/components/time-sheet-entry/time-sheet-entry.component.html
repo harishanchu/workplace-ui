@@ -1,13 +1,23 @@
 <div class="container">
   <h3 mat-dialog-title>{{title}}</h3>
 
-  <form (ngSubmit)="onSaveTimeSheetClick()" [formGroup]="form">
-    <h4>Task details</h4>
 
+  <div fxLayout="row" class="dialog-subtitle">
+    <h4 fxFlex>Task details</h4>
+    <span>
+         <button mat-icon-button (click)="showOpenTasks()" matTooltip="Link to an existing open task">
+          <mat-icon>link</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="taskId" (click)="removeLinkedTask()" matTooltip="Drop link to task">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </span>
+  </div>
+  <form (ngSubmit)="onSaveTimeSheetClick()" [formGroup]="form">
     <div fxLayout="row">
       <mat-form-field class="form-item" fxFlex>
         <mat-select placeholder="Client" formControlName="clientId"
-                    (selectionChange)="populateProjectsBasedOnClient()">
+                    (selectionChange)="populateProjectsBasedOnClient()" cdkFocusInitial>
           <mat-option *ngFor="let client of clients" [value]="client.id">
             {{client.name}}
           </mat-option>
@@ -52,9 +62,9 @@
       <mat-error *ngIf="hasError('duration'); let error">{{error}}</mat-error>
     </div>
 
-    <div mat-dialog-actions>
+    <div mat-dialog-actions align="end">
       <button mat-raised-button matDialogClose>Cancel</button>
-      <button mat-raised-button color="primary">Save</button>
+      <button mat-raised-button color="primary" type="submit">Save</button>
     </div>
   </form>
 </div>

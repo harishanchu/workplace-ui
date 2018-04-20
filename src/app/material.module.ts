@@ -23,6 +23,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ],
   exports: [
     MatSidenavModule,
@@ -71,7 +73,8 @@ import {MatRadioModule} from '@angular/material/radio';
     MatDatepickerModule,
     MatProgressSpinnerModule,
     MatDividerModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ]
 })
 export class MaterialModule {

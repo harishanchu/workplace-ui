@@ -20,19 +20,43 @@ export class TimeSheetService {
     });
   }
 
-  updateTimeSheet (id, timeSheetEntry: TimeSheet) {
+  updateTimeSheet(id, timeSheetEntry: TimeSheet) {
     return this.http.put(`users/me/time-sheets/${id}`, timeSheetEntry).map(response => {
       return response;
     });
   }
 
-  deleteTimeSheet (timeSheetId) {
+  deleteTimeSheet(timeSheetId) {
     return this.http.delete(`users/me/time-sheets/${timeSheetId}`).map(response => {
       return response;
     });
   }
 
-  getCurrentUserTimeSheets(selectedDate: Date, includeDetails) {
+  getOpenTasksForUser(user, includeDetails = false) {
+    const params: any = {
+      filter: {where: {status: 'open'}}
+    };
+
+    if (includeDetails) {
+      params.filter.include = {project: 'client'};
+    }
+
+    params.filter = JSON.stringify(params.filter);
+
+    return this.http.get(`users/${user}/tasks`, {params}).map((response: any[]) => {
+      return response.map(({id, project, comment}) => ({
+        id,
+        client: project.client.name,
+        clientId: project.client.id,
+        project: project.name,
+        projectId: project.id,
+        comment
+      }));
+
+    });
+  }
+
+  getCurrentUserTimeSheets(selectedDate: Date, includeDetails = false) {
     const params: any = {filter: {where: {date: selectedDate.toISOString().slice(0, 10)}}};
 
     if (includeDetails) {
