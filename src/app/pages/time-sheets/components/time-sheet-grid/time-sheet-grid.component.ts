@@ -1,8 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatTableDataSource} from '@angular/material';
+import {MatTableDataSource} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
-
-import {TimeSheetEntryComponent} from '../time-sheet-entry/time-sheet-entry.component';
 import {TimeSheet} from '../../../../models/time-sheet';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
 
@@ -13,22 +11,23 @@ import {TimeSheetService} from '../../../../services/time-sheet.service';
 })
 export class TimeSheetGridComponent implements OnInit {
   private displayedColumns = ['select', 'client', 'project', 'comment', 'status', 'duration'];
+  private displayedColumnsTitles = {}
   private dataSource = new MatTableDataSource();
   private selection = new SelectionModel<TimeSheet>(true, []);
   private loading = false;
   private date;
   @ViewChild('table') private table;
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
-
   constructor(private timeSheetService: TimeSheetService) {
   }
 
   ngOnInit() {
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 
   /**
@@ -68,15 +67,15 @@ export class TimeSheetGridComponent implements OnInit {
         });
   }
 
-  appendItem (item) {
+  appendItem(item) {
     this.refreshGrid();
   }
 
-  updateItem (oldValue, updatedValue) {
+  updateItem(oldValue, updatedValue) {
     this.refreshGrid();
   }
 
-  refreshGrid () {
+  refreshGrid() {
     this.selection.clear();
     this.loadTimeSheetForSelectedDate(this.date);
   }

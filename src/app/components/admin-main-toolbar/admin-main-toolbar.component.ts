@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
 import {Globals} from '../../globals';
-import {Router} from '@angular/router';
-
 import {AuthService} from '../../services/auth.service';
+import {Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
 
 @Component({
-  selector: 'app-main-toolbar',
-  templateUrl: './main-toolbar.component.html',
-  styleUrls: ['./main-toolbar.component.scss']
+  selector: 'app-admin-main-toolbar',
+  templateUrl: './admin-main-toolbar.component.html',
+  styleUrls: ['../main-toolbar/main-toolbar.component.scss']
 })
-export class MainToolbarComponent implements OnInit {
+export class AdminMainToolbarComponent implements OnInit {
+
   constructor(private globals: Globals, private authService: AuthService, private router: Router,
               private notificationService: NotificationService) {
   }
@@ -29,7 +29,8 @@ export class MainToolbarComponent implements OnInit {
     );
   }
 
-  switchUserView () {
-    this.router.navigate(['/admin']);
+  switchUserView() {
+    this.router.navigate(['']);
   }
+
 }

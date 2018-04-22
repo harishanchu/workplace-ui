@@ -81,4 +81,37 @@ export class TimeSheetService {
       }));
     });
   }
+
+  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false) {
+    const params: any = {
+      filter: {
+        where: {
+          date: {between: [fromDate.toISOString().slice(0, 10), toDate.toISOString().slice(0, 10)]}
+        }
+      }
+    };
+
+    if (includeDetails) {
+      params.filter.include = [{task: {project: 'client'}}, 'user'];
+    }
+
+    params.filter = JSON.stringify(params.filter);
+
+    return this.http.get(`time-sheets`,
+      {params}).map((response: any[]) => {
+      return response.map(({id, date, taskId, task, duration, status, user}) => ({
+        id,
+        date,
+        taskId,
+        projectId: task.projectId,
+        project: task.project.name,
+        clientId: task.project.clientId,
+        client: task.project.client.name,
+        comment: task.comment,
+        user: user.name,
+        duration,
+        status
+      }));
+    });
+  }
 }

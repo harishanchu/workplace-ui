@@ -36,6 +36,9 @@ import { OpenTasksListComponent } from './pages/time-sheets/components/open-task
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AdminSideNavComponent } from './components/admin-side-nav/admin-side-nav.component';
 import { AuthAdminGuard } from './guards/auth-admin.guard';
+import {AdminMainToolbarModule} from './components/admin-main-toolbar/admin-main-toolbar.module';
+import { AdminTimeSheetsComponent } from './pages/admin/admin-time-sheets/admin-time-sheets.component';
+import { AdminTimeSheetGridComponent } from './pages/admin/components/admin-time-sheet-grid/admin-time-sheet-grid.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,9 @@ import { AuthAdminGuard } from './guards/auth-admin.guard';
     GuestLayoutComponent,
     OpenTasksListComponent,
     AdminLayoutComponent,
-    AdminSideNavComponent
+    AdminSideNavComponent,
+    AdminTimeSheetsComponent,
+    AdminTimeSheetGridComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +65,7 @@ import { AuthAdminGuard } from './guards/auth-admin.guard';
     MaterialModule,
     AppRoutingModule,
     MainToolbarModule,
+    AdminMainToolbarModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule

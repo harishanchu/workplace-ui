@@ -43,7 +43,7 @@ mat-toolbar {
   overflow: hidden;
 }
 
-app-time-sheet-grid {
+.time-sheet-grid {
   display: block;
   overflow: auto;
   height: calc(100vh - #{$topbarHeight} - 64px);

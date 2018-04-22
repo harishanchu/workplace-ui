@@ -46,7 +46,7 @@ export class TimeSheetEntryComponent implements OnInit {
       'projectId': ['', Validators.required],
       'status': ['', Validators.required],
       'duration': [1, Validators.required],
-      'comment': ['']
+      'comment': ['', Validators.required]
     });
 
     if (this.type === 'update') {

@@ -10,6 +10,7 @@ import {HomeLayoutComponent} from './layouts/home-layout/home-layout.component';
 import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.component';
 import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
 import {AuthAdminGuard} from './guards/auth-admin.guard';
+import {AdminTimeSheetsComponent} from './pages/admin/admin-time-sheets/admin-time-sheets.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,12 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [AuthAdminGuard],
     children: [
-      {path: 'dashboard', component: DsashboardComponent}
+      {path: '', redirectTo: 'insights', pathMatch: 'full'},
+      {path: 'insights', component: DsashboardComponent},
+      {path: 'time-sheets', component: AdminTimeSheetsComponent},
+      {path: 'employees', component: DsashboardComponent},
+      {path: 'clients', component: DsashboardComponent},
+      {path: 'projects', component: DsashboardComponent}
     ]
   },
   {

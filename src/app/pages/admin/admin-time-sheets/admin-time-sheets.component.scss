@@ -1,0 +1,11 @@
+.form-item {
+  &:not(:first-of-type) {
+    margin-left: 10px;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 36px;
+  }
+}

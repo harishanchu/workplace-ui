@@ -28,7 +28,7 @@
       <!-- Rest of the Columns -->
       <ng-container *ngFor="let column of displayedColumns">
         <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
-          <mat-header-cell *matHeaderCellDef> {{column | titlecase}}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{displayedColumnsTitles[column]||column | titlecase}}</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
         </ng-container>
       </ng-container>
