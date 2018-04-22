@@ -1,4 +1,8 @@
-<div>
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+  <div class="load-mask" *ngIf="timeSheetGrid.loading">
+    <mat-spinner diameter=40></mat-spinner>
+  </div>
+
   <mat-toolbar>
     <mat-toolbar-row class="action-bar">
       <div class="action-bar-title">
@@ -26,12 +30,14 @@
           Add new
         </button>
 
-        <button mat-button color="primary" (click)="editEntry(grid.selection.selected[0])" [disabled]="grid.selection.selected.length !== 1">
+        <button mat-button color="primary" (click)="editEntry(grid.selection.selected[0])"
+                [disabled]="grid.selection.selected.length !== 1">
           <mat-icon aria-label="Edit">edit</mat-icon>
           Edit
         </button>
 
-        <button mat-button color="primary" (click)="deleteEntry(grid.selection.selected[0].id)" [disabled]="grid.selection.selected.length !== 1">
+        <button mat-button color="primary" (click)="deleteEntry(grid.selection.selected[0].id)"
+                [disabled]="grid.selection.selected.length !== 1">
           <mat-icon aria-label="Delete">delete</mat-icon>
           Delete
         </button>
@@ -39,4 +45,5 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <app-time-sheet-grid #timeSheetGrid></app-time-sheet-grid>
+
 </div>

@@ -1,6 +1,5 @@
 <div class="timesheet-grid-container">
-  <mat-spinner diameter=40 *ngIf="loading"></mat-spinner>
-  <div *ngIf="!loading">
+  <div>
     <div class="timesheet-grid-header">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
@@ -42,5 +41,4 @@
       No items to display
     </div>
   </div>
-
 </div>

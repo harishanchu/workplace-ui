@@ -11,3 +11,16 @@
   text-align: center;
   padding: 10px;
 }
+
+.load-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.01);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

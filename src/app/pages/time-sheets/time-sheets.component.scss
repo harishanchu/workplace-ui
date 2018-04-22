@@ -38,3 +38,13 @@ mat-toolbar {
     }
   }
 }
+
+.container {
+  overflow: hidden;
+}
+
+app-time-sheet-grid {
+  display: block;
+  overflow: auto;
+  height: calc(100vh - #{$topbarHeight} - 64px);
+}

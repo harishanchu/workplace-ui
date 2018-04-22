@@ -30,4 +30,8 @@ export class MainToolbarComponent implements OnInit {
       }
     );
   }
+
+  navigateToAdminArea () {
+    this.router.navigate(['/admin']);
+  }
 }
