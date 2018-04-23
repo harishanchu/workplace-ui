@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TimeSheet} from '../models/time-sheet';
 import {Task} from '../models/task';
+import {Util} from '../helpers/util';
 
 @Injectable()
 export class TimeSheetService {
@@ -57,7 +58,7 @@ export class TimeSheetService {
   }
 
   getCurrentUserTimeSheets(selectedDate: Date, includeDetails = false) {
-    const params: any = {filter: {where: {date: selectedDate.toISOString().slice(0, 10)}}};
+    const params: any = {filter: {where: {date: Util.formatDate(selectedDate)}}};
 
     if (includeDetails) {
       params.filter.include = {task: {project: 'client'}};
@@ -86,7 +87,7 @@ export class TimeSheetService {
     const params: any = {
       filter: {
         where: {
-          date: {between: [fromDate.toISOString().slice(0, 10), toDate.toISOString().slice(0, 10)]}
+          date: {between: [Util.formatDate(fromDate), Util.formatDate(toDate)]}
         }
       }
     };

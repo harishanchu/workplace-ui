@@ -20,6 +20,22 @@
           <mat-datepicker #toPicker></mat-datepicker>
         </div>
 
+        <div class="form-item">
+          <mat-select placeholder="Client" formControlName="clientId" multiple>
+            <mat-option *ngFor="let client of clients" [value]="client.id">
+              {{client.name}}
+            </mat-option>
+          </mat-select>
+        </div>
+
+        <div class="form-item">
+          <mat-select placeholder="Project" formControlName="projectId" multiple>
+            <mat-option *ngFor="let project of projects" [value]="project.id">
+              {{project.name}}
+            </mat-option>
+          </mat-select>
+        </div>
+
         <!--<span class="separator"></span>
 
         <button mat-button color="primary" (click)="addNewEntry()">

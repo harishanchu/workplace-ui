@@ -3,6 +3,19 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class AppService {
+  static get clientAllItem() {
+    return {
+      id: 'all',
+      name: 'All'
+    };
+  }
+
+  static get projectAllItem() {
+    return {
+      id: 'all',
+      name: 'All'
+    };
+  }
 
   constructor(private http: HttpClient) {
   }
