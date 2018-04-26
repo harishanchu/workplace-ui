@@ -3,14 +3,14 @@ import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class AppService {
-  static get clientAllItem() {
+  static get clientAllItem(): any {
     return {
       id: 'all',
       name: 'All'
     };
   }
 
-  static get projectAllItem() {
+  static get projectAllItem(): any {
     return {
       id: 'all',
       name: 'All'
