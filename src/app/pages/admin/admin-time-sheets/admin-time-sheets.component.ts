@@ -4,6 +4,7 @@ import {TimeSheetService} from '../../../services/time-sheet.service';
 import {MatDatepickerInputEvent} from '@angular/material';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AppService} from '../../../services/app.service';
+import {Util} from '../../../helpers/util';
 
 @Component({
   selector: 'app-admin-time-sheets',
@@ -71,4 +72,21 @@ export class AdminTimeSheetsComponent implements OnInit {
   refreshGrid() {
     this.grid.loadTimeSheetForSelectedDate(this.form.value.fromDate, this.form.value.toDate);
   }
+
+  onClientIdChange(event) {
+    const selectionModel = event.source._selectionModel;
+    const clientIdFormControl = this.form.get('clientId');
+
+    Util.handleMultiSelectWithAllOptionChange(clientIdFormControl, selectionModel);
+    this.populateProjectsBasedOnClient();
+  }
+
+  onProjectIdChange (event) {
+    const selectionModel = event.source._selectionModel;
+    const projectIdFormControl = this.form.get('projectId');
+
+    Util.handleMultiSelectWithAllOptionChange(projectIdFormControl, selectionModel);
+  }
+
+
 }
