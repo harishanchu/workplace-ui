@@ -83,7 +83,7 @@ export class TimeSheetService {
     });
   }
 
-  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false) {
+  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'user', direction = 'asc', pageIndex = 1) {
     const params: any = {
       filter: {
         where: {
