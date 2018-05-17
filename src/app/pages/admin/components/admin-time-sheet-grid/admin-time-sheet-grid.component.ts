@@ -45,7 +45,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
           return this.timeSheetService.getAllUserTimeSheets(this.fromDate, this.toDate, true,
             this.sort.active, this.sort.direction, this.paginator.pageIndex);
         }),
-        map(data => {
+        map(data => {console.log(data);debugger;
          /* // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
@@ -53,13 +53,13 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
 
           return data.items;*/
         }),
-        catchError(() => {
+        catchError((err, caught): any => {
          /* this.isLoadingResults = false;
           // Catch if the GitHub API has reached its rate limit. Return empty data.
           this.isRateLimitReached = true;
           return observableOf([]);*/
         })
-      ).subscribe(data => this.dataSource.data = data);
+      ).subscribe((data) => {debugger; this.dataSource.data = data});
   }
 
   applyFilter(filterValue: string) {

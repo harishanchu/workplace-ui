@@ -99,20 +99,23 @@ export class TimeSheetService {
     params.filter = JSON.stringify(params.filter);
 
     return this.http.get(`time-sheets`,
-      {params}).map((response: any[]) => {
-      return response.map(({id, date, taskId, task, duration, status, user}) => ({
-        id,
-        date,
-        taskId,
-        projectId: task.projectId,
-        project: task.project.name,
-        clientId: task.project.clientId,
-        client: task.project.client.name,
-        comment: task.comment,
-        user: user.name,
-        duration,
-        status
-      }));
+      {params, observe: 'response'}).map((response: any[]) => {debugger;
+      return {
+        data: response.body.map(({id, date, taskId, task, duration, status, user}) => ({
+          id,
+          date,
+          taskId,
+          projectId: task.projectId,
+          project: task.project.name,
+          clientId: task.project.clientId,
+          client: task.project.client.name,
+          comment: task.comment,
+          user: user.name,
+          duration,
+          status
+        })),
+        total:
+      };
     });
   }
 }
