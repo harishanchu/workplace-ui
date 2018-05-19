@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {NotificationService} from '../../../services/notification.service';
 import {TimeSheetService} from '../../../services/time-sheet.service';
 import {MatDatepickerInputEvent} from '@angular/material';
@@ -11,7 +11,7 @@ import {Util} from '../../../helpers/util';
   templateUrl: './admin-time-sheets.component.html',
   styleUrls: ['../../time-sheets/time-sheets.component.scss', './admin-time-sheets.component.scss']
 })
-export class AdminTimeSheetsComponent implements OnInit {
+export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
   private title: string;
   private form;
   private clients = <any>[];
@@ -35,6 +35,9 @@ export class AdminTimeSheetsComponent implements OnInit {
 
   ngOnInit() {
     this.loadComboStores();
+  }
+
+  ngAfterViewInit () {
     this.refreshGrid();
   }
 

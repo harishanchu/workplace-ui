@@ -83,9 +83,11 @@ export class TimeSheetService {
     });
   }
 
-  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'user', direction = 'asc', pageIndex = 1) {
+  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'user', direction = 'asc', pageIndex = 0, pageSize = 10, filterValue = '') {
     const params: any = {
       filter: {
+        skip: pageIndex * pageSize,
+        limit: pageSize,
         where: {
           date: {between: [Util.formatDate(fromDate), Util.formatDate(toDate)]}
         }
@@ -99,9 +101,9 @@ export class TimeSheetService {
     params.filter = JSON.stringify(params.filter);
 
     return this.http.get(`time-sheets`,
-      {params, observe: 'response'}).map((response: any[]) => {debugger;
+      {params, observe: 'response'}).map((response: any[]) => {
       return {
-        data: response.body.map(({id, date, taskId, task, duration, status, user}) => ({
+        items: response.body.map(({id, date, taskId, task, duration, status, user}) => ({
           id,
           date,
           taskId,
@@ -114,7 +116,7 @@ export class TimeSheetService {
           duration,
           status
         })),
-        total:
+        total: response.headers.get('x-total-count') || 0
       };
     });
   }

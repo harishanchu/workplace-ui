@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ViewChild, OnInit, EventEmitter, Output} from '@angular/core';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
 import {MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
 import {TimeSheet} from '../../../../models/time-sheet';
@@ -22,10 +22,13 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   private displayedColumnsTitles = {'user': 'Employee'};
   public dataSource = new MatTableDataSource();
   public selection = new SelectionModel<TimeSheet>(true, []);
-  public loading = false;
+  public loading = true;
   private fromDate: Date;
   private toDate: Date;
+  private refreshGrid = new EventEmitter();
   private enablePagination = true;
+  private totalCount = 0;
+  private filterValue = '';
   @ViewChild('table') private table;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -37,50 +40,36 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page)
+    merge(this.sort.sortChange, this.paginator.page, this.refreshGrid)
       .pipe(
-        startWith({}),
         switchMap(() => {
           this.loading = true;
           return this.timeSheetService.getAllUserTimeSheets(this.fromDate, this.toDate, true,
-            this.sort.active, this.sort.direction, this.paginator.pageIndex);
+            this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize, this.filterValue);
         }),
-        map(data => {console.log(data);debugger;
-         /* // Flip flag to show that loading has finished.
-          this.isLoadingResults = false;
-          this.isRateLimitReached = false;
-          this.resultsLength = data.total_count;
+        map(data => {
+          this.loading = false;
+          this.totalCount = data.total;
 
-          return data.items;*/
+          return data.items;
         }),
         catchError((err, caught): any => {
-         /* this.isLoadingResults = false;
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
-          this.isRateLimitReached = true;
-          return observableOf([]);*/
+          this.loading = false;
+          return observableOf([]);
         })
-      ).subscribe((data) => {debugger; this.dataSource.data = data});
+      ).subscribe((data) => {this.dataSource.data = data;});
   }
 
   applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
+    this.filterValue = filterValue.trim().toLowerCase();
+    this.refreshGrid.emit();
   }
 
-  loadTimeSheetForSelectedDate(fromDate: Date, toDate: Date) {console.log('got here')
+  loadTimeSheetForSelectedDate(fromDate: Date, toDate: Date) {
     this.fromDate = fromDate;
     this.toDate = toDate;
-    this.loading = true;
-    /*this.timeSheetService.getAllUserTimeSheets(fromDate, toDate, true)
-      .subscribe(timeSheets => {
-          this.dataSource.data = timeSheets;
-        },
-        err => {
-        },
-        () => {
-          this.loading = false;
-        });*/
+    this.paginator.pageIndex = 0;
+    this.refreshGrid.emit();
   }
 
   /**
