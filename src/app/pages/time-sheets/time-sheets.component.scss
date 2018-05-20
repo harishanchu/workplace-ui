@@ -36,6 +36,13 @@ mat-toolbar {
       height: 30px;
       margin: 5px 0;
     }
+
+    .form-item {
+      mat-select {
+        border: 1px solid #a8a8a8;
+        padding: 2px;
+      }
+    }
   }
 }
 

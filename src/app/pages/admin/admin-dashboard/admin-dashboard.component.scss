@@ -1,0 +1,82 @@
+.container {
+  padding: 30px 30px;
+}
+
+.status-card {
+  padding: 0;
+  padding-bottom: 8px;
+  border-radius: 6px;
+
+  mat-card-header {
+    margin: 0 15px;
+
+    .card-icon {
+      border-radius: 3px;
+      background-color: #999;
+      padding: 15px;
+      margin-top: -20px;
+      margin-right: 15px;
+      width: auto;
+      height: auto;
+
+      &.orange {
+        background: linear-gradient(60deg, #ffa726, #fb8c00);
+      }
+
+      &.green {
+        background: linear-gradient(60deg, #66bb6a, #43a047);
+      }
+
+      &.red {
+        background: linear-gradient(60deg, #ef5350, #e53935);
+      }
+
+      &.blue {
+        background: linear-gradient(60deg, #26c6da, #00acc1);
+      }
+
+      mat-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 36px;
+        line-height: 56px;
+        color: #fff;
+        text-align: center;
+      }
+    }
+
+    mat-card-title {
+      padding-top: 10px;
+      color: #999;
+      text-align: right;
+    }
+
+    mat-card-subtitle {
+      font-size: 25px;
+      color: #3C4854;
+      font-weight: 300;
+      text-align: right;
+      span {
+        font-size: 80%;
+        font-weight: 400;
+      }
+    }
+  }
+
+  mat-card-actions {
+    border-top: 1px solid #eee;
+    margin: 0 15px;
+
+    .stats {
+      color: #999;
+      font-size: 12px;
+      line-height: 22px;
+
+      mat-icon {
+        position: relative;
+        top: 4px;
+        font-size: 16px;
+      }
+    }
+  }
+}

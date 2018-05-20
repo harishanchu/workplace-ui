@@ -38,7 +38,8 @@ import { AdminSideNavComponent } from './components/admin-side-nav/admin-side-na
 import { AuthAdminGuard } from './guards/auth-admin.guard';
 import {AdminMainToolbarModule} from './components/admin-main-toolbar/admin-main-toolbar.module';
 import { AdminTimeSheetsComponent } from './pages/admin/admin-time-sheets/admin-time-sheets.component';
-import { AdminTimeSheetGridComponent } from './pages/admin/components/admin-time-sheet-grid/admin-time-sheet-grid.component';
+import { AdminTimeSheetGridComponent } from './pages/admin/admin-time-sheets/components/admin-time-sheet-grid/admin-time-sheet-grid.component';
+import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { AdminTimeSheetGridComponent } from './pages/admin/components/admin-time
     AdminLayoutComponent,
     AdminSideNavComponent,
     AdminTimeSheetsComponent,
-    AdminTimeSheetGridComponent
+    AdminTimeSheetGridComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

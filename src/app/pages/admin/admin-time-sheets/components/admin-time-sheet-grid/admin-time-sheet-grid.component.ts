@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, ViewChild, OnInit, EventEmitter, Output} from '@angular/core';
-import {TimeSheetService} from '../../../../services/time-sheet.service';
+import {TimeSheetService} from '../../../../../services/time-sheet.service';
 import {MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
-import {TimeSheet} from '../../../../models/time-sheet';
+import {TimeSheet} from '../../../../../models/time-sheet';
 import {SelectionModel} from '@angular/cdk/collections';
 
 import {Observable} from 'rxjs/Observable';
@@ -14,12 +14,13 @@ import {switchMap} from 'rxjs/operators/switchMap';
 
 @Component({
   selector: 'app-admin-time-sheet-grid',
-  templateUrl: '../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.html',
-  styleUrls: ['../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss']
+  templateUrl: '../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.html',
+  styleUrls: ['../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss']
 })
 export class AdminTimeSheetGridComponent implements AfterViewInit {
   private displayedColumns = ['select', 'user', 'client', 'project', 'comment', 'status', 'duration'];
   private displayedColumnsTitles = {'user': 'Employee'};
+  private defaultSort = 'status';
   public dataSource = new MatTableDataSource();
   public selection = new SelectionModel<TimeSheet>(true, []);
   public loading = true;
@@ -45,7 +46,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
         switchMap(() => {
           this.loading = true;
           return this.timeSheetService.getAllUserTimeSheets(this.fromDate, this.toDate, true,
-            this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize, this.filterValue);
+            this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map(data => {
           this.loading = false;
@@ -62,7 +63,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
 
   applyFilter(filterValue: string) {
     this.filterValue = filterValue.trim().toLowerCase();
-    this.refreshGrid.emit();
+    this.dataSource.filter = this.filterValue;
   }
 
   loadTimeSheetForSelectedDate(fromDate: Date, toDate: Date) {

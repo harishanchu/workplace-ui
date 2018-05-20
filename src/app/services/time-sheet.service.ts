@@ -83,11 +83,12 @@ export class TimeSheetService {
     });
   }
 
-  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'user', direction = 'asc', pageIndex = 0, pageSize = 10, filterValue = '') {
+  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc', pageIndex = 0, pageSize = 10) {
     const params: any = {
       filter: {
         skip: pageIndex * pageSize,
         limit: pageSize,
+        order: sort + ' ' + direction,
         where: {
           date: {between: [Util.formatDate(fromDate), Util.formatDate(toDate)]}
         }
@@ -101,7 +102,7 @@ export class TimeSheetService {
     params.filter = JSON.stringify(params.filter);
 
     return this.http.get(`time-sheets`,
-      {params, observe: 'response'}).map((response: any[]) => {
+      {params, observe: 'response'}).map((response: any) => {
       return {
         items: response.body.map(({id, date, taskId, task, duration, status, user}) => ({
           id,

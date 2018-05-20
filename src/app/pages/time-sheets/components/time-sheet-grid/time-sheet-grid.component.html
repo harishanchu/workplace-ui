@@ -1,11 +1,11 @@
-<div class="timesheet-grid-container">
-  <div>
+<div class="timesheet-grid-container" fxLayout="column">
+  <div fxLayout="column" fxFlex>
     <div class="timesheet-grid-header">
       <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
     </div>
-    <mat-table #table [dataSource]="dataSource" matSort matSortActive="client" matSortDisableClear matSortDirection="asc">
+    <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear matSortDirection="asc" fxFlex>
 
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
@@ -28,7 +28,7 @@
       <!-- Rest of the Columns -->
       <ng-container *ngFor="let column of displayedColumns">
         <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> {{displayedColumnsTitles[column]||column | titlecase}}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef> {{displayedColumnsTitles[column]||column | titlecase}}</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
         </ng-container>
       </ng-container>
@@ -36,15 +36,14 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
     </mat-table>
+    <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'" fxFlex>
+      No items to display
+    </div>
     <mat-paginator *ngIf="enablePagination === true" #paginator
                    [length]="totalCount"
                    [pageSize]="10"
                    [pageSizeOptions]="[5, 10, 20]"
                    [showFirstLastButtons]="true">
     </mat-paginator>
-
-    <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'">
-      No items to display
-    </div>
   </div>
 </div>

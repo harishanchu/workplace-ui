@@ -11,7 +11,7 @@ export class AdminSideNavComponent implements OnInit {
 
   constructor() {
     this.navItemList = [
-      {title: 'Insights', url: '/admin/insights', icon: 'dashboard'},
+      {title: 'Dashboard', url: '/admin/dashboard', icon: 'dashboard'},
       {title: 'Time Sheets', url: '/admin/time-sheets', icon: 'av_timer'},
       {title: 'Employees', url: '/admin/employees', icon: 'people'},
       {title: 'Clients', url: '/admin/clients', icon: 'group_work'},
