@@ -1,3 +1,5 @@
+@import "../../../../styles/variables";
+
 .container {
   padding: 30px 30px;
 }
@@ -35,6 +37,10 @@
         font-size: 16px;
       }
     }
+  }
+
+  .grey {
+    background: linear-gradient(60deg, #cfcfcf, #ececec);
   }
 
   .orange {
@@ -92,5 +98,51 @@
 
 .chart-stats-container {
   margin-top: 50px;
+
+  mat-card-header {
+    mat-card-title {
+      padding: 15px 0;
+      color: #3c4858;
+      font-size: 1.125rem;
+      line-height: 1.4em;
+      font-weight: 300
+    }
+
+    mat-card-subtitle {
+      color: #999;
+    }
+  }
+
+  x-chartist {
+    ::ng-deep {
+      .ct-label {
+        color: rgba($white-color, .7);
+      }
+      .ct-grid {
+        stroke: rgba(255, 255, 255, 0.2);
+      }
+      .ct-series-a .ct-point,
+      .ct-series-a .ct-line,
+      .ct-series-a .ct-bar,
+      .ct-series-a .ct-slice-donut {
+        stroke: rgba(255, 255, 255, .8);
+      }
+      .ct-series-a .ct-slice-pie,
+      .ct-series-a .ct-area {
+        fill: rgba(255, 255, 255, .4);
+      }
+      .ct-series-a .ct-bar {
+        stroke-width: 10px;
+      }
+      .ct-point {
+        stroke-width: 10px;
+        stroke-linecap: round;
+      }
+      .ct-line {
+        fill: none;
+        stroke-width: 4px;
+      }
+    }
+  }
 }
 
