@@ -2,7 +2,7 @@
   padding: 30px 30px;
 }
 
-.status-card {
+.card {
   padding: 0;
   padding-bottom: 8px;
   border-radius: 6px;
@@ -10,31 +10,53 @@
   mat-card-header {
     margin: 0 15px;
 
-    .card-icon {
+    .card-art {
       border-radius: 3px;
       background-color: #999;
       padding: 15px;
       margin-top: -20px;
-      margin-right: 15px;
       width: auto;
       height: auto;
+    }
+  }
 
-      &.orange {
-        background: linear-gradient(60deg, #ffa726, #fb8c00);
+  mat-card-actions {
+    border-top: 1px solid #eee;
+    margin: 0 15px;
+
+    .info {
+      color: #999;
+      font-size: 12px;
+      line-height: 22px;
+
+      mat-icon {
+        position: relative;
+        top: 4px;
+        font-size: 16px;
       }
+    }
+  }
 
-      &.green {
-        background: linear-gradient(60deg, #66bb6a, #43a047);
-      }
+  .orange {
+    background: linear-gradient(60deg, #ffa726, #fb8c00);
+  }
 
-      &.red {
-        background: linear-gradient(60deg, #ef5350, #e53935);
-      }
+  .green {
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+  }
 
-      &.blue {
-        background: linear-gradient(60deg, #26c6da, #00acc1);
-      }
+  .red {
+    background: linear-gradient(60deg, #ef5350, #e53935);
+  }
 
+  .blue {
+    background: linear-gradient(60deg, #26c6da, #00acc1);
+  }
+}
+
+.status-card {
+  mat-card-header {
+    .card-art {
       mat-icon {
         width: 56px;
         height: 56px;
@@ -51,32 +73,24 @@
       text-align: right;
     }
 
-    mat-card-subtitle {
-      font-size: 25px;
-      color: #3C4854;
-      font-weight: 300;
-      text-align: right;
-      span {
-        font-size: 80%;
-        font-weight: 400;
-      }
-    }
-  }
+    ::ng-deep .mat-card-header-text {
+      flex: 1 1 0%;
 
-  mat-card-actions {
-    border-top: 1px solid #eee;
-    margin: 0 15px;
-
-    .stats {
-      color: #999;
-      font-size: 12px;
-      line-height: 22px;
-
-      mat-icon {
-        position: relative;
-        top: 4px;
-        font-size: 16px;
+      mat-card-subtitle {
+        font-size: 25px;
+        color: #3C4854;
+        font-weight: 300;
+        text-align: right;
+        span {
+          font-size: 80%;
+          font-weight: 400;
+        }
       }
     }
   }
 }
+
+.chart-stats-container {
+  margin-top: 50px;
+}
+
