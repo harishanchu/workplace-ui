@@ -65,7 +65,13 @@
     <mat-card fxFlex class="chart-card card" id="hoursChart">
       <mat-card-header fxLayout="column">
         <div mat-card-avatar class="card-art green mat-elevation-z2">
-
+          <x-chartist
+            [data]="hoursChart.data"
+            [type]="hoursChart.type"
+            [options]="hoursChart.options"
+            [responsiveOptions]="hoursChart.responsiveOptions"
+            [events]="hoursChart.events">
+          </x-chartist>
         </div>
         <mat-card-title>Hours</mat-card-title>
         <mat-card-subtitle>50/90<span>hrs</span></mat-card-subtitle>
@@ -80,7 +86,13 @@
     <mat-card fxFlex class="chart-card card" id="resourceAllocationChart">
       <mat-card-header fxLayout="column">
         <div mat-card-avatar class="card-art orange mat-elevation-z2">
-
+          <x-chartist
+            [data]="  resourceAllocationChart.data"
+            [type]="  resourceAllocationChart.type"
+            [options]="  resourceAllocationChart.options"
+            [responsiveOptions]="  resourceAllocationChart.responsiveOptions"
+            [events]="  resourceAllocationChart.events">
+          </x-chartist>
         </div>
         <mat-card-title>Hours</mat-card-title>
         <mat-card-subtitle>50/90<span>hrs</span></mat-card-subtitle>
@@ -95,7 +107,13 @@
     <mat-card fxFlex class="chart-card card" id="tasksChart">
       <mat-card-header fxLayout="column">
         <div mat-card-avatar class="card-art blue mat-elevation-z2">
-
+          <x-chartist
+            [data]="tasksChart.data"
+            [type]="tasksChart.type"
+            [options]="tasksChart.options"
+            [responsiveOptions]="tasksChart.responsiveOptions"
+            [events]="tasksChart.events">
+          </x-chartist>
         </div>
         <mat-card-title>Hours</mat-card-title>
         <mat-card-subtitle>50/90<span>hrs</span></mat-card-subtitle>

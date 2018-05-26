@@ -7,6 +7,7 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {HttpClientModule} from '@angular/common/http';
 
 import './rxjs-operators';
+import { ChartistModule } from 'ng-chartist';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -70,7 +71,8 @@ import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-das
     AdminMainToolbarModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ChartistModule
   ],
   providers: [
     {
