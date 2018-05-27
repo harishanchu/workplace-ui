@@ -16,6 +16,7 @@ export interface Chart {
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
+  private title = 'Dashboard';
   private hoursChart = <Chart> {
     type: 'Line',
     options: {

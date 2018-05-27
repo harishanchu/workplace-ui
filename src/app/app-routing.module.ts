@@ -32,9 +32,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: AdminDashboardComponent},
       {path: 'time-sheets', component: AdminTimeSheetsComponent},
-      {path: 'employees', component: DsashboardComponent},
-      {path: 'clients', component: DsashboardComponent},
-      {path: 'projects', component: DsashboardComponent}
+      {path: 'configuration', component: DsashboardComponent},
     ]
   },
   {
