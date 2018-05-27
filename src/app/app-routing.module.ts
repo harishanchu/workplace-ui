@@ -12,6 +12,7 @@ import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.componen
 import {AuthAdminGuard} from './guards/auth-admin.guard';
 import {AdminTimeSheetsComponent} from './pages/admin/admin-time-sheets/admin-time-sheets.component';
 import {AdminDashboardComponent} from './pages/admin/admin-dashboard/admin-dashboard.component';
+import {AdminConfigurationComponent} from './pages/admin/admin-configuration/admin-configuration.component';
 
 const routes: Routes = [
   {
@@ -32,7 +33,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: AdminDashboardComponent},
       {path: 'time-sheets', component: AdminTimeSheetsComponent},
-      {path: 'configuration', component: DsashboardComponent},
+      {path: 'configuration', component: AdminConfigurationComponent},
     ]
   },
   {

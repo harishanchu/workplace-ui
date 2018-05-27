@@ -1,0 +1,15 @@
+<div class="container">
+  <mat-toolbar>
+    <mat-toolbar-row class="action-bar">
+      <div class="action-bar-title">
+        {{title}}
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="container-body" fxLayout="row wrap">
+    <app-clients-grid fxFlex="50"></app-clients-grid>
+    <app-projects-grid fxFlex="50"></app-projects-grid>
+    <app-tasks-grid fxFlex="50"></app-tasks-grid>
+    <app-employees-grid fxFlex="50"></app-employees-grid>
+  </div>
+</div>

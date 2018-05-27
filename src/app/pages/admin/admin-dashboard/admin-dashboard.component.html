@@ -8,7 +8,7 @@
   </mat-toolbar>
   <div class="container-body">
     <div fxLayout="row" fxLayoutGap="20px" class="quick-stats-container">
-      <mat-card fxFlex class="status-card card">
+      <mat-card fxFlex class="status-card style-card">
         <mat-card-header fxLayout="row">
           <div mat-card-avatar class="card-art blue mat-elevation-z2" fxFlexAlign="start">
             <mat-icon>hourglass_full</mat-icon>
@@ -24,7 +24,7 @@
         </mat-card-actions>
       </mat-card>
 
-      <mat-card fxFlex class="status-card card">
+      <mat-card fxFlex class="status-card style-card">
         <mat-card-header fxLayout="row">
           <div mat-card-avatar class="card-art green mat-elevation-z2" fxFlexAlign="start">
             <mat-icon>check_circle</mat-icon>
@@ -40,7 +40,7 @@
         </mat-card-actions>
       </mat-card>
 
-      <mat-card fxFlex class="status-card card">
+      <mat-card fxFlex class="status-card style-card">
         <mat-card-header fxLayout="row">
           <div mat-card-avatar class="card-art red mat-elevation-z2" fxFlexAlign="start">
             <mat-icon>local_offer</mat-icon>
@@ -56,7 +56,7 @@
         </mat-card-actions>
       </mat-card>
 
-      <mat-card fxFlex class="status-card card">
+      <mat-card fxFlex class="status-card style-card">
         <mat-card-header fxLayout="row">
           <div mat-card-avatar class="card-art orange mat-elevation-z2" fxFlexAlign="start">
             <mat-icon>info</mat-icon>
@@ -74,7 +74,7 @@
     </div>
 
     <div fxLayout="row" fxLayoutGap="20px" class="chart-stats-container">
-      <mat-card fxFlex class="chart-card card" id="hoursChart">
+      <mat-card fxFlex class="chart-card style-card" id="hoursChart">
         <mat-card-header fxLayout="column">
           <div mat-card-avatar class="card-art green mat-elevation-z2">
             <x-chartist
@@ -90,7 +90,7 @@
         </mat-card-header>
       </mat-card>
 
-      <mat-card fxFlex class="chart-card card" id="resourceAllocationChart">
+      <mat-card fxFlex class="chart-card style-card" id="resourceAllocationChart">
         <mat-card-header fxLayout="column">
           <div mat-card-avatar class="card-art grey mat-elevation-z2">
             <x-chartist
@@ -102,11 +102,11 @@
             </x-chartist>
           </div>
           <mat-card-title>Resource Utilization</mat-card-title>
-          <mat-card-subtitle>30% of the users are allocated to client a today</mat-card-subtitle>
+          <mat-card-subtitle>Client A has highest resources assigned</mat-card-subtitle>
         </mat-card-header>
       </mat-card>
 
-      <mat-card fxFlex class="chart-card card" id="tasksChart">
+      <mat-card fxFlex class="chart-card style-card" id="tasksChart">
         <mat-card-header fxLayout="column">
           <div mat-card-avatar class="card-art blue mat-elevation-z2">
             <x-chartist

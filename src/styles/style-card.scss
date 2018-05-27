@@ -1,0 +1,205 @@
+.style-card {
+  padding: 0!important;
+  padding-bottom: 8px!important;
+  border-radius: 6px!important;
+
+  mat-card-header {
+    margin: 0 15px!important;
+
+    .card-art {
+      border-radius: 3px!important;
+      background-color: #999;
+      padding: 15px!important;
+      margin-top: -20px!important;
+      width: auto!important;
+      height: auto!important;
+    }
+  }
+
+  mat-card-actions {
+    border-top: 1px solid #eee;
+    margin: 0 15px!important;
+
+    .info {
+      color: #999;
+      font-size: 12px;
+      line-height: 22px;
+
+      mat-icon {
+        position: relative!important;
+        top: 4px!important;
+        font-size: 16px!important;
+      }
+    }
+  }
+
+  .grey {
+    background: linear-gradient(60deg, #cfcfcf, #ececec);
+  }
+
+  .orange {
+    background: linear-gradient(60deg, #ffa726, #fb8c00);
+  }
+
+  .green {
+    background: linear-gradient(60deg, #66bb6a, #43a047);
+  }
+
+  .red {
+    background: linear-gradient(60deg, #ef5350, #e53935);
+  }
+
+  .blue {
+    background: linear-gradient(60deg, #26c6da, #00acc1);
+  }
+
+  .violet {
+    background: linear-gradient(60deg,#ab47bc,#8e24aa)
+  }
+
+  .text-orange {
+    color: #FD9A13;
+  }
+
+  .text-violet {
+    color: #9D36B3;
+  }
+}
+
+.status-card {
+  mat-card-header {
+    .card-art {
+      mat-icon {
+        width: 56px!important;
+        height: 56px!important;
+        font-size: 36px!important;
+        line-height: 56px!important;
+        color: #fff!important;
+        text-align: center!important;
+      }
+    }
+
+    mat-card-title {
+      padding-top: 10px!important;
+      color: #999!important;
+      text-align: right!important;
+    }
+
+    .mat-card-header-text {
+      flex: 1 1 0%;
+
+      mat-card-subtitle {
+        font-size: 25px!important;
+        color: #3C4854!important;
+        font-weight: 300!important;
+        text-align: right!important;
+        span {
+          font-size: 80%;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+.chart-card {
+  mat-card-header {
+    mat-card-title {
+      padding: 15px 0!important;
+      color: #3c4858!important;
+      font-size: 1.125rem!important;
+      line-height: 1.4em!important;
+      font-weight: 300!important
+    }
+
+    mat-card-subtitle {
+      color: #999!important;
+    }
+  }
+
+  x-chartist {
+    .ct-label {
+      color: rgba($white-color, .7);
+    }
+    .ct-grid {
+      stroke: rgba(255, 255, 255, 0.2);
+    }
+    .ct-series-a .ct-point,
+    .ct-series-a .ct-line,
+    .ct-series-a .ct-bar,
+    .ct-series-a .ct-slice-donut {
+      stroke: rgba(255, 255, 255, .8);
+    }
+    .ct-series-a .ct-slice-pie,
+    .ct-series-a .ct-area {
+      fill: rgba(255, 255, 255, .4);
+    }
+    .ct-series-a .ct-bar {
+      stroke-width: 10px;
+    }
+    .ct-point {
+      stroke-width: 10px;
+      stroke-linecap: round;
+    }
+    .ct-line {
+      fill: none;
+      stroke-width: 4px;
+    }
+  }
+}
+
+.table-card {
+  mat-card-header {
+    mat-card-title {
+      font-size: 1.125rem!important;
+      line-height: 1.4em!important;
+      font-weight: 300!important;
+      color: #fff!important;
+      margin-bottom: 0!important;
+    }
+
+    mat-card-subtitle {
+      color: rgba(255,255,255,.62)!important;
+      margin-top: 16px;
+    }
+  }
+
+  mat-card-content {
+    padding: 15px 20px 0 20px;
+
+    .mat-header-row {
+      min-height: 48px;
+    }
+
+    mat-paginator {
+      .mat-paginator-container {
+        min-height: 40px;
+
+        .mat-paginator-page-size-select {
+          margin-top: 0;
+
+          .mat-form-field-label-wrapper {
+            top: 0;
+            padding-top: 0;
+          }
+
+          .mat-form-field-infix {
+            border-top: 0;
+          }
+
+          .mat-form-field-wrapper {
+            padding-bottom: 0;
+          }
+
+          .mat-input-underline {
+            top: 20px;
+          }
+        }
+      }
+
+      .mat-paginator-range-actions {
+        min-height: 32px;
+      }
+    }
+  }
+}
