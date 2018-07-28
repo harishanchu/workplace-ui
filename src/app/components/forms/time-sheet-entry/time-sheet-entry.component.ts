@@ -23,4 +23,8 @@ export class TimeSheetEntryComponent implements OnInit {
   ngOnInit() {
   }
 
+  formatTimeRangeValue() {
+    console.log(arguments);
+  }
+
 }

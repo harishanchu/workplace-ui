@@ -58,7 +58,7 @@
     <div class="form-item">
       <div class="slider-field time-slider" fxLayout="row" fxLayoutAlign="center center">
         <span class="slider-field-label"> Duration:</span>
-        <mat-slider thumb-label=true min=1 max=600 fxFlex formControlName="duration"></mat-slider>
+        <mat-slider thumbLabel=true min=1 max=600 fxFlex formControlName="duration"></mat-slider>
         <span class="slider-field-extension">minutes</span>
       </div>
       <mat-error *ngIf="hasError('duration'); let error">{{error}}</mat-error>

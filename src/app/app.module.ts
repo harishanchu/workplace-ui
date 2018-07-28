@@ -39,13 +39,15 @@ import { AdminSideNavComponent } from './components/admin-side-nav/admin-side-na
 import { AuthAdminGuard } from './guards/auth-admin.guard';
 import {AdminMainToolbarModule} from './components/admin-main-toolbar/admin-main-toolbar.module';
 import { AdminTimeSheetsComponent } from './pages/admin/admin-time-sheets/admin-time-sheets.component';
-import { AdminTimeSheetGridComponent } from './pages/admin/admin-time-sheets/components/admin-time-sheet-grid/admin-time-sheet-grid.component';
+import { AdminTimeSheetGridComponent } from
+  './pages/admin/admin-time-sheets/components/admin-time-sheet-grid/admin-time-sheet-grid.component';
 import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
 import { AdminConfigurationComponent } from './pages/admin/admin-configuration/admin-configuration.component';
 import { ClientsGridComponent } from './pages/admin/admin-configuration/components/clients-grid/clients-grid.component';
 import { ProjectsGridComponent } from './pages/admin/admin-configuration/components/projects-grid/projects-grid.component';
 import { TasksGridComponent } from './pages/admin/admin-configuration/components/tasks-grid/tasks-grid.component';
 import { EmployeesGridComponent } from './pages/admin/admin-configuration/components/employees-grid/employees-grid.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +71,8 @@ import { EmployeesGridComponent } from './pages/admin/admin-configuration/compon
     ClientsGridComponent,
     ProjectsGridComponent,
     TasksGridComponent,
-    EmployeesGridComponent
+    EmployeesGridComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

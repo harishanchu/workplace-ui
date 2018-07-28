@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   isvalidAuthDataPresent() {
-    const authData = this.getAuthData();
+    let authData = this.getAuthData();
 
     if(
       authData.created && authData.ttl &&

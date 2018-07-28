@@ -13,6 +13,7 @@ import {AuthAdminGuard} from './guards/auth-admin.guard';
 import {AdminTimeSheetsComponent} from './pages/admin/admin-time-sheets/admin-time-sheets.component';
 import {AdminDashboardComponent} from './pages/admin/admin-dashboard/admin-dashboard.component';
 import {AdminConfigurationComponent} from './pages/admin/admin-configuration/admin-configuration.component';
+import {ProfileComponent} from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'time-sheets', pathMatch: 'full'},
       {path: 'time-sheets', component: TimeSheetsComponent},
-      {path: 'dashboard', component: DsashboardComponent}
+      {path: 'dashboard', component: DsashboardComponent},
+      {path: 'profile', component: ProfileComponent}
     ]
   },
   {

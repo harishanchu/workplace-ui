@@ -22,7 +22,7 @@
 
         <div class="form-item">
           <label>Client: </label>
-          <mat-select placeholder="Client" formControlName="clientId" multiple (change)="onClientIdChange($event)">
+          <mat-select placeholder="Client" formControlName="clientId" multiple (selectionChange)="onClientIdChange($event)">
             <mat-option *ngFor="let client of clients" [value]="client.id">
               {{client.name}}
             </mat-option>
@@ -31,7 +31,7 @@
 
         <div class="form-item">
           <label>Project: </label>
-          <mat-select placeholder="Project" formControlName="projectId" multiple (change)="onProjectIdChange($event)">
+          <mat-select placeholder="Project" formControlName="projectId" multiple (selectionChange)="onProjectIdChange($event)">
             <mat-option *ngFor="let project of projects" [value]="project.id">
               {{project.name}}
             </mat-option>

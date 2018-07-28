@@ -31,7 +31,7 @@
 
       <div class="slider-field">
         <span class="slider-field-label"> Duration:</span>
-        <mat-slider thumb-label=true min=1 max=600 class="time-slider"></mat-slider>
+        <mat-slider thumbLabel=true min=1 max=600 class="time-slider" [displayWith]="formatTimeRangeValue"></mat-slider>
         <span class="slider-field-extension">Minutes</span>
       </div>
 
