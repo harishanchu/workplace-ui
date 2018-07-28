@@ -10,7 +10,7 @@ import {TimeSheetService} from '../../../../services/time-sheet.service';
   styleUrls: ['./time-sheet-grid.component.scss']
 })
 export class TimeSheetGridComponent implements OnInit {
-  private displayedColumns = ['select', 'client', 'project', 'comment', 'status', 'duration'];
+  private displayedColumns = ['select', 'client', 'project', 'description', 'status', 'duration'];
   private displayedColumnsTitles = {};
   private defaultSort = 'status';
   private dataSource = new MatTableDataSource();

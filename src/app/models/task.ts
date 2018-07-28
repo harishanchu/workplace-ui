@@ -3,5 +3,5 @@ export interface Task {
   userId?: any;
   projectId?: any;
   status?: any;
-  comment: any;
+  description: any;
 }

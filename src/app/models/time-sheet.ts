@@ -10,5 +10,6 @@ export interface TimeSheet {
   status: any;
   date?: any;
   duration: any;
+  description?: any;
   comment?: any;
 }

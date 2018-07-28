@@ -24,6 +24,13 @@ export class AuthService {
   isvalidAuthDataPresent() {
     const authData = this.getAuthData();
 
+    if(
+      authData.created && authData.ttl &&
+      (Date.parse(authData.created) + authData.ttl*1000) < Date.now()
+    ) {
+      authData = {};
+    }
+
     return !!authData.accessToken;
   }
 

@@ -18,7 +18,7 @@ import {switchMap} from 'rxjs/operators/switchMap';
   styleUrls: ['../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss']
 })
 export class AdminTimeSheetGridComponent implements AfterViewInit {
-  private displayedColumns = ['select', 'user', 'client', 'project', 'comment', 'status', 'duration'];
+  private displayedColumns = ['select', 'user', 'client', 'project', 'description', 'status', 'duration'];
   private displayedColumnsTitles = {'user': 'Employee'};
   private defaultSort = 'status';
   public dataSource = new MatTableDataSource();

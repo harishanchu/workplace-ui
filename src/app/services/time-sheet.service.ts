@@ -45,13 +45,13 @@ export class TimeSheetService {
     params.filter = JSON.stringify(params.filter);
 
     return this.http.get(`users/${user}/tasks`, {params}).map((response: any[]) => {
-      return response.map(({id, project, comment}) => ({
+      return response.map(({id, project, description}) => ({
         id,
         client: project.client.name,
         clientId: project.client.id,
         project: project.name,
         projectId: project.id,
-        comment
+        description
       }));
 
     });
@@ -68,7 +68,7 @@ export class TimeSheetService {
 
     return this.http.get(`users/me/time-sheets`,
       {params}).map((response: any[]) => {
-      return response.map(({id, date, taskId, task, duration, status}) => ({
+      return response.map(({id, date, taskId, task, duration, status, comment}) => ({
         id,
         date,
         taskId,
@@ -76,7 +76,8 @@ export class TimeSheetService {
         project: task.project.name,
         clientId: task.project.clientId,
         client: task.project.client.name,
-        comment: task.comment,
+        description: task.description,
+        comment,
         duration,
         status
       }));
@@ -104,7 +105,7 @@ export class TimeSheetService {
     return this.http.get(`time-sheets`,
       {params, observe: 'response'}).map((response: any) => {
       return {
-        items: response.body.map(({id, date, taskId, task, duration, status, user}) => ({
+        items: response.body.map(({id, date, taskId, task, duration, status, user, comment}) => ({
           id,
           date,
           taskId,
@@ -112,7 +113,8 @@ export class TimeSheetService {
           project: task.project.name,
           clientId: task.project.clientId,
           client: task.project.client.name,
-          comment: task.comment,
+          description: task.description,
+          comment,
           user: user.name,
           duration,
           status

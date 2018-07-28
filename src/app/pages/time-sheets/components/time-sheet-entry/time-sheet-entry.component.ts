@@ -46,7 +46,8 @@ export class TimeSheetEntryComponent implements OnInit {
       'projectId': ['', Validators.required],
       'status': ['', Validators.required],
       'duration': [1, Validators.required],
-      'comment': ['', Validators.required]
+      'description': ['', Validators.required],
+      'comment': ['']
     });
 
     if (this.type === 'update') {
@@ -96,6 +97,7 @@ export class TimeSheetEntryComponent implements OnInit {
       const timeSheet: TimeSheet = {
         status: formValues.status,
         duration: formValues.duration,
+        comment: formValues.comment,
         taskId: this.taskId
       };
 
@@ -106,7 +108,7 @@ export class TimeSheetEntryComponent implements OnInit {
         if (!timeSheet.taskId) {
           const task = {
             projectId: formValues.projectId,
-            comment: formValues.comment
+            description: formValues.description
           };
 
           this.createTask(task, function (error, data) {
@@ -170,26 +172,27 @@ export class TimeSheetEntryComponent implements OnInit {
       status: data.status,
       duration: data.duration,
       comment: data.comment,
+      description: data.description,
       clientId: data.clientId
     });
   }
 
-  loadTaskData({clientId, projectId, comment}) {
+  loadTaskData({clientId, projectId, description}) {
     this.form.controls.clientId.setValue(clientId);
     this.form.controls.projectId.setValue(projectId);
-    this.form.controls.comment.setValue(comment);
+    this.form.controls.description.setValue(description);
     this.populateProjectsBasedOnClient();
   }
 
   disableTaskEditing() {
     this.form.controls.clientId.disable();
-    this.form.controls.comment.disable();
+    this.form.controls.description.disable();
     this.form.controls.projectId.disable();
   }
 
   resetTaskFields() {
     this.form.controls.clientId.reset();
-    this.form.controls.comment.reset();
+    this.form.controls.description.reset();
     this.form.controls.projectId.reset();
   }
 
@@ -197,7 +200,7 @@ export class TimeSheetEntryComponent implements OnInit {
     this.resetTaskFields();
 
     this.form.controls.clientId.enable();
-    this.form.controls.comment.enable();
+    this.form.controls.description.enable();
     this.form.controls.projectId.enable();
   }
 

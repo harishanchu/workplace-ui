@@ -10,7 +10,7 @@ import {TimeSheetService} from '../../../../services/time-sheet.service';
   styleUrls: ['./open-tasks-list.component.scss']
 })
 export class OpenTasksListComponent implements OnInit {
-  private displayedColumns = ['client', 'project', 'comment'];
+  private displayedColumns = ['client', 'project', 'description'];
   private dataSource = new MatTableDataSource();
   private selection = new SelectionModel<Task>(true, []);
   private loading = false;
