@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   private loading = false;
   private returnUrl: string;
 
-  constructor(private router: Router,  private route: ActivatedRoute, private globals: Globals,
+  constructor(private router: Router, private route: ActivatedRoute, private globals: Globals,
               private authService: AuthService, private fb: FormBuilder,
               private notificationService: NotificationService) {
     this.form = fb.group({

@@ -1,4 +1,4 @@
-import {FormGroup, ValidatorFn, FormControl, ValidationErrors} from '@angular/forms';
+import {FormControl, ValidationErrors, ValidatorFn} from '@angular/forms';
 
 export function matchValidator(fieldName: string): ValidatorFn {
   let fcfirst: FormControl;

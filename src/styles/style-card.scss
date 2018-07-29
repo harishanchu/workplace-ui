@@ -1,24 +1,24 @@
 .style-card {
-  padding: 0!important;
-  padding-bottom: 8px!important;
-  border-radius: 6px!important;
+  padding: 0 !important;
+  padding-bottom: 8px !important;
+  border-radius: 6px !important;
 
   mat-card-header {
-    margin: 0 15px!important;
+    margin: 0 15px !important;
 
     .card-art {
-      border-radius: 3px!important;
+      border-radius: 3px !important;
       background-color: #999;
-      padding: 15px!important;
-      margin-top: -20px!important;
-      width: auto!important;
-      height: auto!important;
+      padding: 15px !important;
+      margin-top: -20px !important;
+      width: auto !important;
+      height: auto !important;
     }
   }
 
   mat-card-actions {
     border-top: 1px solid #eee;
-    margin: 0 15px!important;
+    margin: 0 15px !important;
 
     .info {
       color: #999;
@@ -26,9 +26,9 @@
       line-height: 22px;
 
       mat-icon {
-        position: relative!important;
-        top: 4px!important;
-        font-size: 16px!important;
+        position: relative !important;
+        top: 4px !important;
+        font-size: 16px !important;
       }
     }
   }
@@ -54,7 +54,7 @@
   }
 
   .violet {
-    background: linear-gradient(60deg,#ab47bc,#8e24aa)
+    background: linear-gradient(60deg, #ab47bc, #8e24aa)
   }
 
   .text-orange {
@@ -70,29 +70,29 @@
   mat-card-header {
     .card-art {
       mat-icon {
-        width: 56px!important;
-        height: 56px!important;
-        font-size: 36px!important;
-        line-height: 56px!important;
-        color: #fff!important;
-        text-align: center!important;
+        width: 56px !important;
+        height: 56px !important;
+        font-size: 36px !important;
+        line-height: 56px !important;
+        color: #fff !important;
+        text-align: center !important;
       }
     }
 
     mat-card-title {
-      padding-top: 10px!important;
-      color: #999!important;
-      text-align: right!important;
+      padding-top: 10px !important;
+      color: #999 !important;
+      text-align: right !important;
     }
 
     .mat-card-header-text {
       flex: 1 1 0%;
 
       mat-card-subtitle {
-        font-size: 25px!important;
-        color: #3C4854!important;
-        font-weight: 300!important;
-        text-align: right!important;
+        font-size: 25px !important;
+        color: #3C4854 !important;
+        font-weight: 300 !important;
+        text-align: right !important;
         span {
           font-size: 80%;
           font-weight: 400;
@@ -105,15 +105,15 @@
 .chart-card {
   mat-card-header {
     mat-card-title {
-      padding: 15px 0!important;
-      color: #3c4858!important;
-      font-size: 1.125rem!important;
-      line-height: 1.4em!important;
-      font-weight: 300!important
+      padding: 15px 0 !important;
+      color: #3c4858 !important;
+      font-size: 1.125rem !important;
+      line-height: 1.4em !important;
+      font-weight: 300 !important
     }
 
     mat-card-subtitle {
-      color: #999!important;
+      color: #999 !important;
     }
   }
 
@@ -151,15 +151,15 @@
 .table-card {
   mat-card-header {
     mat-card-title {
-      font-size: 1.125rem!important;
-      line-height: 1.4em!important;
-      font-weight: 300!important;
-      color: #fff!important;
-      margin-bottom: 0!important;
+      font-size: 1.125rem !important;
+      line-height: 1.4em !important;
+      font-weight: 300 !important;
+      color: #fff !important;
+      margin-bottom: 0 !important;
     }
 
     mat-card-subtitle {
-      color: rgba(255,255,255,.62)!important;
+      color: rgba(255, 255, 255, .62) !important;
       margin-top: 16px;
     }
   }

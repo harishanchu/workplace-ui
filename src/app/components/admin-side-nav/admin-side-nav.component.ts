@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-admin-side-nav',
@@ -13,7 +13,7 @@ export class AdminSideNavComponent implements OnInit {
     this.navItemList = [
       {title: 'Dashboard', url: '/admin/dashboard', icon: 'dashboard'},
       {title: 'Time Sheets', url: '/admin/time-sheets', icon: 'av_timer'},
-      {title: 'Configuration', url: '/admin/configuration', icon: 'settings'},
+      {title: 'Configuration', url: '/admin/configuration', icon: 'settings'}
     ];
     this.menuMode = 'full';
   }

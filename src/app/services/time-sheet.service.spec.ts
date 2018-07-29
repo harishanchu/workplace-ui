@@ -1,6 +1,6 @@
-import { TestBed, inject } from '@angular/core/testing';
+import {inject, TestBed} from '@angular/core/testing';
 
-import { TimeSheetService } from './time-sheet.service';
+import {TimeSheetService} from './time-sheet.service';
 
 describe('TimeSheetService', () => {
   beforeEach(() => {

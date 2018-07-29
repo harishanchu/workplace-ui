@@ -25,7 +25,7 @@ export class AdminDashboardComponent implements OnInit {
       }),
       // low: 0,
       // high: 50,
-      chartPadding: { top: 0, right: 0, bottom: 0, left: 0},
+      chartPadding: {top: 0, right: 0, bottom: 0, left: 0}
     },
     data: {
       'labels': ['M', 'T', 'W', 'T', 'F'],

@@ -3,7 +3,6 @@ import {MatDatepickerInputEvent, MatDialog} from '@angular/material';
 
 import {TimeSheetEntryComponent} from './components/time-sheet-entry/time-sheet-entry.component';
 import {DatePipe} from '@angular/common';
-import {TimeSheet} from '../../models/time-sheet';
 import {TimeSheetService} from '../../services/time-sheet.service';
 import {NotificationService} from '../../services/notification.service';
 

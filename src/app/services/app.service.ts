@@ -1,10 +1,12 @@
-
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class AppService {
+  constructor(private http: HttpClient) {
+  }
+
   static get clientAllItem(): any {
     return {
       id: 'all',
@@ -17,9 +19,6 @@ export class AppService {
       id: 'all',
       name: 'All'
     };
-  }
-
-  constructor(private http: HttpClient) {
   }
 
   getClients(includeProjects = false) {

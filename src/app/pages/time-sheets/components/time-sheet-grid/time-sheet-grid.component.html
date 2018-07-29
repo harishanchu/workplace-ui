@@ -5,7 +5,8 @@
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
       </mat-form-field>
     </div>
-    <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear matSortDirection="asc" fxFlex>
+    <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear
+               matSortDirection="asc" fxFlex>
 
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">

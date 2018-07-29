@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdminTimeSheetGridComponent } from './admin-time-sheet-grid.component';
+import {AdminTimeSheetGridComponent} from './admin-time-sheet-grid.component';
 
 describe('AdminTimeSheetGridComponent', () => {
   let component: AdminTimeSheetGridComponent;
@@ -8,9 +8,9 @@ describe('AdminTimeSheetGridComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminTimeSheetGridComponent ]
+      declarations: [AdminTimeSheetGridComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

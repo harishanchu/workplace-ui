@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TasksGridComponent } from './tasks-grid.component';
+import {TasksGridComponent} from './tasks-grid.component';
 
 describe('TasksGridComponent', () => {
   let component: TasksGridComponent;
@@ -8,9 +8,9 @@ describe('TasksGridComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TasksGridComponent ]
+      declarations: [TasksGridComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

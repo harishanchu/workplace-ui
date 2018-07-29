@@ -29,11 +29,11 @@ export class MainToolbarComponent implements OnInit {
     );
   }
 
-  navigateToProfile () {
+  navigateToProfile() {
     this.router.navigate(['/profile']);
   }
 
-  switchUserView () {
+  switchUserView() {
     this.router.navigate(['/admin']);
   }
 }

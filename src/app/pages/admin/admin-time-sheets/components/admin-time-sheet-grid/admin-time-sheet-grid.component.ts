@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, ViewChild, OnInit, EventEmitter, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, ViewChild} from '@angular/core';
 import {TimeSheetService} from '../../../../../services/time-sheet.service';
-import {MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {TimeSheet} from '../../../../../models/time-sheet';
 import {SelectionModel} from '@angular/cdk/collections';
 
@@ -13,12 +13,14 @@ import {catchError, map, switchMap} from 'rxjs/operators';
   styleUrls: ['../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss']
 })
 export class AdminTimeSheetGridComponent implements AfterViewInit {
-  private displayedColumns = ['select', 'user', 'client', 'project', 'description', 'status', 'duration'];
-  private displayedColumnsTitles = {'user': 'Employee'};
-  private defaultSort = 'status';
   public dataSource = new MatTableDataSource();
   public selection = new SelectionModel<TimeSheet>(true, []);
   public loading = true;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  private displayedColumns = ['select', 'user', 'client', 'project', 'description', 'status', 'duration'];
+  private displayedColumnsTitles = {'user': 'Employee'};
+  private defaultSort = 'status';
   private fromDate: Date;
   private toDate: Date;
   private refreshGrid = new EventEmitter();
@@ -26,8 +28,6 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   private totalCount = 0;
   private filterValue = '';
   @ViewChild('table') private table;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
   constructor(private timeSheetService: TimeSheetService) {
   }
@@ -53,7 +53,9 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
           this.loading = false;
           return observableOf([]);
         })
-      ).subscribe((data) => {this.dataSource.data = data;});
+      ).subscribe((data) => {
+      this.dataSource.data = data;
+    });
   }
 
   applyFilter(filterValue: string) {

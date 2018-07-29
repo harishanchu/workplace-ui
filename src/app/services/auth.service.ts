@@ -1,4 +1,3 @@
-
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
@@ -13,21 +12,20 @@ export class AuthService {
   private store = new Storage();
   private authStorageKey = 'auth';
 
+  constructor(private http: HttpClient) {
+    this.loggedIn = new BehaviorSubject<boolean>(this.isvalidAuthDataPresent());
+  }
 
   get isLoggedIn() {
     return this.loggedIn.asObservable(); // {2}
   }
 
-  constructor(private http: HttpClient) {
-    this.loggedIn = new BehaviorSubject<boolean>(this.isvalidAuthDataPresent());
-  }
-
   isvalidAuthDataPresent() {
     let authData = this.getAuthData();
 
-    if(
+    if (
       authData.created && authData.ttl &&
-      (Date.parse(authData.created) + authData.ttl*1000) < Date.now()
+      (Date.parse(authData.created) + authData.ttl * 1000) < Date.now()
     ) {
       authData = {};
     }

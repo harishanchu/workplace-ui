@@ -30,12 +30,12 @@ export class Util {
     return [year, month, day].join('-');
   }
 
-  static handleMultiSelectWithAllOptionChange (formControl, selectionModel) {
+  static handleMultiSelectWithAllOptionChange(formControl, selectionModel) {
     if (selectionModel.hasValue()) {
       const firstItem = selectionModel._selected[0];
 
-      if(selectionModel.selected.length > 1 && firstItem.value === 'all') {
-        if(firstItem.active) {
+      if (selectionModel.selected.length > 1 && firstItem.value === 'all') {
+        if (firstItem.active) {
           formControl.setValue(['all']);
         } else {
           formControl.setValue(formControl.value.slice(1));

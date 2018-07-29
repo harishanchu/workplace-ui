@@ -20,7 +20,7 @@
 
   mat-form-field {
     ::ng-deep .mat-form-field-underline {
-      background-color: rgba(0,0,0,0.12);
+      background-color: rgba(0, 0, 0, 0.12);
     }
 
     margin-bottom: 10px;
@@ -58,7 +58,7 @@
       top: 0;
       left: 0;
 
-      &+div {
+      & + div {
         pointer-events: none;
         opacity: 0.7;
       }

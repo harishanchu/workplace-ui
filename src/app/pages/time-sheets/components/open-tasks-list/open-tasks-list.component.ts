@@ -17,7 +17,8 @@ export class OpenTasksListComponent implements OnInit {
   @ViewChild('table') private table;
 
   constructor(private timeSheetService: TimeSheetService,
-              public dialogRef: MatDialogRef<OpenTasksListComponent>) { }
+              public dialogRef: MatDialogRef<OpenTasksListComponent>) {
+  }
 
   ngOnInit() {
     this.loadTasks();
@@ -31,7 +32,8 @@ export class OpenTasksListComponent implements OnInit {
         tasks => {
           this.dataSource.data = tasks;
         },
-        err => {},
+        err => {
+        },
         () => {
           this.loading = false;
         }

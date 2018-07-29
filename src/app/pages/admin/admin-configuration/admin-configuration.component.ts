@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-admin-configuration',
@@ -6,9 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-configuration.component.scss']
 })
 export class AdminConfigurationComponent implements OnInit {
-  private title = "Configuration";
+  private title = 'Configuration';
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

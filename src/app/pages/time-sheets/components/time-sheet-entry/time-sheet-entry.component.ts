@@ -210,7 +210,7 @@ export class TimeSheetEntryComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result !== "") {
+      if (result !== '') {
         this.taskId = result.id;
         this.loadTaskData(result);
         this.disableTaskEditing();

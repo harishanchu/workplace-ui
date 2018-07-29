@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {NotificationService} from '../../../services/notification.service';
 import {TimeSheetService} from '../../../services/time-sheet.service';
 import {MatDatepickerInputEvent} from '@angular/material';
@@ -37,7 +37,7 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
     this.loadComboStores();
   }
 
-  ngAfterViewInit () {
+  ngAfterViewInit() {
     this.refreshGrid();
   }
 
@@ -84,7 +84,7 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
     this.populateProjectsBasedOnClient();
   }
 
-  onProjectIdChange (event) {
+  onProjectIdChange(event) {
     const selectionModel = event.source._selectionModel;
     const projectIdFormControl = this.form.get('projectId');
 

@@ -7,11 +7,14 @@
     </mat-card-header>
     <mat-card-content>
       <div fxLayout="column" fxFlex>
-        <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear matSortDirection="asc" fxFlex>
+        <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear
+                   matSortDirection="asc" fxFlex>
           <!-- Rest of the Columns -->
           <ng-container *ngFor="let column of displayedColumns">
             <ng-container [matColumnDef]="column">
-              <mat-header-cell *matHeaderCellDef class="text-violet"> {{displayedColumnsTitles[column]||column | titlecase}}</mat-header-cell>
+              <mat-header-cell *matHeaderCellDef class="text-violet"> {{displayedColumnsTitles[column]||column |
+                titlecase}}
+              </mat-header-cell>
               <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
             </ng-container>
           </ng-container>

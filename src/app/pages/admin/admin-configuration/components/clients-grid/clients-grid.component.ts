@@ -18,7 +18,8 @@ export class ClientsGridComponent implements OnInit {
   private enablePagination = true;
   @ViewChild('table') private table;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

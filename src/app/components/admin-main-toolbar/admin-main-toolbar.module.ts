@@ -2,14 +2,20 @@ import {NgModule} from '@angular/core';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MaterialModule} from '../../material.module';
-import {AvatarModule} from 'ngx-avatar';
+import {FALLBACK, GravatarConfig, GravatarModule} from 'ngx-gravatar';
+
 import {AdminMainToolbarComponent} from './admin-main-toolbar.component';
+
+const gravatarConfig: GravatarConfig = {
+  fallback: FALLBACK.identicon
+};
 
 @NgModule({
   imports: [
     BrowserAnimationsModule,
     MaterialModule,
-    AvatarModule
+    // AvatarModule
+    GravatarModule.forRoot(gravatarConfig)
   ],
   declarations: [
     AdminMainToolbarComponent

@@ -10,19 +10,22 @@
       <div class="action-bar-tools" fxLayout="row" [formGroup]="form">
         <div class="form-item">
           <label>From: </label>
-          <input [matDatepicker]="fromPicker" [max]="form.value.toDate" formControlName="fromDate" (dateInput)="onDatePick($event)" (click)="fromPicker.open()" readonly>
+          <input [matDatepicker]="fromPicker" [max]="form.value.toDate" formControlName="fromDate"
+                 (dateInput)="onDatePick($event)" (click)="fromPicker.open()" readonly>
           <mat-datepicker #fromPicker></mat-datepicker>
         </div>
 
         <div class="form-item">
           <label>To: </label>
-          <input [matDatepicker]="toPicker" [min]="form.value.fromDate" [max]="maxDate" formControlName="toDate" (dateInput)="onDatePick($event)" (click)="toPicker.open()" readonly>
+          <input [matDatepicker]="toPicker" [min]="form.value.fromDate" [max]="maxDate" formControlName="toDate"
+                 (dateInput)="onDatePick($event)" (click)="toPicker.open()" readonly>
           <mat-datepicker #toPicker></mat-datepicker>
         </div>
 
         <div class="form-item">
           <label>Client: </label>
-          <mat-select placeholder="Client" formControlName="clientId" multiple (selectionChange)="onClientIdChange($event)">
+          <mat-select placeholder="Client" formControlName="clientId" multiple
+                      (selectionChange)="onClientIdChange($event)">
             <mat-option *ngFor="let client of clients" [value]="client.id">
               {{client.name}}
             </mat-option>
@@ -31,7 +34,8 @@
 
         <div class="form-item">
           <label>Project: </label>
-          <mat-select placeholder="Project" formControlName="projectId" multiple (selectionChange)="onProjectIdChange($event)">
+          <mat-select placeholder="Project" formControlName="projectId" multiple
+                      (selectionChange)="onProjectIdChange($event)">
             <mat-option *ngFor="let project of projects" [value]="project.id">
               {{project.name}}
             </mat-option>

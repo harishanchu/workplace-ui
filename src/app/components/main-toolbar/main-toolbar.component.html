@@ -4,9 +4,12 @@
     <span>{{globals.appName}}</span>
     <div class="flex-spacer"></div>
     <a mat-button *ngIf="authService.isAdmin()" (click)="switchUserView()">Admin Area</a>
-    <button mat-icon-button><mat-icon>notifications</mat-icon></button>
+    <button mat-icon-button>
+      <mat-icon>notifications</mat-icon>
+    </button>
     <button mat-icon-button class="avatar-button" [matMenuTriggerFor]="accountMenu">
-      <ngx-avatar value="{{authService.getUserName()[0]}}" gravatarId="{{authService.getUserEmail()}}" size="30"></ngx-avatar>
+      <!--<ngx-avatar value="{{authService.getUserName()[0]}}" gravatarId="{{authService.getUserEmail()}}" size="30"></ngx-avatar>-->
+      <img ngxGravatar [email]="authService.getUserEmail()"  size="30">
     </button>
   </mat-toolbar-row>
 </mat-toolbar>

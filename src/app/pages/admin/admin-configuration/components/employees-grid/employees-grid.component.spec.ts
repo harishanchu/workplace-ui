@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { EmployeesGridComponent } from './employees-grid.component';
+import {EmployeesGridComponent} from './employees-grid.component';
 
 describe('EmployeesGridComponent', () => {
   let component: EmployeesGridComponent;
@@ -8,9 +8,9 @@ describe('EmployeesGridComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EmployeesGridComponent ]
+      declarations: [EmployeesGridComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

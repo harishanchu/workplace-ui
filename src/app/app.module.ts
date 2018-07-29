@@ -3,11 +3,10 @@ import {NgModule} from '@angular/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import './rxjs-operators';
-import { ChartistModule } from 'ng-chartist';
+import {ChartistModule} from 'ng-chartist';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -32,22 +31,21 @@ import {GuestLayoutComponent} from './layouts/guest-layout/guest-layout.componen
 import {TimeSheetService} from './services/time-sheet.service';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_NATIVE_DATE_FORMATS, NativeDateAdapter} from '@angular/material';
 import {DatePipe} from '@angular/common';
-import { AppService } from './services/app.service';
-import { OpenTasksListComponent } from './pages/time-sheets/components/open-tasks-list/open-tasks-list.component';
-import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { AdminSideNavComponent } from './components/admin-side-nav/admin-side-nav.component';
-import { AuthAdminGuard } from './guards/auth-admin.guard';
+import {AppService} from './services/app.service';
+import {OpenTasksListComponent} from './pages/time-sheets/components/open-tasks-list/open-tasks-list.component';
+import {AdminLayoutComponent} from './layouts/admin-layout/admin-layout.component';
+import {AdminSideNavComponent} from './components/admin-side-nav/admin-side-nav.component';
+import {AuthAdminGuard} from './guards/auth-admin.guard';
 import {AdminMainToolbarModule} from './components/admin-main-toolbar/admin-main-toolbar.module';
-import { AdminTimeSheetsComponent } from './pages/admin/admin-time-sheets/admin-time-sheets.component';
-import { AdminTimeSheetGridComponent } from
-  './pages/admin/admin-time-sheets/components/admin-time-sheet-grid/admin-time-sheet-grid.component';
-import { AdminDashboardComponent } from './pages/admin/admin-dashboard/admin-dashboard.component';
-import { AdminConfigurationComponent } from './pages/admin/admin-configuration/admin-configuration.component';
-import { ClientsGridComponent } from './pages/admin/admin-configuration/components/clients-grid/clients-grid.component';
-import { ProjectsGridComponent } from './pages/admin/admin-configuration/components/projects-grid/projects-grid.component';
-import { TasksGridComponent } from './pages/admin/admin-configuration/components/tasks-grid/tasks-grid.component';
-import { EmployeesGridComponent } from './pages/admin/admin-configuration/components/employees-grid/employees-grid.component';
-import { ProfileComponent } from './pages/profile/profile.component';
+import {AdminTimeSheetsComponent} from './pages/admin/admin-time-sheets/admin-time-sheets.component';
+import {AdminTimeSheetGridComponent} from './pages/admin/admin-time-sheets/components/admin-time-sheet-grid/admin-time-sheet-grid.component';
+import {AdminDashboardComponent} from './pages/admin/admin-dashboard/admin-dashboard.component';
+import {AdminConfigurationComponent} from './pages/admin/admin-configuration/admin-configuration.component';
+import {ClientsGridComponent} from './pages/admin/admin-configuration/components/clients-grid/clients-grid.component';
+import {ProjectsGridComponent} from './pages/admin/admin-configuration/components/projects-grid/projects-grid.component';
+import {TasksGridComponent} from './pages/admin/admin-configuration/components/tasks-grid/tasks-grid.component';
+import {EmployeesGridComponent} from './pages/admin/admin-configuration/components/employees-grid/employees-grid.component';
+import {ProfileComponent} from './pages/profile/profile.component';
 
 @NgModule({
   declarations: [

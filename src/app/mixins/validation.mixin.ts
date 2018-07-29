@@ -8,7 +8,7 @@ export class ValidationMixin {
         break;
 
       case 'match':
-        if(field === 'confirmPassword') {
+        if (field === 'confirmPassword') {
           message = 'Passwords don\'t match';
         } else {
           message = 'This field don\'t match';
@@ -16,7 +16,7 @@ export class ValidationMixin {
         break;
 
       case 'minlength':
-        if(field === 'password') {
+        if (field === 'password') {
           message = `Short passwords are easy to guess. Try one with at least ${validationResponse.requiredLength} characters.`;
         } else {
           message = `Minimum ${validationResponse.requiredLength} characters required)`;

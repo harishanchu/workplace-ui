@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AdminMainToolbarComponent } from './admin-main-toolbar.component';
+import {AdminMainToolbarComponent} from './admin-main-toolbar.component';
 
 describe('AdminMainToolbarComponent', () => {
   let component: AdminMainToolbarComponent;
@@ -8,9 +8,9 @@ describe('AdminMainToolbarComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AdminMainToolbarComponent ]
+      declarations: [AdminMainToolbarComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

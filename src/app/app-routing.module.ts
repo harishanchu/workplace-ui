@@ -35,7 +35,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
       {path: 'dashboard', component: AdminDashboardComponent},
       {path: 'time-sheets', component: AdminTimeSheetsComponent},
-      {path: 'configuration', component: AdminConfigurationComponent},
+      {path: 'configuration', component: AdminConfigurationComponent}
     ]
   },
   {
