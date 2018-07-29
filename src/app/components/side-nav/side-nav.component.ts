@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-side-nav',
@@ -9,12 +10,12 @@ export class SideNavComponent implements OnInit {
   private navItemList;
   private menuMode: string;
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.navItemList = [
       {title: 'Time Sheets', url: '/time-sheets', icon: 'av_timer'},
       {title: 'Dashboard', url: '/dashboard', icon: 'dashboard'}
     ];
-    this.menuMode = 'full';
+    this.menuMode = this.authService.getUserPreference('menuMode') || 'full';
   }
 
   ngOnInit() {
@@ -26,6 +27,8 @@ export class SideNavComponent implements OnInit {
     } else {
       this.menuMode = 'full';
     }
+
+    this.authService.setUserPreference('menuMode', this.menuMode);
   }
 
 }

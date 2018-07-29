@@ -99,4 +99,21 @@ export class AuthService {
   getUserName() {
     return this.getAuthData().user.name;
   }
+
+  setUserPreference(key, value) {
+    const authData = this.getAuthData();
+
+    authData.userPreference = authData.userPreference || {};
+    authData.userPreference[key] = value;
+
+    this.setAuthData(authData);
+  }
+
+  getUserPreference(key) {
+    const authData = this.getAuthData();
+
+    authData.userPreference = authData.userPreference || {};
+
+    return authData.userPreference[key];
+  }
 }
