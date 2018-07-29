@@ -6,6 +6,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 
 import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
+import {Util} from '../../../../../helpers/util';
 
 @Component({
   selector: 'app-admin-time-sheet-grid',
@@ -18,8 +19,28 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   public loading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  private displayedColumns = ['select', 'user', 'client', 'project', 'description', 'status', 'duration'];
-  private displayedColumnsTitles = {'user': 'Employee'};
+  private enableRowSelection = false;
+  private displayedColumns = ['user', 'client', 'project', 'description', 'status', 'duration'];
+  private displayedColumnsProperties = {
+    user: {
+      title: 'Employee'
+    },
+    duration: {
+      title: 'Duration(hrs)',
+      formatter: Util.formatTimeDuration
+    },
+    status: {
+      formatter: function (value: string) {
+        if (value === 'inProgress') {
+          value = 'In progress';
+        } else {
+          value = 'Completed';
+        }
+
+        return value;
+      }
+    }
+  };
   private defaultSort = 'status';
   private fromDate: Date;
   private toDate: Date;

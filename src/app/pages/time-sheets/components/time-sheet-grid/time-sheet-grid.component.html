@@ -9,7 +9,7 @@
                matSortDirection="asc" fxFlex>
 
       <!-- Checkbox Column -->
-      <ng-container matColumnDef="select">
+      <ng-container matColumnDef="select" *ngIf="enableRowSelection">
         <mat-header-cell *matHeaderCellDef>
           <mat-checkbox (change)="$event ? masterToggle() : null"
                         [checked]="selection.hasValue() && isAllSelected()"
@@ -29,13 +29,13 @@
       <!-- Rest of the Columns -->
       <ng-container *ngFor="let column of displayedColumns">
         <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
-          <mat-header-cell *matHeaderCellDef> {{displayedColumnsTitles[column]||column | titlecase}}</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
+          <mat-header-cell *matHeaderCellDef> {{displayedColumnsProperties[column] && displayedColumnsProperties[column].title? displayedColumnsProperties[column].title: column | titlecase}}</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{displayedColumnsProperties[column] && displayedColumnsProperties[column].formatter? displayedColumnsProperties[column].formatter(element[column]): element[column]}}</mat-cell>
         </ng-container>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="enableRowSelection && selection.toggle(row)"></mat-row>
     </mat-table>
     <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'" fxFlex>
       No items to display

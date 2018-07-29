@@ -45,4 +45,31 @@ export class Util {
       formControl.setValue(['all']);
     }
   }
+
+  /**
+   * Format time value in minutes to "xh ym";
+   * where x hours and y is minutes;
+   *
+   * @param {number} value
+   * @returns {number}
+   */
+  static formatTimeDuration(value: number) {
+    if (!value) {
+      return 0;
+    }
+
+    if (value >= 60) {
+      let mins = value % 60;
+
+      value = (Math.floor(value / 60)) + 'h ';
+
+      if (mins) {
+        value += mins + 'm';
+      }
+    } else {
+      value = value + 'm';
+    }
+
+    return value;
+  }
 }

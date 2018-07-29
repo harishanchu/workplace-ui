@@ -224,6 +224,10 @@ export class TimeSheetEntryComponent implements OnInit {
     this.taskId = undefined;
     this.enableTaskEditing();
   }
+
+  formatTimeRangeValue(value: number | null) {
+    return Util.formatTimeDuration(value);
+  }
 }
 
 Util.mixin(TimeSheetEntryComponent, [ValidationMixin]);

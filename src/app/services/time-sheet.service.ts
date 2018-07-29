@@ -124,4 +124,8 @@ export class TimeSheetService {
       };
     }));
   }
+
+  downloadAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc') {
+
+  }
 }

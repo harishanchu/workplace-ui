@@ -3,6 +3,7 @@ import {MatTableDataSource} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import {TimeSheet} from '../../../../models/time-sheet';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
+import {Util} from '../../../../helpers/util';
 
 @Component({
   selector: 'app-time-sheet-grid',
@@ -10,8 +11,24 @@ import {TimeSheetService} from '../../../../services/time-sheet.service';
   styleUrls: ['./time-sheet-grid.component.scss']
 })
 export class TimeSheetGridComponent implements OnInit {
+  private enableRowSelection = true;
   private displayedColumns = ['select', 'client', 'project', 'description', 'status', 'duration'];
-  private displayedColumnsTitles = {};
+  private displayedColumnsProperties = {
+    duration: {
+      formatter: Util.formatTimeDuration
+    },
+    status: {
+      formatter: function (value: string) {
+        if (value === 'inProgress') {
+          value = 'In progress';
+        } else {
+          value = 'Completed';
+        }
+
+        return value;
+      }
+    }
+  };
   private defaultSort = 'status';
   private dataSource = new MatTableDataSource();
   private selection = new SelectionModel<TimeSheet>(true, []);

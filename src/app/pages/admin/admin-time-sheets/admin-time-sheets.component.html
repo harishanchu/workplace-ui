@@ -2,6 +2,7 @@
   <div class="load-mask" *ngIf="timeSheetGrid.loading">
     <mat-spinner diameter=40></mat-spinner>
   </div>
+
   <mat-toolbar>
     <mat-toolbar-row class="action-bar">
       <div class="action-bar-title">
@@ -11,14 +12,14 @@
         <div class="form-item">
           <label>From: </label>
           <input [matDatepicker]="fromPicker" [max]="form.value.toDate" formControlName="fromDate"
-                 (dateInput)="onDatePick($event)" (click)="fromPicker.open()" readonly>
+                 (dateInput)="onDatePick($event)" (click)="fromPicker.open()" readonly size="8">
           <mat-datepicker #fromPicker></mat-datepicker>
         </div>
 
         <div class="form-item">
           <label>To: </label>
           <input [matDatepicker]="toPicker" [min]="form.value.fromDate" [max]="maxDate" formControlName="toDate"
-                 (dateInput)="onDatePick($event)" (click)="toPicker.open()" readonly>
+                 (dateInput)="onDatePick($event)" (click)="toPicker.open()" readonly size="8">
           <mat-datepicker #toPicker></mat-datepicker>
         </div>
 
@@ -42,26 +43,12 @@
           </mat-select>
         </div>
 
-        <!--<span class="separator"></span>
-
-        <button mat-button color="primary" (click)="addNewEntry()">
-          <mat-icon aria-label="add">add_circle_outline</mat-icon>
-          Add new
+        <button mat-button color="primary" (click)="exportTimeSheets()" [disabled]="grid.dataSource._renderData.getValue().length == 0">
+          <mat-icon aria-label="Download">get_app</mat-icon>
+          Download
         </button>
-
-        <button mat-button color="primary" (click)="editEntry(grid.selection.selected[0])"
-                [disabled]="grid.selection.selected.length !== 1">
-          <mat-icon aria-label="Edit">edit</mat-icon>
-          Edit
-        </button>
-
-        <button mat-button color="primary" (click)="deleteEntry(grid.selection.selected[0].id)"
-                [disabled]="grid.selection.selected.length !== 1">
-          <mat-icon aria-label="Delete">delete</mat-icon>
-          Delete
-        </button>-->
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
-  <app-admin-time-sheet-grid #timeSheetGrid class="time-sheet-grid" fxFlex></app-admin-time-sheet-grid>
+  <app-admin-time-sheet-grid #timeSheetGrid class="time-sheet-grid"></app-admin-time-sheet-grid>
 </div>
