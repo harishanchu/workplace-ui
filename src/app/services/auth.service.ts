@@ -1,7 +1,8 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {Storage} from '../helpers/storage';
-import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 
 // import { User } from './user';
@@ -52,28 +53,28 @@ export class AuthService {
 
 
   attemptAuth(creds: { email: string, password: string }): Observable<any> {
-    return this.http.post('users/login', creds).map(resp => {
+    return this.http.post('users/login', creds).pipe(map(resp => {
         // Save token
         this.setAuthData(resp);
 
         return true;
       }
-    );
+    ));
   }
 
   logout() {
-    return this.http.delete('users/logout').map(res => {
+    return this.http.delete('users/logout').pipe(map(res => {
         // clear token from store
         this.clearAuthData();
       }
-    );
+    ));
   }
 
   register(user) {
-    return this.http.post('users', user).map(response => {
+    return this.http.post('users', user).pipe(map(response => {
         return response;
       }
-    );
+    ));
   }
 
   getAuthData() {

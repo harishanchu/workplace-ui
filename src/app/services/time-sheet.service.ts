@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {TimeSheet} from '../models/time-sheet';
@@ -10,27 +12,27 @@ export class TimeSheetService {
   }
 
   createTask(task: Task) {
-    return this.http.post(`users/me/tasks`, task).map(response => {
+    return this.http.post(`users/me/tasks`, task).pipe(map(response => {
       return response;
-    });
+    }));
   }
 
   createTimeSheet(timeSheetEntry: TimeSheet) {
-    return this.http.post(`users/me/time-sheets`, timeSheetEntry).map(response => {
+    return this.http.post(`users/me/time-sheets`, timeSheetEntry).pipe(map(response => {
       return response;
-    });
+    }));
   }
 
   updateTimeSheet(id, timeSheetEntry: TimeSheet) {
-    return this.http.put(`users/me/time-sheets/${id}`, timeSheetEntry).map(response => {
+    return this.http.put(`users/me/time-sheets/${id}`, timeSheetEntry).pipe(map(response => {
       return response;
-    });
+    }));
   }
 
   deleteTimeSheet(timeSheetId) {
-    return this.http.delete(`users/me/time-sheets/${timeSheetId}`).map(response => {
+    return this.http.delete(`users/me/time-sheets/${timeSheetId}`).pipe(map(response => {
       return response;
-    });
+    }));
   }
 
   getOpenTasksForUser(user, includeDetails = false) {
@@ -44,7 +46,7 @@ export class TimeSheetService {
 
     params.filter = JSON.stringify(params.filter);
 
-    return this.http.get(`users/${user}/tasks`, {params}).map((response: any[]) => {
+    return this.http.get(`users/${user}/tasks`, {params}).pipe(map((response: any[]) => {
       return response.map(({id, project, description}) => ({
         id,
         client: project.client.name,
@@ -54,7 +56,7 @@ export class TimeSheetService {
         description
       }));
 
-    });
+    }));
   }
 
   getCurrentUserTimeSheets(selectedDate: Date, includeDetails = false) {
@@ -67,7 +69,7 @@ export class TimeSheetService {
     params.filter = JSON.stringify(params.filter);
 
     return this.http.get(`users/me/time-sheets`,
-      {params}).map((response: any[]) => {
+      {params}).pipe(map((response: any[]) => {
       return response.map(({id, date, taskId, task, duration, status, comment}) => ({
         id,
         date,
@@ -81,7 +83,7 @@ export class TimeSheetService {
         duration,
         status
       }));
-    });
+    }));
   }
 
   getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc', pageIndex = 0, pageSize = 10) {
@@ -103,7 +105,7 @@ export class TimeSheetService {
     params.filter = JSON.stringify(params.filter);
 
     return this.http.get(`time-sheets`,
-      {params, observe: 'response'}).map((response: any) => {
+      {params, observe: 'response'}).pipe(map((response: any) => {
       return {
         items: response.body.map(({id, date, taskId, task, duration, status, user, comment}) => ({
           id,
@@ -121,6 +123,6 @@ export class TimeSheetService {
         })),
         total: response.headers.get('x-total-count') || 0
       };
-    });
+    }));
   }
 }

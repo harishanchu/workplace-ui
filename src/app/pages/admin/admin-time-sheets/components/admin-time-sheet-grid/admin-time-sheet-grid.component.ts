@@ -4,13 +4,8 @@ import {MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
 import {TimeSheet} from '../../../../../models/time-sheet';
 import {SelectionModel} from '@angular/cdk/collections';
 
-import {Observable} from 'rxjs/Observable';
-import {merge} from 'rxjs/observable/merge';
-import {of as observableOf} from 'rxjs/observable/of';
-import {catchError} from 'rxjs/operators/catchError';
-import {map} from 'rxjs/operators/map';
-import {startWith} from 'rxjs/operators/startWith';
-import {switchMap} from 'rxjs/operators/switchMap';
+import {merge, of as observableOf} from 'rxjs';
+import {catchError, map, switchMap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-admin-time-sheet-grid',

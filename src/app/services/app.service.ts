@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
@@ -27,14 +29,14 @@ export class AppService {
       params.filter = JSON.stringify({include: 'projects'});
     }
 
-    return this.http.get('clients', {params}).map(res => {
+    return this.http.get('clients', {params}).pipe(map(res => {
       return res;
-    });
+    }));
   }
 
   getProjects() {
-    return this.http.get('projects').map(res => {
+    return this.http.get('projects').pipe(map(res => {
       return res;
-    });
+    }));
   }
 }
