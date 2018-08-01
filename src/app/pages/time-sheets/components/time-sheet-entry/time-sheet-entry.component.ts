@@ -45,7 +45,7 @@ export class TimeSheetEntryComponent implements OnInit {
       'clientId': ['', Validators.required],
       'projectId': ['', Validators.required],
       'status': ['', Validators.required],
-      'duration': [1, Validators.required],
+      'duration': [1, [Validators.required, Validators.min(1), Validators.max(600)]],
       'description': ['', Validators.required],
       'comment': ['']
     });

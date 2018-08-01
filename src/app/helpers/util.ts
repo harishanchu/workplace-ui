@@ -53,23 +53,25 @@ export class Util {
    * @param {number} value
    * @returns {number}
    */
-  static formatTimeDuration(value: number) {
+  static formatTimeDuration(value: number): string {
+    let formattedValue: string;
+
     if (!value) {
-      return 0;
+      formattedValue = '0';
     }
 
     if (value >= 60) {
       let mins = value % 60;
 
-      value = (Math.floor(value / 60)) + 'h ';
+      formattedValue = `${(Math.floor(value / 60))}h `;
 
       if (mins) {
-        value += mins + 'm';
+        formattedValue += `${mins}m`;
       }
     } else {
-      value = value + 'm';
+      formattedValue = `${value}m`;
     }
 
-    return value;
+    return formattedValue;
   }
 }

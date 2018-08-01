@@ -55,15 +55,23 @@
       <mat-error *ngIf="hasError('status'); let error">{{error}}</mat-error>
     </mat-form-field>
 
-    <div class="form-item">
-      <div class="slider-field time-slider" fxLayout="row" fxLayoutAlign="center center">
-        <span class="slider-field-label"> Duration:</span>
-        <mat-slider thumbLabel=true min=1 max=600 fxFlex formControlName="duration" [displayWith]="formatTimeRangeValue"></mat-slider>
-        <span class="slider-field-extension"></span>
-      </div>
-      <mat-error *ngIf="hasError('duration'); let error">{{error}}</mat-error>
-    </div>
+    <div class="form-item slider-form-item">
+      <div fxLayout="row">
+        <div fxFlex="90">
+          <div fxLayout="row" class="slider-field">
+            <span class="slider-field-label" fxFlexAlign="end"> Duration:</span>
+            <mat-slider thumbLabel=true min=1 max=600 fxFlex fxFlexAlign="end" formControlName="duration" [displayWith]="formatTimeRangeValue" #slider (change)="sliderTextInput.value = slider.value"></mat-slider>
+          </div>
+          <mat-error *ngIf="hasError('duration'); let error">{{error}}</mat-error>
+        </div>
 
+        <mat-form-field fxFlex="10">
+          <input type="number" matInput formControlName="duration" (input)="slider.value = sliderTextInput.value" #sliderTextInput>
+        </mat-form-field>
+      </div>
+
+    </div>
+    <!--1.02456em 0-->
     <mat-form-field class="full-width form-item">
       <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
       <mat-error *ngIf="hasError('comment'); let error">{{error}}</mat-error>

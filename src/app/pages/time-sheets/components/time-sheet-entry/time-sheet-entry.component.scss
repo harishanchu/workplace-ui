@@ -7,24 +7,23 @@
   margin: 6px 4px;
 }
 
+.slider-form-item {
+  font-family: Roboto, Helvetica, Arial, sans-serif;
+  mat-error {
+    font-size: 75%;
+    margin-top: 0.46666667em;
+    top: calc(100% - 1.79166667em);
+  }
+}
 .slider-field {
+  height: 70%;
   .slider-field-label,
   .slider-field-extension {
     color: rgba(0, 0, 0, 0.54);
   }
-  ::ng-deep {
-    .mat-slider-thumb-label {
-      transform: rotate(45deg) !important;
-      border-radius: 50% 50% 0 !important;
-    }
-
-    .mat-slider-thumb {
-      transform: scale(0) !important;
-    }
-
-    .mat-slider-thumb-label-text {
-      opacity: 1 !important;
-    }
+  .mat-slider {
+    padding-bottom: 0;
+    height: 25px;
   }
 }
 
