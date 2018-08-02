@@ -112,4 +112,9 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
       this.dataSource.data.forEach((row: TimeSheet) => this.selection.select(row));
     }
   }
+
+  export() {
+    return this.timeSheetService.downloadAllUserTimeSheets(this.fromDate, this.toDate, true,
+      this.sort.active, this.sort.direction);
+  }
 }

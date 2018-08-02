@@ -85,7 +85,7 @@ export class TimeSheetService {
     }));
   }
 
-  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc', pageIndex = 0, pageSize = 10) {
+  _getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc',downLoad = false, pageIndex, pageSize) {
     const params: any = {
       filter: {
         skip: pageIndex * pageSize,
@@ -103,8 +103,18 @@ export class TimeSheetService {
 
     params.filter = JSON.stringify(params.filter);
 
-    return this.http.get(`time-sheets`,
-      {params, observe: 'response'}).pipe(map((response: any) => {
+    let url = 'time-sheets';
+
+    if(downLoad) {
+      url = 'time-sheets/download';
+    }
+
+    return this.http.get(url,
+      {params, observe: 'response'});
+  }
+
+  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc', pageIndex = 0, pageSize = 10) {
+    return this._getAllUserTimeSheets.call(this, fromDate, toDate, includeDetails, sort, direction, false, pageIndex, pageSize).pipe(map((response: any) => {
       return {
         items: response.body.map(({id, date, taskId, task, duration, status, user, comment}) => ({
           id,
@@ -125,7 +135,18 @@ export class TimeSheetService {
     }));
   }
 
-  downloadAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc') {
-
+  downloadAllUserTimeSheets(...args) {
+    this._getAllUserTimeSheets.apply(this, [...args, true]).subscribe(function (data) {
+      console.log(arguments)
+      dowloadFile(data);
+    });
   }
+
+
+}
+
+function dowloadFile (data: Response){
+  var blob = new Blob([data], { type: 'text/csv' });
+  var url= window.URL.createObjectURL(blob);
+  window.open(url);
 }

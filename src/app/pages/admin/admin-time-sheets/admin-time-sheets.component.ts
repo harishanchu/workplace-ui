@@ -72,6 +72,10 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
     this.refreshGrid();
   }
 
+  exportTimeSheets() {
+    this.grid.export();
+  }
+
   refreshGrid() {
     this.grid.loadTimeSheetForSelectedDate(this.form.value.fromDate, this.form.value.toDate);
   }
@@ -89,9 +93,5 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
     const projectIdFormControl = this.form.get('projectId');
 
     Util.handleMultiSelectWithAllOptionChange(projectIdFormControl, selectionModel);
-  }
-
-  exportTimeSheets() {
-
   }
 }
