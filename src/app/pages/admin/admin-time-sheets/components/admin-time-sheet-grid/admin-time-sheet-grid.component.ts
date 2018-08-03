@@ -67,7 +67,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   private advancedFilter = true;
   private totalCount = 0;
   private filterValue: any;
-  private filters = {};
+  private filters:any = {};
   private filterErrorMessages = {
     'operator': 'Provided operator is not supported.',
     'key': 'Provided filter key is not supported',
