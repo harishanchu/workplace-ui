@@ -74,4 +74,103 @@ export class Util {
 
     return formattedValue;
   }
+
+  /**
+   * Get an object key value where key specified in dot notation.
+   *
+   * @param obj
+   * @param path
+   * @returns {*}
+   */
+  static objectGet(obj, path) {
+    const pathArray = path.split('.');
+
+    if (!Util.isset(obj)) {
+      return null;
+    }
+
+    for (let i = 0; i < pathArray.length; i++) {
+      obj = obj[pathArray[i]];
+
+      if (!Util.isset(obj)) {
+        break;
+      }
+    }
+
+    return obj;
+  }
+
+  /**
+   * Set an object key value where key specified in dot notation.
+   *
+   * @param obj
+   * @param path
+   * @param value
+   */
+  static objectSet(obj, path, value) {
+    if (typeof(path) === 'string') {
+      path = path.split('.');
+    }
+    if (!Util.isset(obj[path[0]])) {
+      obj[path[0]] = {};
+    }
+    if (path.length > 1) {
+      Util.objectSet(obj[path.shift()], path, value);
+    } else {
+      obj[path[0]] = value;
+    }
+  }
+
+  static objectPush(obj, path, value) {
+    if (typeof(path) === 'string') {
+      path = path.split('.');
+    }
+    if (!Util.isset(obj[path[0]])) {
+      obj[path[0]] = {};
+    }
+    if (path.length > 1) {
+      Util.objectPush(obj[path.shift()], path, value);
+    } else {
+      if (! Array.isArray(obj[path[0]])) {
+        obj[path[0]] = [];
+      }
+
+      obj[path[0]].push(value);
+    }
+  }
+
+  /**
+   * Checks whether given value is null or undefined.
+   *
+   * @returns {boolean}
+   */
+  static isset(...args) {
+    //  discuss at: http://phpjs.org/functions/isset/
+    // original by: Kevin van Zonneveld (http://kevin.vanzonneveld.net)
+    // improved by: FremyCompany
+    // improved by: Onno Marsman
+    // improved by: Rafał Kukawski
+    //   example 1: isset( undefined, true);
+    //   returns 1: false
+    //   example 2: isset( 'Kevin van Zonneveld' );
+    //   returns 2: true
+
+    let a = args;
+    let l = a.length;
+    let i = 0;
+    let undef;
+
+    if (l === 0) {
+      throw new Error('Empty isset');
+    }
+
+    while (i !== l) {
+      if (a[i] === undef || a[i] === null) {
+        return false;
+      }
+      i++;
+    }
+
+    return true;
+  }
 }

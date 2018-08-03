@@ -1,9 +1,12 @@
 <div class="timesheet-grid-container" fxLayout="column">
   <div fxLayout="column" fxFlex>
     <div class="timesheet-grid-header">
-      <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <mat-form-field *ngIf="!advancedFilter">
+        <input matInput (keyup)="applyLocalFilter($event.target.value)" placeholder="Filter timesheets">
       </mat-form-field>
+      <tag-input [(ngModel)]="filterValue"  [modelAsStrings]="true" secondaryPlaceholder="Filter timesheets" placeholder="+ Add more filters" #filterInput *ngIf="advancedFilter" (onAdd)="advancedFilterChange()" (onRemove)="advancedFilterChange()" [validators]="filterValidator" [errorMessages]="filterErrorMessages">
+        <!--<tag-input-dropdown [autocompleteItems]="['iTem1', 'item2', 'item3']"></tag-input-dropdown>-->
+      </tag-input>
     </div>
     <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear
                matSortDirection="asc" fxFlex>
@@ -29,7 +32,7 @@
       <!-- Rest of the Columns -->
       <ng-container *ngFor="let column of displayedColumns">
         <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
-          <mat-header-cell *matHeaderCellDef> {{displayedColumnsProperties[column] && displayedColumnsProperties[column].title? displayedColumnsProperties[column].title: column | titlecase}}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef [mat-sort-header]="displayedColumnsProperties[column] && displayedColumnsProperties[column].sortField? displayedColumnsProperties[column].sortField: column" [disabled]="!displayedColumnsProperties[column] || !displayedColumnsProperties[column].sortable ? '' : null"> {{displayedColumnsProperties[column] && displayedColumnsProperties[column].title? displayedColumnsProperties[column].title: column | titlecase}}</mat-header-cell>
           <mat-cell *matCellDef="let element"> {{displayedColumnsProperties[column] && displayedColumnsProperties[column].formatter? displayedColumnsProperties[column].formatter(element[column]): element[column]}}</mat-cell>
         </ng-container>
       </ng-container>

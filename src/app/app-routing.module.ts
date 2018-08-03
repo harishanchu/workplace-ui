@@ -32,7 +32,7 @@ const routes: Routes = [
     component: AdminLayoutComponent,
     canActivate: [AuthAdminGuard],
     children: [
-      {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+      {path: '', redirectTo: 'time-sheets', pathMatch: 'full'},
       {path: 'dashboard', component: AdminDashboardComponent},
       {path: 'time-sheets', component: AdminTimeSheetsComponent},
       {path: 'configuration', component: AdminConfigurationComponent}

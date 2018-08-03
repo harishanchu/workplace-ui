@@ -7,6 +7,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import './rxjs-operators';
 import {ChartistModule} from 'ng-chartist';
+import { TagInputModule } from 'ngx-chips';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -83,7 +84,8 @@ import {ProfileComponent} from './pages/profile/profile.component';
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    ChartistModule
+    ChartistModule,
+    TagInputModule
   ],
   providers: [
     {

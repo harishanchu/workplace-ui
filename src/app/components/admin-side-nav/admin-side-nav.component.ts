@@ -12,9 +12,9 @@ export class AdminSideNavComponent implements OnInit {
 
   constructor(private authService: AuthService) {
     this.navItemList = [
-      {title: 'Dashboard', url: '/admin/dashboard', icon: 'dashboard'},
+      // {title: 'Dashboard', url: '/admin/dashboard', icon: 'dashboard'},
       {title: 'Time Sheets', url: '/admin/time-sheets', icon: 'av_timer'},
-      {title: 'Configuration', url: '/admin/configuration', icon: 'settings'}
+      // {title: 'Configuration', url: '/admin/configuration', icon: 'settings'}
     ];
     this.menuMode = this.authService.getUserPreference('menuMode') || 'full';
   }

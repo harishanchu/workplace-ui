@@ -1,13 +1,66 @@
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {TimeSheet} from '../models/time-sheet';
 import {Task} from '../models/task';
 import {Util} from '../helpers/util';
+import {Globals} from '../globals';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class TimeSheetService {
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private globals: Globals, private authService: AuthService) {
+  }
+
+  static formatAllUserTimeSheetsApiFilter(data) {
+    const where = {
+      date: {between: [Util.formatDate(data.fromDate), Util.formatDate(data.toDate)]}
+    };
+
+    if (data.clientId[0] !== 'all') {
+      Util.objectSet(where, 'task.project.clientId.inq', data.clientId);
+    }
+
+    if (data.projectId[0] !== 'all') {
+      Util.objectSet(where, 'task.projectId.inq', data.projectId);
+    }
+
+    if (data.advancedFilters) {
+      const filterableFields = data.advancedFilters.filterableFields;
+
+      data.advancedFilters.items.forEach(function (item) {
+        const bits = item.match(/^([a-z]+?)([!=><]+)([a-z0-9A-Z* ]+)$/);
+
+        switch (bits[2]) {
+          case '=':
+            if (bits[3].indexOf('*') > -1) {
+              Util.objectSet(where, `${filterableFields[bits[1]]}.like`, bits[3].replace(/\*/g, '%'));
+            } else {
+              Util.objectPush(where, `${filterableFields[bits[1]]}.inq`, bits[3]);
+            }
+            break;
+
+          case '!=':
+            if (bits[3].indexOf('*') > -1) {
+              Util.objectSet(where, `${filterableFields[bits[1]]}.nlike`, bits[3].replace(/\*/g, '%'));
+            } else {
+              Util.objectPush(where, `${filterableFields[bits[1]]}.nin`, bits[3]);
+            }
+            break;
+
+          case '>':
+            Util.objectPush(where, `${filterableFields[bits[1]]}.gt`, bits[3]);
+            break;
+
+          case '<':
+            Util.objectPush(where, `${filterableFields[bits[1]]}.lt`, bits[3]);
+            break;
+        }
+
+      });
+    }
+
+    return where;
   }
 
   createTask(task: Task) {
@@ -85,15 +138,15 @@ export class TimeSheetService {
     }));
   }
 
-  _getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc',downLoad = false, pageIndex, pageSize) {
+  _getAllUserTimeSheets(filters: { fromDate: Date, toDate: Date }, includeDetails = false,
+                        sort = 'status', direction = 'asc',
+                        downLoad = false, pageIndex, pageSize) {
     const params: any = {
       filter: {
         skip: pageIndex * pageSize,
         limit: pageSize,
         order: sort + ' ' + direction,
-        where: {
-          date: {between: [Util.formatDate(fromDate), Util.formatDate(toDate)]}
-        }
+        where: TimeSheetService.formatAllUserTimeSheetsApiFilter(filters)
       }
     };
 
@@ -103,18 +156,21 @@ export class TimeSheetService {
 
     params.filter = JSON.stringify(params.filter);
 
-    let url = 'time-sheets';
-
-    if(downLoad) {
-      url = 'time-sheets/download';
+    if (downLoad) {
+      window.location.href = this.globals.baseApiUrl + 'time-sheets/download?' +
+        new HttpParams({fromObject: params}).toString()
+        + '&access_token=' + this.authService.getAuthToken();
+    } else {
+      return this.http.get('time-sheets',
+        {params, observe: 'response'});
     }
-
-    return this.http.get(url,
-      {params, observe: 'response'});
   }
 
-  getAllUserTimeSheets(fromDate: Date, toDate: Date, includeDetails = false, sort = 'status', direction = 'asc', pageIndex = 0, pageSize = 10) {
-    return this._getAllUserTimeSheets.call(this, fromDate, toDate, includeDetails, sort, direction, false, pageIndex, pageSize).pipe(map((response: any) => {
+  getAllUserTimeSheets(filters, includeDetails, sort, direction, pageIndex = 0, pageSize = 10) {
+    return this._getAllUserTimeSheets(
+      filters, includeDetails,
+      sort, direction, false,
+      pageIndex, pageSize).pipe(map((response: any) => {
       return {
         items: response.body.map(({id, date, taskId, task, duration, status, user, comment}) => ({
           id,
@@ -136,17 +192,6 @@ export class TimeSheetService {
   }
 
   downloadAllUserTimeSheets(...args) {
-    this._getAllUserTimeSheets.apply(this, [...args, true]).subscribe(function (data) {
-      console.log(arguments)
-      dowloadFile(data);
-    });
+    this._getAllUserTimeSheets.apply(this, [...args, true]);
   }
-
-
-}
-
-function dowloadFile (data: Response){
-  var blob = new Blob([data], { type: 'text/csv' });
-  var url= window.URL.createObjectURL(blob);
-  window.open(url);
 }

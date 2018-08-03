@@ -7,6 +7,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {Util} from '../../../../../helpers/util';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-admin-time-sheet-grid',
@@ -14,20 +15,35 @@ import {Util} from '../../../../../helpers/util';
   styleUrls: ['../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss']
 })
 export class AdminTimeSheetGridComponent implements AfterViewInit {
+  static filterableFields = {
+    'employee': 'user.name',
+    'status': 'status',
+    'description': 'task.description',
+    'comment': 'comment',
+    'duration': 'duration'
+  };
+  static filterOpertors = ['!=', '=', '>', '<'];
   public dataSource = new MatTableDataSource();
   public selection = new SelectionModel<TimeSheet>(true, []);
   public loading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   private enableRowSelection = false;
-  private displayedColumns = ['user', 'client', 'project', 'description', 'status', 'duration'];
+  private displayedColumns = ['user', 'client', 'project', 'description', 'comment', 'status', 'duration'];
   private displayedColumnsProperties = {
     user: {
-      title: 'Employee'
+      title: 'Employee',
+      sortable: false,
+      sortField: 'user.name'
+    },
+    description: {
+      sortable: false,
+      sortField: 'task.description'
     },
     duration: {
       title: 'Duration(hrs)',
-      formatter: Util.formatTimeDuration
+      formatter: Util.formatTimeDuration,
+      sortable: true
     },
     status: {
       formatter: function (value: string) {
@@ -38,16 +54,25 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
         }
 
         return value;
-      }
+      },
+      sortable: true
+    },
+    comment: {
+      sortable: true
     }
   };
   private defaultSort = 'status';
-  private fromDate: Date;
-  private toDate: Date;
   private refreshGrid = new EventEmitter();
   private enablePagination = true;
+  private advancedFilter = true;
   private totalCount = 0;
-  private filterValue = '';
+  private filterValue: any;
+  private filters = {};
+  private filterErrorMessages = {
+    'operator': 'Provided operator is not supported.',
+    'key': 'Provided filter key is not supported',
+    'error': 'Please provide a valid filter'
+  };
   @ViewChild('table') private table;
 
   constructor(private timeSheetService: TimeSheetService) {
@@ -61,7 +86,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
       .pipe(
         switchMap(() => {
           this.loading = true;
-          return this.timeSheetService.getAllUserTimeSheets(this.fromDate, this.toDate, true,
+          return this.timeSheetService.getAllUserTimeSheets(this.filters, true,
             this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
         }),
         map(data => {
@@ -79,14 +104,48 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
     });
   }
 
-  applyFilter(filterValue: string) {
+  applyLocalFilter(filterValue: string) {
     this.filterValue = filterValue.trim().toLowerCase();
     this.dataSource.filter = this.filterValue;
   }
 
-  loadTimeSheetForSelectedDate(fromDate: Date, toDate: Date) {
-    this.fromDate = fromDate;
-    this.toDate = toDate;
+  filterValidator(control: FormControl) {
+    const bits = control.value.match(/^([a-z]+?)([!=><]+)([a-z0-9A-Z* ]+)$/);
+
+    if (!bits) {
+      return {
+        "error": true
+      };
+    } else if (AdminTimeSheetGridComponent.filterOpertors.indexOf(bits[2]) === -1) {
+      return {
+        "operator": true
+      }
+    } else if (Object.keys(AdminTimeSheetGridComponent.filterableFields).indexOf(bits[1]) === -1) {
+      return {
+        "key": true
+      }
+    }
+
+    return null;
+  }
+
+  advancedFilterChange() {
+    if (this.filterValue && this.filterValue.length) {
+      this.filters.advancedFilters = {
+        items: this.filterValue,
+        filterOpertors: AdminTimeSheetGridComponent.filterOpertors,
+        filterableFields: AdminTimeSheetGridComponent.filterableFields
+      };
+    } else {
+      delete this.filters.advancedFilters;
+    }
+
+    this.loadTimeSheet(this.filters);
+  }
+
+  loadTimeSheet(filters) {
+    filters.advancedFilters = this.filters.advancedFilters;
+    this.filters = filters;
     this.paginator.pageIndex = 0;
     this.refreshGrid.emit();
   }
@@ -114,7 +173,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   }
 
   export() {
-    return this.timeSheetService.downloadAllUserTimeSheets(this.fromDate, this.toDate, true,
+    return this.timeSheetService.downloadAllUserTimeSheets(this.filters, true,
       this.sort.active, this.sort.direction);
   }
 }

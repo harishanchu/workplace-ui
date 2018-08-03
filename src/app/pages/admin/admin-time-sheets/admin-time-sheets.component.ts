@@ -77,7 +77,7 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
   }
 
   refreshGrid() {
-    this.grid.loadTimeSheetForSelectedDate(this.form.value.fromDate, this.form.value.toDate);
+    this.grid.loadTimeSheet(this.form.value);
   }
 
   onClientIdChange(event) {
@@ -86,6 +86,8 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
 
     Util.handleMultiSelectWithAllOptionChange(clientIdFormControl, selectionModel);
     this.populateProjectsBasedOnClient();
+
+    this.refreshGrid();
   }
 
   onProjectIdChange(event) {
@@ -93,5 +95,7 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
     const projectIdFormControl = this.form.get('projectId');
 
     Util.handleMultiSelectWithAllOptionChange(projectIdFormControl, selectionModel);
+
+    this.refreshGrid();
   }
 }
