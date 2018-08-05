@@ -2,6 +2,17 @@
 .timesheet-grid-container {
   //padding: 5px;
   height: 100%;
+  .mat-header-cell,
+  .mat-header-cell button,
+  .mat-cell {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mat-cell {
+    margin: 0 5px;
+  }
 }
 
 .timesheet-grid-header {

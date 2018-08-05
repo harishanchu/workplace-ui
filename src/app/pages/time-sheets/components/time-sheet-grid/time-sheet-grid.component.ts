@@ -12,7 +12,7 @@ import {Util} from '../../../../helpers/util';
 })
 export class TimeSheetGridComponent implements OnInit {
   private enableRowSelection = true;
-  private displayedColumns = ['select', 'client', 'project', 'description', 'status', 'duration'];
+  private displayedColumns = ['select', 'client', 'project', 'description', 'comment', 'status', 'duration'];
   private displayedColumnsProperties = {
     duration: {
       formatter: Util.formatTimeDuration
@@ -72,6 +72,7 @@ export class TimeSheetGridComponent implements OnInit {
 
 
   loadTimeSheetForSelectedDate(date: Date) {
+    this.selection.clear();
     this.date = date;
     this.loading = true;
     this.timeSheetService.getCurrentUserTimeSheets(date, true)
