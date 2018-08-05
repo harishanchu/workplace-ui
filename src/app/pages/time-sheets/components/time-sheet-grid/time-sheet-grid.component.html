@@ -4,7 +4,7 @@
       <mat-form-field *ngIf="!advancedFilter">
         <input matInput (keyup)="applyLocalFilter($event.target.value)" placeholder="Filter timesheets">
       </mat-form-field>
-      <tag-input [(ngModel)]="filterValue"  [modelAsStrings]="true" secondaryPlaceholder="Filter timesheets" placeholder="+ Add more filters" #filterInput *ngIf="advancedFilter" (onAdd)="advancedFilterChange()" (onRemove)="advancedFilterChange()" [validators]="filterValidator" [errorMessages]="filterErrorMessages">
+      <tag-input [matTooltip]="advancedFilterTooltip" [(ngModel)]="filterValue"  [modelAsStrings]="true" secondaryPlaceholder="Filter timesheets" placeholder="+ Add more filters" #filterInput *ngIf="advancedFilter" (onAdd)="advancedFilterChange()" (onRemove)="advancedFilterChange()" [validators]="filterValidator" [errorMessages]="filterErrorMessages">
         <!--<tag-input-dropdown [autocompleteItems]="['iTem1', 'item2', 'item3']"></tag-input-dropdown>-->
       </tag-input>
     </div>

@@ -29,7 +29,9 @@ export class TimeSheetService {
       const filterableFields = data.advancedFilters.filterableFields;
 
       data.advancedFilters.items.forEach(function (item) {
-        const bits = item.match(/^([a-z]+?)([!=><]+)([a-z0-9A-Z* ]+)$/);
+        const bits = item.match(/^\s*([a-z]+?)\s*([!=><]+)\s*([a-z0-9A-Z* ]+)$/);
+
+        bits[3] = bits[3].trim();
 
         switch (bits[2]) {
           case '=':

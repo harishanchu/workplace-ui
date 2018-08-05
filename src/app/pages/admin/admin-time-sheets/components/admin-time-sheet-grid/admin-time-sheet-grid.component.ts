@@ -33,11 +33,19 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   private displayedColumnsProperties = {
     user: {
       title: 'Employee',
-      sortable: false,
+      sortable: true,
       sortField: 'user.name'
     },
+    client: {
+      sortable: true,
+      sortField: 'task.project.client.name'
+    },
+    project: {
+      sortable: true,
+      sortField: 'task.project.name'
+    },
     description: {
-      sortable: false,
+      sortable: true,
       sortField: 'task.description'
     },
     duration: {
@@ -67,15 +75,17 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   private advancedFilter = true;
   private totalCount = 0;
   private filterValue: any;
-  private filters:any = {};
+  private filters: any = {};
   private filterErrorMessages = {
     'operator': 'Provided operator is not supported.',
     'key': 'Provided filter key is not supported',
     'error': 'Please provide a valid filter'
   };
+  private advancedFilterTooltip;
   @ViewChild('table') private table;
 
   constructor(private timeSheetService: TimeSheetService) {
+    this.advancedFilterTooltip = 'Supports filtering of fileds: ' + Object.keys(AdminTimeSheetGridComponent.filterableFields).join(', ') + ' with operators: ' + AdminTimeSheetGridComponent.filterOpertors.join(', ');
   }
 
   ngAfterViewInit() {
@@ -110,19 +120,19 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   }
 
   filterValidator(control: FormControl) {
-    const bits = control.value.match(/^([a-z]+?)([!=><]+)([a-z0-9A-Z* ]+)$/);
+    const bits = control.value.match(/^\s*([a-z]+?)\s*([!=><]+)\s*([a-z0-9A-Z* ]+)$/);
 
     if (!bits) {
       return {
-        "error": true
+        'error': true
       };
     } else if (AdminTimeSheetGridComponent.filterOpertors.indexOf(bits[2]) === -1) {
       return {
-        "operator": true
+        'operator': true
       }
     } else if (Object.keys(AdminTimeSheetGridComponent.filterableFields).indexOf(bits[1]) === -1) {
       return {
-        "key": true
+        'key': true
       }
     }
 
