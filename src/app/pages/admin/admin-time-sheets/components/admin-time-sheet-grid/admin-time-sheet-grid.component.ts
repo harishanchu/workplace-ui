@@ -29,7 +29,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   private enableRowSelection = false;
-  private displayedColumns = ['user', 'client', 'project', 'description', 'comment', 'status', 'duration'];
+  private displayedColumns = ['user', 'client', 'project', 'description', 'type', 'comment', 'status', 'duration'];
   private displayedColumnsProperties = {
     user: {
       title: 'Employee',
@@ -47,6 +47,10 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
     description: {
       sortable: true,
       sortField: 'task.description'
+    },
+    type: {
+      sortable: true,
+      sortField: 'task.type'
     },
     duration: {
       title: 'Duration(hrs)',

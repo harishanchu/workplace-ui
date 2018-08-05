@@ -37,3 +37,9 @@
     padding: 0.7em 0;
   }
 }
+
+.mat-form-field.mat-form-field-type-mat-select {
+  ::ng-deep .mat-form-field-infix {
+    width: 150px;
+  }
+}

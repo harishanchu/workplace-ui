@@ -101,13 +101,14 @@ export class TimeSheetService {
     params.filter = JSON.stringify(params.filter);
 
     return this.http.get(`users/${user}/tasks`, {params}).pipe(map((response: any[]) => {
-      return response.map(({id, project, description}) => ({
+      return response.map(({id, project, description, type}) => ({
         id,
         client: project.client.name,
         clientId: project.client.id,
         project: project.name,
         projectId: project.id,
-        description
+        description,
+        type: type
       }));
 
     }));
@@ -133,6 +134,7 @@ export class TimeSheetService {
         clientId: task.project.clientId,
         client: task.project.client.name,
         description: task.description,
+        type: task.type,
         comment,
         duration,
         status
@@ -183,6 +185,7 @@ export class TimeSheetService {
           clientId: task.project.clientId,
           client: task.project.client.name,
           description: task.description,
+          type: task.type,
           comment,
           user: user.name,
           duration,

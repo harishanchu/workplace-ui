@@ -4,4 +4,5 @@ export interface Task {
   projectId?: any;
   status?: any;
   description: any;
+  type: any;
 }

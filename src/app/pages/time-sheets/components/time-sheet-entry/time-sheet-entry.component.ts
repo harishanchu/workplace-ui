@@ -25,6 +25,7 @@ export class TimeSheetEntryComponent implements OnInit {
   private taskId;
   private clients = <any>[];
   private projects = <any>[];
+  private taskTypes = <any>[];
   private projectsUnfiltered = <any>[];
   private statuses = [
     {name: 'Completed', value: 'completed'},
@@ -47,6 +48,7 @@ export class TimeSheetEntryComponent implements OnInit {
       'status': ['', Validators.required],
       'duration': [1, [Validators.required, Validators.min(1), Validators.max(600)]],
       'description': ['', Validators.required],
+      'type': ['', Validators.required],
       'comment': ['']
     });
 
@@ -64,6 +66,12 @@ export class TimeSheetEntryComponent implements OnInit {
   ngOnInit() {
     this.appService.getClients(false).subscribe(clients => {
       this.clients = clients;
+    });
+    this.appService.getTaskTyes().subscribe(types => {
+      this.taskTypes = types;
+      if(!this.form.controls['type'].value) {
+        this.form.controls['type'].setValue(types[0]);
+      }
     });
 
     this.loadComboStores();
@@ -108,7 +116,8 @@ export class TimeSheetEntryComponent implements OnInit {
         if (!timeSheet.taskId) {
           const task = {
             projectId: formValues.projectId,
-            description: formValues.description
+            description: formValues.description,
+            type: formValues.type
           };
 
           this.createTask(task, function (error, data) {
@@ -173,14 +182,16 @@ export class TimeSheetEntryComponent implements OnInit {
       duration: data.duration,
       comment: data.comment,
       description: data.description,
-      clientId: data.clientId
+      clientId: data.clientId,
+      type: data.type,
     });
   }
 
-  loadTaskData({clientId, projectId, description}) {
+  loadTaskData({clientId, projectId, description, type}) {
     this.form.controls.clientId.setValue(clientId);
     this.form.controls.projectId.setValue(projectId);
     this.form.controls.description.setValue(description);
+    this.form.controls.type.setValue(type);
     this.populateProjectsBasedOnClient();
   }
 
@@ -188,12 +199,14 @@ export class TimeSheetEntryComponent implements OnInit {
     this.form.controls.clientId.disable();
     this.form.controls.description.disable();
     this.form.controls.projectId.disable();
+    this.form.controls.type.disable();
   }
 
   resetTaskFields() {
     this.form.controls.clientId.reset();
     this.form.controls.description.reset();
     this.form.controls.projectId.reset();
+    this.form.controls.type.reset();
   }
 
   enableTaskEditing() {
@@ -202,6 +215,7 @@ export class TimeSheetEntryComponent implements OnInit {
     this.form.controls.clientId.enable();
     this.form.controls.description.enable();
     this.form.controls.projectId.enable();
+    this.form.controls.type.enable();
   }
 
   showOpenTasks() {

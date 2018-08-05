@@ -12,4 +12,5 @@ export interface TimeSheet {
   duration: any;
   description?: any;
   comment?: any;
+  type?: any;
 }

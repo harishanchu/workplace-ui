@@ -38,4 +38,10 @@ export class AppService {
       return res;
     }));
   }
+
+  getTaskTyes() {
+    return this.http.get('tasks/types').pipe(map(res => {
+      return res;
+    }));
+  }
 }

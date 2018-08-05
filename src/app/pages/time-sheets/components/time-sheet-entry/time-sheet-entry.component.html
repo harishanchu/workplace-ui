@@ -33,6 +33,15 @@
         </mat-select>
         <mat-error *ngIf="hasError('projectId'); let error">{{error}}</mat-error>
       </mat-form-field>
+
+      <mat-form-field class="form-item" fxFlex="25">
+        <mat-select placeholder="Type" formControlName="type">
+          <mat-option *ngFor="let type of taskTypes" [value]="type">
+            {{type}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('type'); let error">{{error}}</mat-error>
+      </mat-form-field>
     </div>
 
 

@@ -1,14 +1,23 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+  HttpResponse
+} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {mergeMap, take} from 'rxjs/operators';
+import 'rxjs/add/operator/do';
 import {AuthService} from '../services/auth.service';
 import {Globals} from '../globals';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthService, private globals: Globals) {
+  constructor(private authService: AuthService, private router: Router, private globals: Globals) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -21,7 +30,20 @@ export class AppHttpInterceptor implements HttpInterceptor {
             url: this.formUrl(request.url)
           });
 
-          return next.handle(request);
+          return next.handle(request).do(
+            (event: HttpEvent<any>) => {
+              if (event instanceof HttpResponse) {
+                return event;
+              }
+            },
+            (err) => {
+              if (err instanceof HttpErrorResponse) {
+                if (err.status === 401) {
+                  this.authService.clearAuthData();
+                  this.router.navigate(['/login']);
+                }
+              }
+            });
         })
       );
   }
