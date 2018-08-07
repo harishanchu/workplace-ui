@@ -11,6 +11,7 @@ import {Util} from '../../../../helpers/util';
   styleUrls: ['./time-sheet-grid.component.scss']
 })
 export class TimeSheetGridComponent implements OnInit {
+  @ViewChild('infoPanel') private infoPanel;
   private enableRowSelection = true;
   private enableGridFooter = true;
   private displayedColumns = ['select', 'client', 'project', 'description', 'comment', 'status', 'duration'];
@@ -102,5 +103,13 @@ export class TimeSheetGridComponent implements OnInit {
 
   getTotalHours() {
     return Util.formatTimeDuration(this.dataSource.data.map((t: any) => t.duration).reduce((acc, value) => acc + value, 0));
+  }
+
+  toggleInfoPanel () {
+    this.infoPanel.toggle();
+  }
+
+  infoPanelToggleButtonText () {
+    return this.infoPanel.opened? "Hide info panel": "Show info pannel";
   }
 }

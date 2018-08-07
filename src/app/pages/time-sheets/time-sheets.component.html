@@ -41,6 +41,13 @@
           <mat-icon aria-label="Delete">delete</mat-icon>
           Delete
         </button>
+
+        <div fxFill></div>
+
+        <button mat-button color="primary" (click)="timeSheetGrid.toggleInfoPanel()">
+          <mat-icon aria-label="info">info</mat-icon>
+          {{ timeSheetGrid.infoPanelToggleButtonText() }}
+        </button>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

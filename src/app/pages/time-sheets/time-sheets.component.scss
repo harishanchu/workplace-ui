@@ -11,6 +11,6 @@ mat-toolbar {
 
 .time-sheet-grid {
   display: block;
-  overflow: auto;
+  overflow: hidden;
   height: calc(100vh - #{$topbarHeight} - 64px);
 }

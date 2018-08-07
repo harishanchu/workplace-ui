@@ -1,4 +1,6 @@
-/* Structure */
+mat-drawer-container {
+  height: 100%;
+}
 .timesheet-grid-container {
   //padding: 5px;
   height: 100%;
@@ -45,8 +47,12 @@
 
 .mat-table {
   overflow: auto;
+  height: calc(100% - 74px)
 }
 
 .mat-column-select {
   overflow: visible;
+}
+
+.info-panel {
 }
