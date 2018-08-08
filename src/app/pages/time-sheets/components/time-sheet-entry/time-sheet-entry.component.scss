@@ -1,10 +1,19 @@
 .container {
-  min-width: 450px;
+  .form-body {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
 }
 
 .form-item {
   font-size: 14px;
-  margin: 6px 4px;
+  margin: 6px 0;
+}
+
+.form-item-row {
+  .form-item {
+    margin: 6px 4px;
+  }
 }
 
 .slider-form-item {
