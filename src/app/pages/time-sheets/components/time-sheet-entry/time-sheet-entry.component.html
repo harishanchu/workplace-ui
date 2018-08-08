@@ -14,7 +14,8 @@
       </span>
   </div>
   <form (ngSubmit)="onSaveTimeSheetClick()" [formGroup]="form">
-    <div fxLayout="row">
+    <div class="form-body">
+    <div fxLayout="row" class="form-item-row">
       <mat-form-field class="form-item" fxFlex>
         <mat-select placeholder="Client" formControlName="clientId"
                     (selectionChange)="populateProjectsBasedOnClient()" cdkFocusInitial>
@@ -44,7 +45,6 @@
       </mat-form-field>
     </div>
 
-
     <mat-form-field class="full-width form-item">
       <textarea matInput placeholder="Description" formControlName="description"></textarea>
       <mat-error *ngIf="hasError('description'); let error">{{error}}</mat-error>
@@ -53,7 +53,6 @@
     <div fxLayout="row" class="dialog-subtitle">
       <h4 fxFlex>Log work</h4>
     </div>
-
 
     <mat-form-field class="form-item full-width">
       <mat-select placeholder="Status" formControlName="status">
@@ -85,7 +84,7 @@
       <textarea matInput placeholder="Comment" formControlName="comment"></textarea>
       <mat-error *ngIf="hasError('comment'); let error">{{error}}</mat-error>
     </mat-form-field>
-
+    </div>
     <div mat-dialog-actions align="end">
       <button mat-raised-button matDialogClose>Cancel</button>
       <button mat-raised-button color="primary" type="submit">Save</button>
