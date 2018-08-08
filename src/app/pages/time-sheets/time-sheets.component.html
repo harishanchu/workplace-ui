@@ -8,8 +8,8 @@
       <div class="action-bar-title">
         {{title}}
       </div>
-      <div class="action-bar-tools" fxLayout="row">
-        <div class="date-switcher">
+      <div class="action-bar-tools" fxLayout="row" fxFlex="1 1 auto">
+        <div class="date-switcher" fxFlexAlign="start">
           <button mat-icon-button color="primary" (click)="swithDate(-1)">
             <mat-icon mat-button>keyboard_arrow_left</mat-icon>
           </button>
@@ -42,7 +42,7 @@
           Delete
         </button>
 
-        <div fxFill></div>
+        <span fxFlex></span>
 
         <button mat-button color="primary" (click)="timeSheetGrid.toggleInfoPanel()">
           <mat-icon aria-label="info">info</mat-icon>

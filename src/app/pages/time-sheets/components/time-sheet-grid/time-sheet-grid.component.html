@@ -12,6 +12,7 @@
           <!--<tag-input-dropdown [autocompleteItems]="['iTem1', 'item2', 'item3']"></tag-input-dropdown>-->
         </tag-input>
       </div>
+      <div class="time-sheet-grid-body">
       <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear matSortDirection="asc">
 
         <!-- Checkbox Column -->
@@ -75,8 +76,8 @@
                      [length]="totalCount"
                      [pageSize]="10"
                      [pageSizeOptions]="[5, 10, 20]"
-                     [showFirstLastButtons]="true">
+                     [showFirstLastButtons]="true" [style.display]="dataSource._renderData.getValue().length == 0 ? 'none' : ''">
       </mat-paginator>
-
+      </div>
   </mat-drawer-content>
 </mat-drawer-container>

@@ -11,6 +11,7 @@
   text-align: center;
   padding: 10px;
   background: #fff;
+  @include vertical-align(40%);
 }
 
 .load-mask {

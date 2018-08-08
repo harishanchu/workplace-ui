@@ -1,5 +1,8 @@
 mat-drawer-container {
   height: 100%;
+  mat-drawer {
+    background: none;
+  }
 }
 .timesheet-grid-container {
   //padding: 5px;
@@ -33,6 +36,11 @@ mat-drawer-container {
   background: #fff;
 }
 
+.time-sheet-grid-body {
+  overflow: auto;
+  height: calc(100% - 74px);
+}
+
 .mat-header-row {
   top: 0;
   position: sticky;
@@ -43,11 +51,6 @@ mat-drawer-container {
 .mat-form-field {
   font-size: 14px;
   width: 100%;
-}
-
-.mat-table {
-  overflow: auto;
-  height: calc(100% - 74px)
 }
 
 .mat-column-select {
