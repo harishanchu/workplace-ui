@@ -31,14 +31,14 @@ mat-drawer-container {
 }
 
 .timesheet-grid-header {
-  min-height: 64px;
+  min-height: 69px;
   padding: 8px 24px 0;
   background: #fff;
 }
 
 .time-sheet-grid-body {
   overflow: auto;
-  height: calc(100% - 74px);
+  height: calc(100% - 79px);
 }
 
 .mat-header-row {
@@ -58,4 +58,5 @@ mat-drawer-container {
 }
 
 .info-panel {
+  min-width: 400px;
 }

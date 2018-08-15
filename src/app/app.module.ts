@@ -47,6 +47,7 @@ import {ProjectsGridComponent} from './pages/admin/admin-configuration/component
 import {TasksGridComponent} from './pages/admin/admin-configuration/components/tasks-grid/tasks-grid.component';
 import {EmployeesGridComponent} from './pages/admin/admin-configuration/components/employees-grid/employees-grid.component';
 import {ProfileComponent} from './pages/profile/profile.component';
+import { TimeSheetGridInfoComponent } from './pages/time-sheets/components/time-sheet-grid-info/time-sheet-grid-info.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import {ProfileComponent} from './pages/profile/profile.component';
     ProjectsGridComponent,
     TasksGridComponent,
     EmployeesGridComponent,
-    ProfileComponent
+    ProfileComponent,
+    TimeSheetGridInfoComponent
   ],
   imports: [
     BrowserModule,

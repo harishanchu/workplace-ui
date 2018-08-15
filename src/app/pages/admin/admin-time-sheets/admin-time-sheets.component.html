@@ -8,7 +8,7 @@
       <div class="action-bar-title">
         {{title}}
       </div>
-      <div class="action-bar-tools" fxLayout="row" [formGroup]="form">
+      <div class="action-bar-tools" fxLayout="row" [formGroup]="form" fxFlex="1 1 auto">
         <div class="form-item">
           <label>From: </label>
           <input [matDatepicker]="fromPicker" [max]="form.value.toDate" formControlName="fromDate"
@@ -46,6 +46,14 @@
         <button mat-button color="primary" (click)="exportTimeSheets()" [disabled]="grid.dataSource._renderData.getValue().length == 0">
           <mat-icon aria-label="Download">get_app</mat-icon>
           Download
+        </button>
+
+
+        <span fxFlex></span>
+
+        <button mat-button color="primary" (click)="timeSheetGrid.toggleInfoPanel()">
+          <mat-icon aria-label="info">info</mat-icon>
+          {{ timeSheetGrid.infoPanelToggleButtonText() }}
         </button>
       </div>
     </mat-toolbar-row>

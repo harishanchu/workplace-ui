@@ -15,6 +15,7 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss']
 })
 export class AdminTimeSheetGridComponent implements AfterViewInit {
+  @ViewChild('infoPanel') private infoPanel;
   static filterableFields = {
     'employee': 'user.name',
     'status': 'status',
@@ -189,5 +190,13 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   export() {
     return this.timeSheetService.downloadAllUserTimeSheets(this.filters, true,
       this.sort.active, this.sort.direction);
+  }
+
+  toggleInfoPanel () {
+    this.infoPanel.toggle();
+  }
+
+  infoPanelToggleButtonText () {
+    return this.infoPanel.opened? "Hide info panel": "Show info pannel";
   }
 }
