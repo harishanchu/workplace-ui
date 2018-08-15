@@ -149,7 +149,7 @@ export class TimeSheetService {
       filter: {
         skip: pageIndex * pageSize,
         limit: pageSize,
-        order: sort + ' ' + direction,
+        order: [sort + ' ' + direction, 'id asc'],
         where: TimeSheetService.formatAllUserTimeSheetsApiFilter(filters)
       }
     };
