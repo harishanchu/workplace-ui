@@ -57,7 +57,7 @@ export class TimeSheetGridComponent implements OnInit {
    */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.dataSource.filteredData.length;
     return numSelected === numRows;
   }
 
@@ -68,7 +68,7 @@ export class TimeSheetGridComponent implements OnInit {
     if (this.isAllSelected()) {
       this.selection.clear();
     } else {
-      this.dataSource.data.forEach((row: TimeSheet) => this.selection.select(row));
+      this.dataSource.filteredData.forEach((row: TimeSheet) => this.selection.select(row));
     }
   }
 
@@ -102,7 +102,7 @@ export class TimeSheetGridComponent implements OnInit {
   }
 
   getTotalHours() {
-    return Util.formatTimeDuration(this.dataSource.data.map((t: any) => t.duration).reduce((acc, value) => acc + value, 0));
+    return Util.formatTimeDuration(this.dataSource.filteredData.map((t: any) => t.duration).reduce((acc, value) => acc + value, 0));
   }
 
   toggleInfoPanel () {
