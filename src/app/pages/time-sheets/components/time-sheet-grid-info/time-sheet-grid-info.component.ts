@@ -1,9 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {Util} from '../../../../helpers/util';
 import {MatTableDataSource} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import {TimeSheet} from '../../../../models/time-sheet';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
+
+import {merge} from 'rxjs';
+import {filter} from 'rxjs/operators';
 
 @Component({
   selector: 'app-time-sheet-grid-info',
@@ -12,6 +15,9 @@ import {TimeSheetService} from '../../../../services/time-sheet.service';
 })
 export class TimeSheetGridInfoComponent implements OnInit {
   @Input() gridSelection: SelectionModel<TimeSheet>;
+  @Input() panelState: EventEmitter<boolean>;
+  private isOpened: boolean;
+  private infoLoaded = false;
   private displayedColumns = ['description', 'status', 'duration'];
   private displayedColumnsProperties = {
     duration: {
@@ -21,9 +27,9 @@ export class TimeSheetGridInfoComponent implements OnInit {
     status: {
       formatter: function (value: string) {
         if (value === 'inProgress') {
-          value = 'In progress';
+          value = 'Open';
         } else {
-          value = 'Completed';
+          value = 'Closed';
         }
 
         return value;
@@ -36,15 +42,28 @@ export class TimeSheetGridInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.gridSelection.onChange.subscribe(() => this.loadTaskSummary());
+    merge(
+      this.gridSelection.onChange,
+      this.panelState.pipe(
+        filter(value => {
+          this.isOpened = value;
+          return value === true;
+        })
+      )
+    ).subscribe(() => this.loadTaskSummary());
   }
 
   loadTaskSummary() {
-    const taskIds = this.gridSelection.selected.map((timeSheet) => timeSheet.taskId);
+    if (this.isOpened) {
+      this.infoLoaded = true;
+      const taskIds = this.gridSelection.selected.map((timeSheet) => timeSheet.taskId);
 
-    this.timeSheetService.getTaskSummary(taskIds).subscribe((data) => {
-      this.dataSource.data = data;
-    });
+      this.timeSheetService.getTaskSummary(taskIds).subscribe((data) => {
+        this.dataSource.data = data;
+      });
+    } else {
+      this.infoLoaded = false;
+    }
   }
 
   getInfoPanelTitle() {

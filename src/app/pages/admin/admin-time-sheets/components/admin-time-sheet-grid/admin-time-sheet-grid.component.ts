@@ -29,8 +29,8 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   public loading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  private enableRowSelection = false;
-  private displayedColumns = ['user', 'client', 'project', 'description', 'type', 'comment', 'status', 'duration'];
+  private enableRowSelection = true;
+  private displayedColumns = ['select', 'user', 'client', 'project', 'description', 'type', 'comment', 'status', 'duration'];
   private displayedColumnsProperties = {
     user: {
       title: 'Employee',
@@ -101,6 +101,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
       .pipe(
         switchMap(() => {
           this.loading = true;
+          this.selection.clear();
           return this.timeSheetService.getAllUserTimeSheets(this.filters, true,
             this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
         }),
