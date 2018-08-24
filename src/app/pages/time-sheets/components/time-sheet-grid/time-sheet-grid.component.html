@@ -1,5 +1,5 @@
 <mat-drawer-container>
-  <mat-drawer mode="side" position="end" #infoPanel class="info-panel"><app-time-sheet-grid-info [selectedRecords]="this.selection.selected"></app-time-sheet-grid-info></mat-drawer>
+  <mat-drawer mode="side" position="end" #infoPanel class="info-panel"><app-time-sheet-grid-info [gridSelection]="this.selection"></app-time-sheet-grid-info></mat-drawer>
   <mat-drawer-content class="timesheet-grid-container">
       <div class="timesheet-grid-header">
         <mat-form-field *ngIf="!advancedFilter">

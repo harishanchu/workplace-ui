@@ -199,4 +199,23 @@ export class TimeSheetService {
   downloadAllUserTimeSheets(...args) {
     this._getAllUserTimeSheets.apply(this, [...args, true]);
   }
+
+  getTaskSummary(ids) {
+    const filter = JSON.stringify({
+      'where': {'id': {'inq': ids}},
+      'include': {'relation': 'timeSheets', 'scope': {'fields': ['duration']}}
+    });
+
+    return this.http.get('tasks', {
+      params: {
+        filter: filter
+      }
+    }).pipe(map((response: any[]) => {
+      return response.map(({description, status, timeSheets}) => ({
+        description,
+        status,
+        duration: timeSheets.reduce((sum, timeSheet) => sum + timeSheet.duration, 0)
+      }));
+    }));
+  }
 }

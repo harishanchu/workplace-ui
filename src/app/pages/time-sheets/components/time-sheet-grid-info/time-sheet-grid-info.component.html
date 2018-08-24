@@ -1,3 +1,37 @@
 <mat-toolbar>
-  <span>{{ getInfoPanelTitle() }}</span>
+  <span class="title">{{ getInfoPanelTitle() }}</span>
 </mat-toolbar>
+<mat-tab-group>
+  <mat-tab label="Task summary">
+    <mat-table #table [dataSource]="dataSource"
+               [style.display]="dataSource._renderData.getValue().length != 0 ? '' : 'none'">
+      <!-- Rest of the Columns -->
+      <ng-container *ngFor="let column of displayedColumns; index as i">
+        <ng-container [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef>
+            {{displayedColumnsProperties[column] && displayedColumnsProperties[column].title?
+            displayedColumnsProperties[column].title: column | titlecase}}
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{displayedColumnsProperties[column] &&
+            displayedColumnsProperties[column].formatter? displayedColumnsProperties[column].formatter(element[column]):
+            element[column]}}
+          </mat-cell>
+          <ng-container *ngIf="i <  displayedColumns.length - 2">
+            <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+          </ng-container>
+          <ng-container *ngIf="i == displayedColumns.length - 1">
+            <mat-footer-cell *matFooterCellDef>{{ getTotalHours() }}</mat-footer-cell>
+          </ng-container>
+          <ng-container *ngIf="i ==  displayedColumns.length - 2">
+            <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+               (click)="enableRowSelection && selection.toggle(row)"></mat-row>
+      <mat-footer-row *matFooterRowDef="displayedColumns" [style.display]="dataSource._renderData.getValue().length > 1 ? '' : 'none'"></mat-footer-row>
+    </mat-table>
+  </mat-tab>
+</mat-tab-group>
