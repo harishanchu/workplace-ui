@@ -214,6 +214,7 @@ export class TimeSheetService {
       return response.map(({description, status, timeSheets}) => ({
         description,
         status,
+        count: timeSheets.length,
         duration: timeSheets.reduce((sum, timeSheet) => sum + timeSheet.duration, 0)
       }));
     }));

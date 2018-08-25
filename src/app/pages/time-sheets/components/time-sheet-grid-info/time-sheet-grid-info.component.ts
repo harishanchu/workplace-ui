@@ -1,12 +1,13 @@
 import {Component, EventEmitter, Input, OnInit} from '@angular/core';
 import {Util} from '../../../../helpers/util';
-import {MatTableDataSource} from '@angular/material';
+import {MatDrawer, MatTableDataSource} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import {TimeSheet} from '../../../../models/time-sheet';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
 
 import {merge} from 'rxjs';
 import {filter} from 'rxjs/operators';
+import {AuthService} from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-time-sheet-grid-info',
@@ -15,10 +16,11 @@ import {filter} from 'rxjs/operators';
 })
 export class TimeSheetGridInfoComponent implements OnInit {
   @Input() gridSelection: SelectionModel<TimeSheet>;
-  @Input() panelState: EventEmitter<boolean>;
+  @Input() panel: MatDrawer;
+  private panelState: EventEmitter<boolean>;
   private isOpened: boolean;
   private infoLoaded = false;
-  private displayedColumns = ['description', 'status', 'duration'];
+  private displayedColumns = ['description', 'status', 'count', 'duration'];
   private displayedColumnsProperties = {
     duration: {
       formatter: Util.formatTimeDuration,
@@ -34,19 +36,29 @@ export class TimeSheetGridInfoComponent implements OnInit {
 
         return value;
       }
+    },
+    count: {
+      title: 'Time sheet entries'
     }
   };
   private dataSource = new MatTableDataSource();
 
-  constructor(private timeSheetService: TimeSheetService) {
+  constructor(private timeSheetService: TimeSheetService, private authService: AuthService) {
   }
 
   ngOnInit() {
+    this.panelState = this.panel.openedChange;
+
+    if (this.authService.getUserPreference('showTimeSheetGridInfoPanel')) {
+      this.panel.open();
+    }
+
     merge(
       this.gridSelection.onChange,
       this.panelState.pipe(
         filter(value => {
           this.isOpened = value;
+          this.authService.setUserPreference('showTimeSheetGridInfoPanel', this.isOpened);
           return value === true;
         })
       )

@@ -1,0 +1,33 @@
+mat-card {
+  &.message-card {
+    padding: 0;
+    margin: 0 0 12px;
+    border-radius: 0;
+
+    &.info {
+      -webkit-box-shadow: 4px 0 0 0 #d3d3d3 inset, 0 1px 3px rgba(0,0,0,0.12);
+      box-shadow: 4px 0 0 0 #d3d3d3 inset, 0 1px 3px rgba(0,0,0,0.12);
+      mat-icon {
+        color: #A9A9A9;
+      }
+    }
+
+    .icon {
+      mat-icon {
+        font-size: 18px;
+        height: 18px;
+        width: 18px;
+      }
+      height: 17px;
+      padding: 7.4px;
+      float: left;
+    }
+    .text {
+      font-size: 12px;
+      line-height: 16px;
+      padding: 8px 12px 8px 0;
+      vertical-align: middle;
+      margin-left: 32px;
+    }
+  }
+}

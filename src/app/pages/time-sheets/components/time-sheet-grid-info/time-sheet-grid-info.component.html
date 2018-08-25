@@ -3,6 +3,11 @@
 </mat-toolbar>
 <mat-tab-group>
   <mat-tab label="Task summary">
+    <mat-card class="message-card info margin-top-20" [style.display]="dataSource._renderData.getValue().length != 0 ? 'none' : 'block'">
+      <div class="icon"><mat-icon>info</mat-icon></div>
+      <div class="text">No time sheets selected.</div>
+    </mat-card>
+
     <mat-table #table [dataSource]="dataSource"
                [style.display]="dataSource._renderData.getValue().length != 0 ? '' : 'none'">
       <!-- Rest of the Columns -->
@@ -31,7 +36,8 @@
       <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"
                (click)="enableRowSelection && selection.toggle(row)"></mat-row>
-      <mat-footer-row *matFooterRowDef="displayedColumns" [style.display]="dataSource._renderData.getValue().length > 1 ? '' : 'none'"></mat-footer-row>
+      <mat-footer-row *matFooterRowDef="displayedColumns"
+                      [style.display]="dataSource._renderData.getValue().length > 1 ? '' : 'none'"></mat-footer-row>
     </mat-table>
   </mat-tab>
 </mat-tab-group>

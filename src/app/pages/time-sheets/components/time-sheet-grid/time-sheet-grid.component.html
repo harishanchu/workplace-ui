@@ -1,6 +1,6 @@
 <mat-drawer-container>
   <mat-drawer mode="side" position="end" #infoPanel class="info-panel">
-    <app-time-sheet-grid-info [gridSelection]="this.selection" [panelState]="infoPanel.openedChange"></app-time-sheet-grid-info>
+    <app-time-sheet-grid-info [gridSelection]="this.selection" [panel]="infoPanel"></app-time-sheet-grid-info>
   </mat-drawer>
   <mat-drawer-content class="timesheet-grid-container">
       <div class="timesheet-grid-header">
