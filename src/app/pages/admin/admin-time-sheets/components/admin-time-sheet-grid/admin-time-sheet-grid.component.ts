@@ -8,6 +8,7 @@ import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {Util} from '../../../../../helpers/util';
 import {FormControl} from '@angular/forms';
+import {AuthService} from '../../../../../services/auth.service';
 
 @Component({
   selector: 'app-admin-time-sheet-grid',
@@ -89,7 +90,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   private advancedFilterTooltip;
   @ViewChild('table') private table;
 
-  constructor(private timeSheetService: TimeSheetService) {
+  constructor(private timeSheetService: TimeSheetService, private authService: AuthService) {
     this.advancedFilterTooltip = 'Supports filtering of fileds: ' + Object.keys(AdminTimeSheetGridComponent.filterableFields).join(', ') + ' with operators: ' + AdminTimeSheetGridComponent.filterOpertors.join(', ');
   }
 
@@ -197,7 +198,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
     this.infoPanel.toggle();
   }
 
-  infoPanelToggleButtonText () {
-    return this.infoPanel.opened? "Hide info panel": "Show info pannel";
+  infoPanelToggleButtonText() {
+    return this.authService.getUserPreference('showTimeSheetGridInfoPanel') ? 'Hide info panel' : 'Show info pannel';
   }
 }

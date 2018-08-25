@@ -4,6 +4,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {TimeSheet} from '../../../../models/time-sheet';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
 import {Util} from '../../../../helpers/util';
+import {AuthService} from '../../../../services/auth.service';
 
 @Component({
   selector: 'app-time-sheet-grid',
@@ -38,7 +39,7 @@ export class TimeSheetGridComponent implements OnInit {
   private date;
   @ViewChild('table') private table;
 
-  constructor(private timeSheetService: TimeSheetService) {
+  constructor(private timeSheetService: TimeSheetService, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -105,11 +106,11 @@ export class TimeSheetGridComponent implements OnInit {
     return Util.formatTimeDuration(this.dataSource.filteredData.map((t: any) => t.duration).reduce((acc, value) => acc + value, 0));
   }
 
-  toggleInfoPanel () {
+  toggleInfoPanel() {
     this.infoPanel.toggle();
   }
 
-  infoPanelToggleButtonText () {
-    return this.infoPanel.opened? "Hide info panel": "Show info pannel";
+  infoPanelToggleButtonText() {
+    return this.authService.getUserPreference('showTimeSheetGridInfoPanel') ? 'Hide info panel' : 'Show info pannel';
   }
 }
