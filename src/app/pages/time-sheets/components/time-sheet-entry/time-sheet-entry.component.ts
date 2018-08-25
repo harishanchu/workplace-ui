@@ -9,6 +9,7 @@ import {TimeSheetService} from '../../../../services/time-sheet.service';
 import {NotificationService} from '../../../../services/notification.service';
 import {AppService} from '../../../../services/app.service';
 import {OpenTasksListComponent} from '../open-tasks-list/open-tasks-list.component';
+import {TaskService} from '../../../../services/task.service';
 
 @Component({
   selector: 'app-time-sheet-entry',
@@ -36,6 +37,7 @@ export class TimeSheetEntryComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) public data,
               private fb: FormBuilder,
               private timeSheetService: TimeSheetService,
+              private taskService: TaskService,
               private notificationService: NotificationService,
               private appService: AppService,
               public dialog: MatDialog) {
@@ -140,7 +142,7 @@ export class TimeSheetEntryComponent implements OnInit {
   }
 
   createTask(task: Task, callback) {
-    this.timeSheetService.createTask(<Task>task).subscribe(
+    this.taskService.createTask(<Task>task).subscribe(
       data => {
         return callback.call(this, null, data);
       },

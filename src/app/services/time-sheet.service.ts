@@ -2,7 +2,6 @@ import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {TimeSheet} from '../models/time-sheet';
-import {Task} from '../models/task';
 import {Util} from '../helpers/util';
 import {Globals} from '../globals';
 import {AuthService} from './auth.service';
@@ -13,9 +12,13 @@ export class TimeSheetService {
   }
 
   static formatAllUserTimeSheetsApiFilter(data) {
-    const where = {
-      date: {between: [Util.formatDate(data.fromDate), Util.formatDate(data.toDate)]}
-    };
+    let where: any = {};
+
+    if (data.advancedFilters) {
+      where = Util.formatApiFilter(data.advancedFilters.filterableFields, data.advancedFilters.items);
+    }
+
+    where.date = {between: [Util.formatDate(data.fromDate), Util.formatDate(data.toDate)]};
 
     if (data.clientId[0] !== 'all') {
       Util.objectSet(where, 'task.project.clientId.inq', data.clientId);
@@ -25,50 +28,7 @@ export class TimeSheetService {
       Util.objectSet(where, 'task.projectId.inq', data.projectId);
     }
 
-    if (data.advancedFilters) {
-      const filterableFields = data.advancedFilters.filterableFields;
-
-      data.advancedFilters.items.forEach(function (item) {
-        const bits = item.match(/^\s*([a-z]+?)\s*([!=><]+)\s*([a-z0-9A-Z* ]+)$/);
-
-        bits[3] = bits[3].trim();
-
-        switch (bits[2]) {
-          case '=':
-            if (bits[3].indexOf('*') > -1) {
-              Util.objectSet(where, `${filterableFields[bits[1]]}.like`, bits[3].replace(/\*/g, '%'));
-            } else {
-              Util.objectPush(where, `${filterableFields[bits[1]]}.inq`, bits[3]);
-            }
-            break;
-
-          case '!=':
-            if (bits[3].indexOf('*') > -1) {
-              Util.objectSet(where, `${filterableFields[bits[1]]}.nlike`, bits[3].replace(/\*/g, '%'));
-            } else {
-              Util.objectPush(where, `${filterableFields[bits[1]]}.nin`, bits[3]);
-            }
-            break;
-
-          case '>':
-            Util.objectPush(where, `${filterableFields[bits[1]]}.gt`, bits[3]);
-            break;
-
-          case '<':
-            Util.objectPush(where, `${filterableFields[bits[1]]}.lt`, bits[3]);
-            break;
-        }
-
-      });
-    }
-
     return where;
-  }
-
-  createTask(task: Task) {
-    return this.http.post(`users/me/tasks`, task).pipe(map(response => {
-      return response;
-    }));
   }
 
   createTimeSheet(timeSheetEntry: TimeSheet) {
@@ -205,25 +165,5 @@ export class TimeSheetService {
     }
 
     this._getAllUserTimeSheets(filters, includeDetails, sort, direction, format);
-  }
-
-  getTaskSummary(ids) {
-    const filter = JSON.stringify({
-      'where': {'id': {'inq': ids}},
-      'include': {'relation': 'timeSheets', 'scope': {'fields': ['duration']}}
-    });
-
-    return this.http.get('tasks', {
-      params: {
-        filter: filter
-      }
-    }).pipe(map((response: any[]) => {
-      return response.map(({description, status, timeSheets}) => ({
-        description,
-        status,
-        count: timeSheets.length,
-        duration: timeSheets.reduce((sum, timeSheet) => sum + timeSheet.duration, 0)
-      }));
-    }));
   }
 }

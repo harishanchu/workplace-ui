@@ -173,4 +173,42 @@ export class Util {
 
     return true;
   }
+
+  static formatApiFilter (filterableFields,  filters) {
+    const where = {};
+
+    filters.forEach(function (item) {
+      const bits = item.match(/^\s*([a-z]+?)\s*([!=><]+)\s*([a-z0-9A-Z* ]+)$/);
+
+      bits[3] = bits[3].trim();
+
+      switch (bits[2]) {
+        case '=':
+          if (bits[3].indexOf('*') > -1) {
+            Util.objectSet(where, `${filterableFields[bits[1]]}.like`, bits[3].replace(/\*/g, '%'));
+          } else {
+            Util.objectPush(where, `${filterableFields[bits[1]]}.inq`, bits[3]);
+          }
+          break;
+
+        case '!=':
+          if (bits[3].indexOf('*') > -1) {
+            Util.objectSet(where, `${filterableFields[bits[1]]}.nlike`, bits[3].replace(/\*/g, '%'));
+          } else {
+            Util.objectPush(where, `${filterableFields[bits[1]]}.nin`, bits[3]);
+          }
+          break;
+
+        case '>':
+          Util.objectPush(where, `${filterableFields[bits[1]]}.gt`, bits[3]);
+          break;
+
+        case '<':
+          Util.objectPush(where, `${filterableFields[bits[1]]}.lt`, bits[3]);
+          break;
+      }
+    });
+
+    return where;
+  }
 }

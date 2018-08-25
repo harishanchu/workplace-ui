@@ -1,0 +1,58 @@
+<div class="grid-container">
+  <div class="grid-header">
+    <tag-input [matTooltip]="advancedFilterTooltip" [(ngModel)]="filterValue" [modelAsStrings]="true"
+               secondaryPlaceholder="Filter tasks" placeholder="+ Add more filters" #filterInput
+               (onAdd)="advancedFilterChange()" (onRemove)="advancedFilterChange()"
+               [validators]="filterValidator" [errorMessages]="filterErrorMessages">
+      <!--<tag-input-dropdown [autocompleteItems]="['iTem1', 'item2', 'item3']"></tag-input-dropdown>-->
+    </tag-input>
+  </div>
+  <div class="grid-body">
+    <mat-table #table [dataSource]="dataSource" matSort matSortDisableClear matSortDirection="asc">
+
+      <!-- Rest of the Columns -->
+      <ng-container *ngFor="let column of displayedColumns; index as i">
+        <ng-container [matColumnDef]="column">
+          <mat-header-cell *matHeaderCellDef
+                           [mat-sort-header]="displayedColumnsProperties[column] && displayedColumnsProperties[column].sortField? displayedColumnsProperties[column].sortField: column"
+                           [disabled]="!displayedColumnsProperties[column] || !displayedColumnsProperties[column].sortable ? '' : null">
+            {{displayedColumnsProperties[column] && displayedColumnsProperties[column].title?
+            displayedColumnsProperties[column].title: column | titlecase}}
+          </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{displayedColumnsProperties[column] &&
+            displayedColumnsProperties[column].formatter? displayedColumnsProperties[column].formatter(element[column]):
+            element[column]}}
+          </mat-cell>
+          <ng-container *ngIf="enableGridFooter">
+            <ng-container *ngIf="i <  displayedColumns.length - 2">
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <ng-container *ngIf="i == displayedColumns.length - 1">
+              <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+            </ng-container>
+            <ng-container *ngIf="i ==  displayedColumns.length - 2">
+              <mat-footer-cell *matFooterCellDef>Total</mat-footer-cell>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+               (click)="enableRowSelection && selection.toggle(row)"></mat-row>
+      <ng-container *ngIf="enableGridFooter">
+        <mat-footer-row *matFooterRowDef="displayedColumns"
+                        [style.display]="dataSource._renderData.getValue().length != 0 ? '' : 'none'"></mat-footer-row>
+      </ng-container>
+    </mat-table>
+    <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'">
+      No items to display
+    </div>
+    <mat-paginator *ngIf="enablePagination === true" #paginator
+                   [length]="totalCount"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   [showFirstLastButtons]="true" [style.display]="dataSource._renderData.getValue().length == 0 ? 'none' : ''">
+    </mat-paginator>
+  </div>
+</div>

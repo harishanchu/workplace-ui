@@ -48,6 +48,9 @@ import {TasksGridComponent} from './pages/admin/admin-configuration/components/t
 import {EmployeesGridComponent} from './pages/admin/admin-configuration/components/employees-grid/employees-grid.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import { TimeSheetGridInfoComponent } from './pages/time-sheets/components/time-sheet-grid-info/time-sheet-grid-info.component';
+import { TasksComponent } from './pages/tasks/tasks.component';
+import { TaskGridComponent } from './pages/tasks/components/task-grid/task-grid.component';
+import {TaskService} from './services/task.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +76,9 @@ import { TimeSheetGridInfoComponent } from './pages/time-sheets/components/time-
     TasksGridComponent,
     EmployeesGridComponent,
     ProfileComponent,
-    TimeSheetGridInfoComponent
+    TimeSheetGridInfoComponent,
+    TasksComponent,
+    TaskGridComponent
   ],
   imports: [
     BrowserModule,
@@ -108,6 +113,7 @@ import { TimeSheetGridInfoComponent } from './pages/time-sheets/components/time-
     Globals,
     NotificationService,
     TimeSheetService,
+    TaskService,
     DatePipe,
     AppService,
     AuthAdminGuard

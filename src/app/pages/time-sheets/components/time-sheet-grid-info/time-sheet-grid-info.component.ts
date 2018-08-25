@@ -3,11 +3,11 @@ import {Util} from '../../../../helpers/util';
 import {MatDrawer, MatTableDataSource} from '@angular/material';
 import {SelectionModel} from '@angular/cdk/collections';
 import {TimeSheet} from '../../../../models/time-sheet';
-import {TimeSheetService} from '../../../../services/time-sheet.service';
 
 import {merge} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {AuthService} from '../../../../services/auth.service';
+import {TaskService} from '../../../../services/task.service';
 
 @Component({
   selector: 'app-time-sheet-grid-info',
@@ -43,7 +43,7 @@ export class TimeSheetGridInfoComponent implements OnInit {
   };
   private dataSource = new MatTableDataSource();
 
-  constructor(private timeSheetService: TimeSheetService, private authService: AuthService) {
+  constructor(private taskService: TaskService, private authService: AuthService) {
   }
 
   ngOnInit() {
@@ -70,7 +70,7 @@ export class TimeSheetGridInfoComponent implements OnInit {
       this.infoLoaded = true;
       const taskIds = this.gridSelection.selected.map((timeSheet) => timeSheet.taskId);
 
-      this.timeSheetService.getTaskSummary(taskIds).subscribe((data) => {
+      this.taskService.getTaskSummary(taskIds).subscribe((data) => {
         this.dataSource.data = data;
       });
     } else {

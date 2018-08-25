@@ -91,7 +91,10 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   @ViewChild('table') private table;
 
   constructor(private timeSheetService: TimeSheetService, private authService: AuthService) {
-    this.advancedFilterTooltip = 'Supports filtering of fileds: ' + Object.keys(AdminTimeSheetGridComponent.filterableFields).join(', ') + ' with operators: ' + AdminTimeSheetGridComponent.filterOpertors.join(', ');
+    this.advancedFilterTooltip =
+      'Supports filtering of fileds: ' +
+      Object.keys(AdminTimeSheetGridComponent.filterableFields).join(', ') +
+      ' with operators: ' + AdminTimeSheetGridComponent.filterOpertors.join(', ');
   }
 
   ngAfterViewInit() {
@@ -194,7 +197,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
       this.sort.active, this.sort.direction, advanced);
   }
 
-  toggleInfoPanel () {
+  toggleInfoPanel() {
     this.infoPanel.toggle();
   }
 

@@ -1,0 +1,14 @@
+<div class="container" fxLayout="column" fxLayoutAlign="center">
+  <div class="load-mask" *ngIf="taskGrid.loading">
+    <mat-spinner diameter=40></mat-spinner>
+  </div>
+
+  <mat-toolbar>
+    <mat-toolbar-row class="action-bar">
+      <div class="action-bar-title">
+        {{title}}
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <app-task-grid #taskGrid class="task-grid"></app-task-grid>
+</div>

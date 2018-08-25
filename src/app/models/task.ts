@@ -5,4 +5,6 @@ export interface Task {
   status?: any;
   description: any;
   type: any;
+  client?: any;
+  project?: any;
 }

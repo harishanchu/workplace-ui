@@ -13,6 +13,7 @@ export class SideNavComponent implements OnInit {
   constructor(private authService: AuthService) {
     this.navItemList = [
       {title: 'Time Sheets', url: '/time-sheets', icon: 'av_timer'},
+      {title: 'Tasks', url: '/tasks', icon: 'assignment_turned_in'},
       {title: 'Dashboard', url: '/dashboard', icon: 'dashboard'}
     ];
     this.menuMode = this.authService.getUserPreference('menuMode') || 'full';

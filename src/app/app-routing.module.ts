@@ -14,6 +14,7 @@ import {AdminTimeSheetsComponent} from './pages/admin/admin-time-sheets/admin-ti
 import {AdminDashboardComponent} from './pages/admin/admin-dashboard/admin-dashboard.component';
 import {AdminConfigurationComponent} from './pages/admin/admin-configuration/admin-configuration.component';
 import {ProfileComponent} from './pages/profile/profile.component';
+import {TasksComponent} from './pages/tasks/tasks.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,7 @@ const routes: Routes = [
     children: [
       {path: '', redirectTo: 'time-sheets', pathMatch: 'full'},
       {path: 'time-sheets', component: TimeSheetsComponent},
+      {path: 'tasks', component: TasksComponent},
       {path: 'dashboard', component: DsashboardComponent},
       {path: 'profile', component: ProfileComponent}
     ]

@@ -1,0 +1,44 @@
+
+.grid-container {
+  //padding: 5px;
+  height: 100%;
+  .mat-header-cell,
+  .mat-header-cell button,
+  .mat-cell {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .mat-cell, .mat-header-cell, .mat-footer-cell {
+    padding: 0 5px;
+    &:first-of-type {
+      padding-left: 24px;
+    }
+    &:last-of-type {
+      padding-right: 24px;
+    }
+    &.mat-column-select {
+      width: 44px;
+      flex: 0 1 auto;
+    }
+  }
+}
+
+.grid-header {
+  min-height: 69px;
+  padding: 8px 24px 0;
+  background: #fff;
+}
+
+.grid-body {
+  overflow: auto;
+  height: calc(100% - 79px);
+}
+
+.mat-header-row {
+  top: 0;
+  position: sticky;
+  z-index: 1;
+  background-color: inherit;
+}
