@@ -188,9 +188,9 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
     }
   }
 
-  export() {
+  export(advanced) {
     return this.timeSheetService.downloadAllUserTimeSheets(this.filters, true,
-      this.sort.active, this.sort.direction);
+      this.sort.active, this.sort.direction, advanced);
   }
 
   toggleInfoPanel () {

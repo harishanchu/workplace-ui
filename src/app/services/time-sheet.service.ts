@@ -144,7 +144,7 @@ export class TimeSheetService {
 
   _getAllUserTimeSheets(filters: { fromDate: Date, toDate: Date }, includeDetails = false,
                         sort = 'status', direction = 'asc',
-                        downLoad = false, pageIndex, pageSize) {
+                        downLoad: any = false, pageIndex = 0, pageSize = 10) {
     const params: any = {
       filter: {
         skip: pageIndex * pageSize,
@@ -161,6 +161,7 @@ export class TimeSheetService {
     params.filter = JSON.stringify(params.filter);
 
     if (downLoad) {
+      params.format = downLoad;
       window.location.href = this.globals.baseApiUrl + 'time-sheets/download?' +
         new HttpParams({fromObject: params}).toString()
         + '&access_token=' + this.authService.getAuthToken();
@@ -196,8 +197,14 @@ export class TimeSheetService {
     }));
   }
 
-  downloadAllUserTimeSheets(...args) {
-    this._getAllUserTimeSheets.apply(this, [...args, true]);
+  downloadAllUserTimeSheets(filters, includeDetails, sort, direction, advanced = false) {
+    let format = 'basic';
+
+    if (advanced) {
+      format = 'advanced';
+    }
+
+    this._getAllUserTimeSheets(filters, includeDetails, sort, direction, format);
   }
 
   getTaskSummary(ids) {

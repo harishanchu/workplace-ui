@@ -72,8 +72,8 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
     this.refreshGrid();
   }
 
-  exportTimeSheets() {
-    this.grid.export();
+  exportTimeSheets(advanced = false) {
+    this.grid.export(advanced);
   }
 
   refreshGrid() {
