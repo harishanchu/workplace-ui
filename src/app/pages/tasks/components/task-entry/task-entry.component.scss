@@ -1,0 +1,23 @@
+.container {
+  .form-body {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+}
+
+.form-item {
+  font-size: 14px;
+  margin: 6px 0;
+}
+
+.form-item-row {
+  .form-item {
+    margin: 6px 4px;
+  }
+}
+
+.mat-form-field.mat-form-field-type-mat-select {
+  ::ng-deep .mat-form-field-infix {
+    width: 150px;
+  }
+}

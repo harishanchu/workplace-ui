@@ -1,0 +1,46 @@
+<div class="container">
+  <h3 mat-dialog-title>{{title}}</h3>
+
+  <form (ngSubmit)="onSaveClick()" [formGroup]="form">
+    <div class="form-body">
+      <div fxLayout="row" class="form-item-row">
+        <mat-form-field class="form-item" fxFlex>
+          <mat-select placeholder="Client" formControlName="clientId"
+                      (selectionChange)="populateProjectsBasedOnClient()" cdkFocusInitial>
+            <mat-option *ngFor="let client of clients" [value]="client.id">
+              {{client.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('clientId'); let error">{{error}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-item" fxFlex>
+          <mat-select placeholder="Project" formControlName="projectId">
+            <mat-option *ngFor="let project of projects" [value]="project.id">
+              {{project.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('projectId'); let error">{{error}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="form-item" fxFlex="25">
+          <mat-select placeholder="Type" formControlName="type">
+            <mat-option *ngFor="let type of taskTypes" [value]="type">
+              {{type}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError('type'); let error">{{error}}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="full-width form-item">
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+        <mat-error *ngIf="hasError('description'); let error">{{error}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-raised-button matDialogClose>Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>

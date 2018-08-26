@@ -8,6 +8,20 @@
       <div class="action-bar-title">
         {{title}}
       </div>
+
+      <div class="action-bar-tools" fxLayout="row" fxFlex="1 1 auto">
+        <button mat-button color="primary" (click)="editEntry(grid.selection.selected[0])"
+                [disabled]="grid.selection.selected.length !== 1">
+          <mat-icon aria-label="Edit">edit</mat-icon>
+          Edit
+        </button>
+
+        <button mat-button color="primary" (click)="deleteEntry(grid.selection.selected[0].id)"
+                [disabled]="grid.selection.selected.length !== 1">
+          <mat-icon aria-label="Delete">delete</mat-icon>
+          Delete
+        </button>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
   <app-task-grid #taskGrid class="task-grid"></app-task-grid>

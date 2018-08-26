@@ -81,4 +81,16 @@ export class TaskService {
       };
     }));
   }
+
+  updateTask(id, task: Task) {
+    return this.http.put(`users/me/tasks/${id}`, task).pipe(map(response => {
+      return response;
+    }));
+  }
+
+  deleteTask(taskId) {
+    return this.http.delete(`users/me/tasks/${taskId}`).pipe(map(response => {
+      return response;
+    }));
+  }
 }

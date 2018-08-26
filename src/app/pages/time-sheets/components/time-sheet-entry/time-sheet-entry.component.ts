@@ -69,7 +69,7 @@ export class TimeSheetEntryComponent implements OnInit {
     this.appService.getClients(false).subscribe(clients => {
       this.clients = clients;
     });
-    this.appService.getTaskTyes().subscribe(types => {
+    this.appService.getTaskTypes().subscribe(types => {
       this.taskTypes = types;
       if(!this.form.controls['type'].value) {
         this.form.controls['type'].setValue(types[0]);

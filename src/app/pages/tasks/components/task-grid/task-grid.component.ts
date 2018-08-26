@@ -21,7 +21,7 @@ export class TaskGridComponent implements AfterViewInit {
   static filterOpertors = ['!=', '=', '>', '<'];
   private enableRowSelection = true;
   private enableGridFooter = true;
-  private displayedColumns = ['description', 'type', 'client', 'project', 'status'];
+  private displayedColumns = ['select', 'description', 'type', 'client', 'project', 'status'];
   private displayedColumnsProperties = {
     description: {
       sortable: true
@@ -52,10 +52,9 @@ export class TaskGridComponent implements AfterViewInit {
   };
   private dataSource = new MatTableDataSource();
   private selection = new SelectionModel<Task>(true, []);
-  private loading = false;
+  private loading = true;
   private refreshGrid = new EventEmitter();
   private enablePagination = true;
-  private advancedFilter = true;
   private totalCount = 0;
   private filterValue: any;
   private filters: any = {};
@@ -121,4 +120,34 @@ export class TaskGridComponent implements AfterViewInit {
     this.refreshGrid.emit();
   }
 
+  /**
+   * Whether the number of selected elements matches the total number of rows.
+   *
+   * @returns {boolean}
+   */
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.filteredData.length;
+    return numSelected === numRows;
+  }
+
+  /**
+   * Selects all rows if they are not all selected; otherwise clear selection.
+   */
+  masterToggle() {
+    if (this.isAllSelected()) {
+      this.selection.clear();
+    } else {
+      this.dataSource.filteredData.forEach((row: Task) => this.selection.select(row));
+    }
+  }
+
+  updateItem(oldValue, updatedValue) {
+    this.reloadGrid();
+  }
+
+  reloadGrid() {
+    this.selection.clear();
+    this.loadGrid(this.filters);
+  }
 }

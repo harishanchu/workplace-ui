@@ -39,7 +39,7 @@ export class AppService {
     }));
   }
 
-  getTaskTyes() {
+  getTaskTypes() {
     return this.http.get('tasks/types').pipe(map(res => {
       return res;
     }));

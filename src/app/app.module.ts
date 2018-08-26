@@ -7,7 +7,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import './rxjs-operators';
 import {ChartistModule} from 'ng-chartist';
-import { TagInputModule } from 'ngx-chips';
+import {TagInputModule} from 'ngx-chips';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -47,10 +47,11 @@ import {ProjectsGridComponent} from './pages/admin/admin-configuration/component
 import {TasksGridComponent} from './pages/admin/admin-configuration/components/tasks-grid/tasks-grid.component';
 import {EmployeesGridComponent} from './pages/admin/admin-configuration/components/employees-grid/employees-grid.component';
 import {ProfileComponent} from './pages/profile/profile.component';
-import { TimeSheetGridInfoComponent } from './pages/time-sheets/components/time-sheet-grid-info/time-sheet-grid-info.component';
-import { TasksComponent } from './pages/tasks/tasks.component';
-import { TaskGridComponent } from './pages/tasks/components/task-grid/task-grid.component';
+import {TimeSheetGridInfoComponent} from './pages/time-sheets/components/time-sheet-grid-info/time-sheet-grid-info.component';
+import {TasksComponent} from './pages/tasks/tasks.component';
+import {TaskGridComponent} from './pages/tasks/components/task-grid/task-grid.component';
 import {TaskService} from './services/task.service';
+import {TaskEntryComponent} from './pages/tasks/components/task-entry/task-entry.component';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import {TaskService} from './services/task.service';
     ProfileComponent,
     TimeSheetGridInfoComponent,
     TasksComponent,
-    TaskGridComponent
+    TaskGridComponent,
+    TaskEntryComponent
   ],
   imports: [
     BrowserModule,
@@ -120,7 +122,8 @@ import {TaskService} from './services/task.service';
   ],
   entryComponents: [
     TimeSheetEntryComponent,
-    OpenTasksListComponent
+    OpenTasksListComponent,
+    TaskEntryComponent
   ],
   bootstrap: [AppComponent]
 })
