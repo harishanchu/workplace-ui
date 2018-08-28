@@ -1,7 +1,10 @@
+@import "../../../../../styles/themeing";
+
 mat-drawer-container {
   height: 100%;
   mat-drawer {
     background: none;
+    border-left: $primaryBorder;
   }
 }
 .timesheet-grid-container {
