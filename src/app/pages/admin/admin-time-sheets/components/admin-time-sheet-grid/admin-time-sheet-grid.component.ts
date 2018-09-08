@@ -31,8 +31,12 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   private enableRowSelection = true;
-  private displayedColumns = ['select', 'user', 'client', 'project', 'description', 'type', 'comment', 'status', 'duration'];
+  private displayedColumns = ['select', 'date', 'user', 'client', 'project', 'description', 'type', 'comment', 'status', 'duration'];
   private displayedColumnsProperties = {
+    date: {
+      sortable: true,
+      formatter: Util.formatDate,
+    },
     user: {
       title: 'Employee',
       sortable: true,
@@ -193,8 +197,12 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   }
 
   export(advanced) {
-    return this.timeSheetService.downloadAllUserTimeSheets(this.filters, true,
-      this.sort.active, this.sort.direction, advanced);
+    if(advanced) {
+      alert('WIP');
+    } else {
+      return this.timeSheetService.downloadAllUserTimeSheets(this.filters, true,
+        this.sort.active, this.sort.direction, advanced);
+    }
   }
 
   toggleInfoPanel() {
