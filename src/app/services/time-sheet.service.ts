@@ -107,8 +107,6 @@ export class TimeSheetService {
                         downLoad: any = false, pageIndex = 0, pageSize = 10) {
     const params: any = {
       filter: {
-        skip: pageIndex * pageSize,
-        limit: pageSize,
         order: [sort + ' ' + direction, 'id asc'],
         where: TimeSheetService.formatAllUserTimeSheetsApiFilter(filters)
       }
@@ -116,6 +114,11 @@ export class TimeSheetService {
 
     if (includeDetails) {
       params.filter.include = [{task: {project: 'client'}}, 'user'];
+    }
+
+    if (!downLoad) {
+      params.filter.skip = pageIndex * pageSize;
+      params.filter.limit = pageSize;
     }
 
     params.filter = JSON.stringify(params.filter);

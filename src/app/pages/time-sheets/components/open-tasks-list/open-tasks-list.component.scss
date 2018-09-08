@@ -3,6 +3,11 @@
   padding: 5px;
   width: 400px;
 
+  mat-table {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+
   mat-spinner {
     margin: auto;
   }
