@@ -40,7 +40,7 @@ export class TaskGridComponent implements AfterViewInit {
     status: {
       sortable: true,
       formatter: function (value: string) {
-        if (value === 'inProgress') {
+        if (value === 'open') {
           value = 'In progress';
         } else {
           value = 'Completed';

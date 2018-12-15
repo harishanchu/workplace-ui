@@ -43,10 +43,16 @@ export class TimeSheetService {
     }));
   }
 
-  deleteTimeSheet(timeSheetId) {
-    return this.http.delete(`users/me/time-sheets/${timeSheetId}`).pipe(map(response => {
-      return response;
-    }));
+  deleteTimeSheet(timeSheetIds) {
+    if (timeSheetIds.length === 1) {
+      return this.http.delete(`users/me/time-sheets/${timeSheetIds[0].id}`).pipe(map(response => {
+        return response;
+      }));
+    } else {
+      return this.http.delete('time-sheets', {body: {id: timeSheetIds.map(sheet => sheet.id)}}).pipe(map(response => {
+        return response;
+      }));
+    }
   }
 
   getOpenTasksForUser(user, includeDetails = false) {

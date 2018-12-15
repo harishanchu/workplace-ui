@@ -68,8 +68,8 @@ export class TimeSheetsComponent implements OnInit {
     });
   }
 
-  deleteEntry(timeSheetId) {
-    this.timeSheetService.deleteTimeSheet(timeSheetId).subscribe(
+  deleteEntry(timeSheetIds) {
+    this.timeSheetService.deleteTimeSheet(timeSheetIds).subscribe(
       data => {
         this.grid.refreshGrid();
       },
