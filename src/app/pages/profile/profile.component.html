@@ -1,3 +1,22 @@
-<p>
-  profile works!
-</p>
+<div class="container">
+  <div class="mat-title">Personal Info</div>
+  <form (ngSubmit)="onSaveProfileClick()" [formGroup]="form">
+    <mat-form-field class="form-item">
+      <input matInput placeholder="Name" formControlName="name">
+      <mat-error *ngIf="hasError('name'); let error">{{error}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="form-item">
+      <input matInput placeholder="Email" readonly formControlName="email">
+    </mat-form-field>
+    <mat-form-field class="form-item">
+      <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dob">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="hasError('dob'); let error">{{error}}</mat-error>
+    </mat-form-field>
+    <div class="form-footer">
+      <button mat-raised-button (click)="cancelProfileChanges()" >Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>

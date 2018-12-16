@@ -100,6 +100,10 @@ export class AuthService {
     return this.getAuthData().user.name;
   }
 
+  getUserDetails() {
+    return this.getAuthData().user;
+  }
+
   setUserPreference(key, value) {
     const authData = this.getAuthData();
 
@@ -115,5 +119,12 @@ export class AuthService {
     authData.userPreference = authData.userPreference || {};
 
     return authData.userPreference[key];
+  }
+
+  updateUserDetails(user) {
+    /*return this.http.post('users/me', user).pipe(map(response => {
+        return response;
+      }
+    ));*/
   }
 }

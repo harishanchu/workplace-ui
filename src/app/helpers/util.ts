@@ -131,7 +131,7 @@ export class Util {
     if (path.length > 1) {
       Util.objectPush(obj[path.shift()], path, value);
     } else {
-      if (! Array.isArray(obj[path[0]])) {
+      if (!Array.isArray(obj[path[0]])) {
         obj[path[0]] = [];
       }
 
@@ -174,7 +174,7 @@ export class Util {
     return true;
   }
 
-  static formatApiFilter (filterableFields,  filters) {
+  static formatApiFilter(filterableFields, filters) {
     const where = {};
 
     filters.forEach(function (item) {

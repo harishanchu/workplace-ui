@@ -5,6 +5,7 @@ import {TimeSheetEntryComponent} from './components/time-sheet-entry/time-sheet-
 import {DatePipe} from '@angular/common';
 import {TimeSheetService} from '../../services/time-sheet.service';
 import {NotificationService} from '../../services/notification.service';
+import {ConfirmComponent} from '../../components/confirm/confirm.component';
 
 @Component({
   selector: 'app-time-sheets',
@@ -68,8 +69,29 @@ export class TimeSheetsComponent implements OnInit {
     });
   }
 
-  deleteEntry(timeSheetIds) {
-    this.timeSheetService.deleteTimeSheet(timeSheetIds).subscribe(
+  deleteEntry(timeSheets) {
+    if (timeSheets.length > 1) {
+      this.confirmDeleteEntry(confirm => {
+        if (confirm) {
+          this.doDeleteEntry(timeSheets);
+        }
+      });
+    } else {
+      this.doDeleteEntry(timeSheets);
+    }
+  }
+
+  confirmDeleteEntry(callback) {
+    this.dialog.open(ConfirmComponent, {
+      data: {
+        title: 'Delete timesheet entry',
+        message: 'Do you wish to delete multiple timesheets at once?'
+      }
+    }).afterClosed().subscribe(callback);
+  }
+
+  doDeleteEntry(timeSheets) {
+    this.timeSheetService.deleteTimeSheet(timeSheets).subscribe(
       data => {
         this.grid.refreshGrid();
       },

@@ -1,7 +1,9 @@
 @import '~@angular/material/theming';
 
+$font-family : Roboto, Helvetica, Arial, sans-serif;
+
 $custom-typography: mat-typography-config(
-  $font-family: 'Roboto, Helvetica, Arial, sans-serif',
+  $font-family: quote($font-family),
   $display-4: mat-typography-level(112px, 112px, 300),
   $display-3: mat-typography-level(56px, 56px, 400),
   $display-2: mat-typography-level(45px, 48px, 400),

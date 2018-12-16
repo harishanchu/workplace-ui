@@ -4,9 +4,9 @@
     <span>{{globals.appName}}</span>
     <div class="flex-spacer"></div>
     <a mat-button *ngIf="authService.isAdmin()" (click)="switchUserView()">Administration</a>
-    <button mat-icon-button>
+<!--    <button mat-icon-button>
       <mat-icon>notifications</mat-icon>
-    </button>
+    </button>-->
     <button mat-icon-button class="avatar-button" [matMenuTriggerFor]="accountMenu">
       <!--<ngx-avatar value="{{authService.getUserName()[0]}}" gravatarId="{{authService.getUserEmail()}}" size="30"></ngx-avatar>-->
       <img ngxGravatar [email]="authService.getUserEmail()"  size="30">
@@ -15,13 +15,14 @@
 </mat-toolbar>
 
 <mat-menu #accountMenu="matMenu" overlapTrigger="false">
+  <div class="mat-menu-item-user">
+    <div>{{user.name}}</div>
+    <div class="mat-caption">{{user.email}}</div>
+  </div>
+  <mat-divider></mat-divider>
   <button mat-menu-item (click)="navigateToProfile()">
     <mat-icon>account_circle</mat-icon>
     <span>Profile</span>
-  </button>
-  <button mat-menu-item>
-    <mat-icon>notifications_off</mat-icon>
-    <span>Disable alerts</span>
   </button>
   <button mat-menu-item (click)="logout()">
     <mat-icon>power_settings_new</mat-icon>

@@ -1,0 +1,26 @@
+.container {
+  padding: 30px;
+  min-width: 200px;
+  margin: 0 30%
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  margin: 6px 0;
+}
+
+.form-footer {
+  padding: 12px 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: -24px;
+  justify-content: flex-end;
+
+  button {
+    margin-left: 8px;
+  }
+}

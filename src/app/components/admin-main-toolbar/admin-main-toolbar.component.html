@@ -15,10 +15,11 @@
 </mat-toolbar>
 
 <mat-menu #accountMenu="matMenu" overlapTrigger="false">
-  <button mat-menu-item>
-    <mat-icon>notifications_off</mat-icon>
-    <span>Disable alerts</span>
-  </button>
+  <div class="mat-menu-item-user">
+    <div>{{user.name}}</div>
+    <div class="mat-caption">{{user.email}}</div>
+  </div>
+  <mat-divider></mat-divider>
   <button mat-menu-item (click)="logout()">
     <mat-icon>power_settings_new</mat-icon>
     <span>Logout</span>

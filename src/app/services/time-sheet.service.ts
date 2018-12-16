@@ -49,7 +49,7 @@ export class TimeSheetService {
         return response;
       }));
     } else {
-      return this.http.delete('time-sheets', {body: {id: timeSheetIds.map(sheet => sheet.id)}}).pipe(map(response => {
+      return this.http.request('delete', 'time-sheets', {body: {id: timeSheetIds.map(sheet => sheet.id)}}).pipe(map(response => {
         return response;
       }));
     }

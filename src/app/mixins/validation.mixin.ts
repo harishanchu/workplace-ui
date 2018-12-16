@@ -24,7 +24,7 @@ export class ValidationMixin {
         break;
 
       default:
-        message = 'Please enter valid value';
+        message = 'Please enter a valid value';
     }
 
     return message;

@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
               private authService: AuthService, private fb: FormBuilder,
               private notificationService: NotificationService) {
     this.form = fb.group({
-      'name': ['', Validators.required],
+      'name': ['', [Validators.required, Validators.min(3), Validators.max(30)]],
       'email': ['', Validators.required],
       'password': ['', [Validators.minLength(6), Validators.required]],
       'confirmPassword': ['', [Validators.required, matchValidator('password')]]

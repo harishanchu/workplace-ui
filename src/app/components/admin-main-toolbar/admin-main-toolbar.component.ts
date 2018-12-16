@@ -10,9 +10,11 @@ import {NotificationService} from '../../services/notification.service';
   styleUrls: ['../main-toolbar/main-toolbar.component.scss']
 })
 export class AdminMainToolbarComponent implements OnInit {
+  private user: object;
 
   constructor(private globals: Globals, private authService: AuthService, private router: Router,
               private notificationService: NotificationService) {
+    this.user = this.authService.getUserDetails();
   }
 
   ngOnInit() {
