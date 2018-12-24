@@ -1,7 +1,8 @@
 .container {
-  padding: 30px;
+  height: 100%;
   min-width: 200px;
-  margin: 0 30%
+  padding: 20px 30%;
+  background-color: #fff;
 }
 
 form {
@@ -11,6 +12,12 @@ form {
 
 mat-form-field {
   margin: 6px 0;
+}
+
+.form-item-row {
+  .form-item {
+    margin: 6px 4px;
+  }
 }
 
 .form-footer {

@@ -16,6 +16,9 @@ export class MainToolbarComponent implements OnInit {
   constructor(private globals: Globals, private authService: AuthService, private router: Router,
               private notificationService: NotificationService) {
     this.user = this.authService.getUserDetails();
+    this.authService.profileChange$.subscribe((user) => {
+      this.user = user;
+    });
   }
 
   ngOnInit() {

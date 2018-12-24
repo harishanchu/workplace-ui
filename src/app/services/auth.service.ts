@@ -1,8 +1,9 @@
-import {map} from 'rxjs/operators';
-import {Injectable} from '@angular/core';
+import {map, tap} from 'rxjs/operators';
+import {EventEmitter, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Storage} from '../helpers/storage';
 import {HttpClient} from '@angular/common/http';
+import {Profile} from '../models/Profile';
 
 // import { User } from './user';
 
@@ -11,6 +12,7 @@ export class AuthService {
   private loggedIn;
   private store = new Storage();
   private authStorageKey = 'auth';
+  public profileChange$ = new EventEmitter();
 
   constructor(private http: HttpClient) {
     this.loggedIn = new BehaviorSubject<boolean>(this.isvalidAuthDataPresent());
@@ -104,6 +106,16 @@ export class AuthService {
     return this.getAuthData().user;
   }
 
+  setUserDetails(user) {
+    const authData = this.getAuthData();
+    const roles = authData.user.roles;
+
+    authData.user = user;
+    user.roles = roles;
+
+    this.setAuthData(authData);
+  }
+
   setUserPreference(key, value) {
     const authData = this.getAuthData();
 
@@ -121,10 +133,14 @@ export class AuthService {
     return authData.userPreference[key];
   }
 
-  updateUserDetails(user) {
-    /*return this.http.post('users/me', user).pipe(map(response => {
+  updateProfile(profile: Profile) {
+    const self = this;
+    return this.http.patch('users/me', profile).pipe(map(response => {
         return response;
       }
-    ));*/
+    )).pipe(tap((response) => {
+      self.setUserDetails(response);
+      self.profileChange$.emit(self.getUserDetails());
+    }));
   }
 }

@@ -8,14 +8,24 @@
     <mat-form-field class="form-item">
       <input matInput placeholder="Email" readonly formControlName="email">
     </mat-form-field>
-    <mat-form-field class="form-item">
-      <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dob">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-      <mat-error *ngIf="hasError('dob'); let error">{{error}}</mat-error>
-    </mat-form-field>
+    <div fxLayout="row" class="form-item-row">
+      <mat-form-field class="form-item" fxFlex>
+        <mat-select placeholder="Gender" formControlName="gender" cdkFocusInitial>
+          <mat-option *ngFor="let gender of genders" [value]="gender.id">
+            {{gender.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('gender'); let error">{{error}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-item" fxFlex>
+        <input matInput [matDatepicker]="picker" placeholder="Date of birth" formControlName="dob">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-error *ngIf="hasError('dob'); let error">{{error}}</mat-error>
+      </mat-form-field>
+    </div>
     <div class="form-footer">
-      <button mat-raised-button (click)="cancelProfileChanges()" >Cancel</button>
+      <button mat-raised-button type="button" (click)="cancelProfileChanges()">Cancel</button>
       <button mat-raised-button color="primary" type="submit">Save</button>
     </div>
   </form>
