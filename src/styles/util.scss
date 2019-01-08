@@ -30,7 +30,11 @@
 }
 
 .text-success {
-  color: #4caf50 !important;
+  color: $success !important;
+}
+
+.text-fail {
+  color: $failure !important;
 }
 
 .mat-menu-item-user {

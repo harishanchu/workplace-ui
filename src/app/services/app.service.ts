@@ -1,6 +1,8 @@
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {UserStats} from '../models/UserStats';
+import {Observable} from 'rxjs/Rx';
 
 @Injectable()
 export class AppService {
@@ -43,5 +45,9 @@ export class AppService {
     return this.http.get('tasks/types').pipe(map(res => {
       return res;
     }));
+  }
+
+  getUserStats(userId): Observable<UserStats> {
+    return this.http.get(`users/${userId}/stats`)
   }
 }

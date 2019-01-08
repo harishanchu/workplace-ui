@@ -1,3 +1,126 @@
-<p>
-  dsashboard works!
-</p>
+<div class="container">
+  <mat-toolbar>
+    <mat-toolbar-row class="action-bar">
+      <div class="action-bar-title">
+        {{title}}
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="container-body">
+    <div fxLayout="row" fxLayoutGap="20px" class="quick-stats-container">
+      <mat-card fxFlex class="status-card style-card">
+        <mat-card-header fxLayout="row">
+          <div mat-card-avatar class="card-art blue mat-elevation-z2" fxFlexAlign="start">
+            <mat-icon>hourglass_full</mat-icon>
+          </div>
+          <mat-card-title>Hours</mat-card-title>
+          <mat-card-subtitle>{{(stats.weeklyTotalDuration/60)| number:'1.0-2'}}/90<span>hrs</span></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <div class="info">
+            <mat-icon>date_range</mat-icon>
+            Logged Today
+          </div>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card fxFlex class="status-card style-card">
+        <mat-card-header fxLayout="row">
+          <div mat-card-avatar class="card-art green mat-elevation-z2" fxFlexAlign="start">
+            <mat-icon>check_circle</mat-icon>
+          </div>
+          <mat-card-title>Tasks</mat-card-title>
+          <mat-card-subtitle>{{stats.todayCompletedTasksCount}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <div class="info">
+            <mat-icon>date_range</mat-icon>
+            Completed Today
+          </div>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card fxFlex class="status-card style-card">
+        <mat-card-header fxLayout="row">
+          <div mat-card-avatar class="card-art red mat-elevation-z2" fxFlexAlign="start">
+            <mat-icon>local_offer</mat-icon>
+          </div>
+          <mat-card-title>Open Tasks</mat-card-title>
+          <mat-card-subtitle>{{stats.openTasksCount}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <div class="info">
+            <mat-icon>date_range</mat-icon>
+            So far
+          </div>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card fxFlex class="status-card style-card">
+        <mat-card-header fxLayout="row">
+          <div mat-card-avatar class="card-art orange mat-elevation-z2" fxFlexAlign="start">
+            <mat-icon>info</mat-icon>
+          </div>
+          <mat-card-title>Worked days</mat-card-title>
+          <mat-card-subtitle>{{stats.currentWeekWorkedDays}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <div class="info">
+            <mat-icon>date_range</mat-icon>
+            Current week
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" class="chart-stats-container">
+      <mat-card fxFlex class="chart-card style-card" id="hoursChart">
+        <mat-card-header fxLayout="column">
+          <div mat-card-avatar class="card-art green mat-elevation-z2">
+            <x-chartist
+              [data]="hoursChart.data"
+              [type]="hoursChart.type"
+              [options]="hoursChart.options"
+              [responsiveOptions]="hoursChart.responsiveOptions"
+              [events]="hoursChart.events">
+            </x-chartist>
+          </div>
+          <mat-card-title>Daily Hours</mat-card-title>
+          <mat-card-subtitle [innerHTML]="hoursChartCaption"></mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+
+      <mat-card fxFlex class="chart-card style-card" id="resourceAllocationChart">
+        <mat-card-header fxLayout="column">
+          <div mat-card-avatar class="card-art grey mat-elevation-z2">
+            <x-chartist
+              [data]="  resourceAllocationChart.data"
+              [type]="  resourceAllocationChart.type"
+              [options]="  resourceAllocationChart.options"
+              [responsiveOptions]="  resourceAllocationChart.responsiveOptions"
+              [events]="  resourceAllocationChart.events">
+            </x-chartist>
+          </div>
+          <mat-card-title>Resource Utilization</mat-card-title>
+          <mat-card-subtitle>Client A has highest resources assigned</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+
+      <mat-card fxFlex class="chart-card style-card" id="tasksChart">
+        <mat-card-header fxLayout="column">
+          <div mat-card-avatar class="card-art blue mat-elevation-z2">
+            <x-chartist
+              [data]="tasksChart.data"
+              [type]="tasksChart.type"
+              [options]="tasksChart.options"
+              [responsiveOptions]="tasksChart.responsiveOptions"
+              [events]="tasksChart.events">
+            </x-chartist>
+          </div>
+          <mat-card-title>Tasks Completed</mat-card-title>
+          <mat-card-subtitle><span class="text-success">55%</span> increase in today completed tasks</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    </div>
+  </div>
+</div>
