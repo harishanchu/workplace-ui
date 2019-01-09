@@ -22,7 +22,8 @@
             ],
             "styles": [
               "src/styles.scss",
-              "node_modules/chartist/dist/chartist.css"
+              "node_modules/chartist/dist/chartist.css",
+              "node_modules/chartist-plugin-tooltips-updated/dist/chartist-plugin-tooltip.scss"
             ],
             "scripts": []
           },

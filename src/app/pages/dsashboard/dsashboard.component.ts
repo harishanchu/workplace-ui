@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as Chartist from 'chartist';
+import '../../plugins/chartist-plugin-tooltip/chartist-plugin-tooltip.js';
 import {ChartEvent, ChartType} from 'ng-chartist';
 import {AppService} from '../../services/app.service';
 import {UserStats} from '../../models/UserStats';
@@ -22,6 +23,7 @@ export class DsashboardComponent implements OnInit {
   private loading = false;
   private stats = {} as UserStats;
   private hoursChartCaption: string;
+  private resourceAllocationChartCaption: string;
   private hoursChart = <Chart> {
     type: 'Line',
     options: {
@@ -33,30 +35,39 @@ export class DsashboardComponent implements OnInit {
       chartPadding: {top: 0, right: 0, bottom: 0, left: 0}
     },
     data: {
-      'labels': ['M', 'T', 'W', 'T', 'F'],
-      'series': [
-        [0, 0, 0, 0, 0]
-      ]
+      'labels': [],
+      'series': []
     }
   };
   private resourceAllocationChart = <Chart> {
     data: {
-      series: [20, 10, 30, 40]
+      series: []
     },
     options: {
       donut: true,
       donutWidth: 40,
       donutSolid: true,
       startAngle: 270,
-      showLabel: true
+      showLabel: true,
+      plugins: [
+        Chartist.plugins.tooltip({
+          tooltipOffset: {
+            x: 30,
+            y: 112
+          },
+          unit: 'hrs'
+        })
+      ]
     },
     type: 'Pie'
   };
   private tasksChart = <Chart> {
     type: 'Line',
     data: {
-      'labels': [],
-      'series': []
+      'labels': ['M', 'T', 'W', 'T', 'F'],
+      'series': [
+        [0, 0, 0, 0, 0]
+      ]
     }
   };
 
@@ -86,9 +97,10 @@ export class DsashboardComponent implements OnInit {
 
   refreshChartData() {
     this.refreshHoursChart();
+    this.refreshResourceUtilizationChart();
   }
 
-  refreshHoursChart () {
+  refreshHoursChart() {
     const labels = [];
     const series = [];
     let caption;
@@ -119,5 +131,33 @@ ${((d1 - d2) / d1 * 100).toFixed(2)}%
     }
 
     this.hoursChartCaption = caption;
+  }
+
+  refreshResourceUtilizationChart() {
+    const list = this.stats.currentWeekResourceAllocationPerClient;
+    const series = [];
+    const labels = [];
+
+    list.forEach(item => {
+      labels.push(item.clientName);
+      series.push({
+        value: (item.duration / 60).toFixed(2),
+        meta: item.clientName
+      });
+    });
+
+    this.resourceAllocationChart.data.series = series;
+    this.resourceAllocationChart.data.labels = labels;
+
+    if (list.length) {
+      const client = list.reduce((item, current) => {
+        if (!current || (current && current.duration < item.duration)) {
+          current = item;
+        }
+
+        return current;
+      });
+      this.resourceAllocationChartCaption = `Client ${client.clientName} has highest resources assigned`;
+    }
   }
 }
