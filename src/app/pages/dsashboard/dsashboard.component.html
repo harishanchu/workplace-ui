@@ -118,7 +118,7 @@
             </x-chartist>
           </div>
           <mat-card-title>Tasks Completed</mat-card-title>
-          <mat-card-subtitle><span class="text-success">55%</span> increase in today completed tasks</mat-card-subtitle>
+          <mat-card-subtitle [innerHTML]="tasksChartCaption"></mat-card-subtitle>
         </mat-card-header>
       </mat-card>
     </div>

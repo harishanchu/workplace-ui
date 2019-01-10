@@ -23,6 +23,7 @@ export class DsashboardComponent implements OnInit {
   private loading = false;
   private stats = {} as UserStats;
   private hoursChartCaption: string;
+  private tasksChartCaption: string;
   private resourceAllocationChartCaption: string;
   private hoursChart = <Chart> {
     type: 'Line',
@@ -64,10 +65,8 @@ export class DsashboardComponent implements OnInit {
   private tasksChart = <Chart> {
     type: 'Line',
     data: {
-      'labels': ['M', 'T', 'W', 'T', 'F'],
-      'series': [
-        [0, 0, 0, 0, 0]
-      ]
+      'labels': [],
+      'series': []
     }
   };
 
@@ -98,6 +97,7 @@ export class DsashboardComponent implements OnInit {
   refreshChartData() {
     this.refreshHoursChart();
     this.refreshResourceUtilizationChart();
+    this.refreshTasksChart();
   }
 
   refreshHoursChart() {
@@ -127,7 +127,7 @@ ${((d2 - d1) / d1 * 100).toFixed(2)}%
 ${((d1 - d2) / d1 * 100).toFixed(2)}%
 </span> decrease in ${list[length - 1].day.toLowerCase()} hours`;
     } else {
-      caption = `You have worked <span class="text-success">${series.reduce((a, b) => a + b, 0).toFixed(2)}</span> hours in last 7 days`;
+      caption = `You have worked <span class="text-success">${series.reduce((a, b) => a + b, 0).toFixed(2)}</span> hours in last 7 worked days`;
     }
 
     this.hoursChartCaption = caption;
@@ -159,5 +159,38 @@ ${((d1 - d2) / d1 * 100).toFixed(2)}%
       });
       this.resourceAllocationChartCaption = `Client ${client.clientName} has highest resources assigned`;
     }
+  }
+
+  refreshTasksChart() {
+    const labels = [];
+    const series = [];
+    let caption;
+    const list = this.stats.dailyCompletedTasksForLast7Days;
+    const length = list.length;
+
+    list.forEach(item => {
+      labels.push(item.day.substr(0, 1).toUpperCase());
+      series.push((item.count));
+    });
+
+    this.tasksChart.data.labels = labels;
+    this.tasksChart.data.series = [series];
+
+    let d1 = series[length - 2];
+    let d2 = series[length - 1];
+
+    if (d2 - d1 > 1) {
+      caption = `<span class="text-success">
+${((d2 - d1) / d1 * 100).toFixed(2)}%
+</span> increase in ${list[length - 1].day.toLowerCase()} completed tasks`;
+    } else if (d1 - d2 > 1) {
+      caption = `<span class="text-fail">
+${((d1 - d2) / d1 * 100).toFixed(2)}%
+</span> decrease in ${list[length - 1].day.toLowerCase()} completed tasks`;
+    } else {
+      caption = `You have completed <span class="text-success">${series.reduce((a, b) => a + b, 0)}</span> tasks in last 7 worked days`;
+    }
+
+    this.tasksChartCaption = caption;
   }
 }
