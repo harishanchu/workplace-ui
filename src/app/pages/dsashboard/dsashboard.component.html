@@ -10,16 +10,32 @@
     <div fxLayout="row" fxLayoutGap="20px" class="quick-stats-container">
       <mat-card fxFlex class="status-card style-card">
         <mat-card-header fxLayout="row">
-          <div mat-card-avatar class="card-art blue mat-elevation-z2" fxFlexAlign="start">
-            <mat-icon>hourglass_full</mat-icon>
+          <div mat-card-avatar class="card-art orange mat-elevation-z2" fxFlexAlign="start">
+            <mat-icon>info</mat-icon>
           </div>
-          <mat-card-title>Hours</mat-card-title>
-          <mat-card-subtitle>{{(stats.weeklyTotalDuration/60)| number:'1.0-2'}}/{{globals.maxWorkHoursPerWeek}}<span>hrs</span></mat-card-subtitle>
+          <mat-card-title>Worked days</mat-card-title>
+          <mat-card-subtitle>{{stats.currentWeekWorkedDays}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-actions>
           <div class="info">
             <mat-icon>date_range</mat-icon>
-            Logged Today
+            Current week
+          </div>
+        </mat-card-actions>
+      </mat-card>
+
+      <mat-card fxFlex class="status-card style-card">
+        <mat-card-header fxLayout="row">
+          <div mat-card-avatar class="card-art blue mat-elevation-z2" fxFlexAlign="start">
+            <mat-icon>hourglass_full</mat-icon>
+          </div>
+          <mat-card-title>Hours</mat-card-title>
+          <mat-card-subtitle>{{(stats.weeklyTotalDuration/60)| number:'1.0-2'}}/{{globals.maxWorkHoursPerWeek}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-actions>
+          <div class="info">
+            <mat-icon>date_range</mat-icon>
+            Logged current week
           </div>
         </mat-card-actions>
       </mat-card>
@@ -52,22 +68,6 @@
           <div class="info">
             <mat-icon>date_range</mat-icon>
             So far
-          </div>
-        </mat-card-actions>
-      </mat-card>
-
-      <mat-card fxFlex class="status-card style-card">
-        <mat-card-header fxLayout="row">
-          <div mat-card-avatar class="card-art orange mat-elevation-z2" fxFlexAlign="start">
-            <mat-icon>info</mat-icon>
-          </div>
-          <mat-card-title>Worked days</mat-card-title>
-          <mat-card-subtitle>{{stats.currentWeekWorkedDays}}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-actions>
-          <div class="info">
-            <mat-icon>date_range</mat-icon>
-            Current week
           </div>
         </mat-card-actions>
       </mat-card>
