@@ -34,6 +34,10 @@ export class AdminMainToolbarComponent implements OnInit {
     );
   }
 
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
+  }
+
   switchUserView() {
     this.router.navigate(['']);
   }

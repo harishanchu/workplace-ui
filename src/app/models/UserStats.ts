@@ -5,5 +5,5 @@ export interface UserStats {
   dailyCompletedTasksForLast7Days?: Array<any>;
   openTasksCount?: number;
   currentWeekWorkedDays?: number;
-  currentWeekResourceAllocationPerClient?: Array<any>;
+  last7daysResourceAllocationPerClient?: Array<any>;
 }

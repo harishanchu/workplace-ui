@@ -23,6 +23,10 @@ export class AppService {
     };
   }
 
+  getClientConfig () {
+    return this.http.get('config');
+  }
+
   getClients(includeProjects = false) {
     const params: any = {};
 
@@ -48,6 +52,6 @@ export class AppService {
   }
 
   getUserStats(userId): Observable<UserStats> {
-    return this.http.get(`users/${userId}/stats`)
+    return this.http.get(`users/${userId}/stats`);
   }
 }

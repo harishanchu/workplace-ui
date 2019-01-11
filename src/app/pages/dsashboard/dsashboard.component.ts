@@ -4,6 +4,7 @@ import '../../plugins/chartist-plugin-tooltip/chartist-plugin-tooltip.js';
 import {ChartEvent, ChartType} from 'ng-chartist';
 import {AppService} from '../../services/app.service';
 import {UserStats} from '../../models/UserStats';
+import {Globals} from '../../globals';
 
 export interface Chart {
   type: ChartType;
@@ -70,7 +71,7 @@ export class DsashboardComponent implements OnInit {
     }
   };
 
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private globals: Globals) {
   }
 
   ngOnInit() {
@@ -112,8 +113,7 @@ export class DsashboardComponent implements OnInit {
       series.push((item.duration / 60));
     });
 
-    this.hoursChart.data.labels = labels;
-    this.hoursChart.data.series = [series];
+    this.hoursChart.data = {labels, series: [series]};
 
     let d1 = series[length - 2];
     let d2 = series[length - 1];
@@ -134,7 +134,7 @@ ${((d1 - d2) / d1 * 100).toFixed(2)}%
   }
 
   refreshResourceUtilizationChart() {
-    const list = this.stats.currentWeekResourceAllocationPerClient;
+    const list = this.stats.last7daysResourceAllocationPerClient;
     const series = [];
     const labels = [];
 
@@ -146,8 +146,10 @@ ${((d1 - d2) / d1 * 100).toFixed(2)}%
       });
     });
 
-    this.resourceAllocationChart.data.series = series;
-    this.resourceAllocationChart.data.labels = labels;
+    this.resourceAllocationChart.data = {
+      series,
+      labels
+    };
 
     if (list.length) {
       const client = list.reduce((item, current) => {
@@ -157,7 +159,9 @@ ${((d1 - d2) / d1 * 100).toFixed(2)}%
 
         return current;
       });
-      this.resourceAllocationChartCaption = `Client ${client.clientName} has highest resources assigned`;
+      this.resourceAllocationChartCaption = `You have worked for client ${client.clientName} the highest in last 7 days`;
+    } else {
+      this.resourceAllocationChartCaption = `You haven't logged any time sheet for last 7 days`;
     }
   }
 
@@ -173,8 +177,7 @@ ${((d1 - d2) / d1 * 100).toFixed(2)}%
       series.push((item.count));
     });
 
-    this.tasksChart.data.labels = labels;
-    this.tasksChart.data.series = [series];
+    this.tasksChart.data = {labels, series: [series]};
 
     let d1 = series[length - 2];
     let d2 = series[length - 1];

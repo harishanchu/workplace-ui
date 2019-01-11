@@ -23,6 +23,11 @@
       flex: 0 1 auto;
     }
   }
+  .mat-row:hover .mat-cell {
+    overflow: visible;
+    white-space: normal;
+    word-break: break-word;
+  }
 }
 
 .grid-header {

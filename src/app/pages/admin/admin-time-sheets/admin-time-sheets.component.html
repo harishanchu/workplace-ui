@@ -43,14 +43,18 @@
           </mat-select>
         </div>
 
-        <button mat-button color="primary" [disabled]="grid.dataSource._renderData.getValue().length == 0" [matMenuTriggerFor]="downloadMenu">
+        <!--<button mat-button color="primary" [disabled]="grid.dataSource._renderData.getValue().length == 0" [matMenuTriggerFor]="downloadMenu">
           <mat-icon aria-label="Download">get_app</mat-icon>
           Download
         </button>
         <mat-menu #downloadMenu="matMenu">
           <button mat-menu-item (click)="exportTimeSheets()" >Basic format</button>
           <button mat-menu-item (click)="exportTimeSheets(true)" >Advanced format</button>
-        </mat-menu>
+        </mat-menu>-->
+        <button mat-button color="primary" (click)="exportTimeSheets()" [disabled]="grid.dataSource._renderData.getValue().length == 0">
+          <mat-icon aria-label="Download">get_app</mat-icon>
+          Download
+        </button>
 
         <span fxFlex></span>
 
