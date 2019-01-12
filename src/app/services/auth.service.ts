@@ -9,10 +9,10 @@ import {Profile} from '../models/Profile';
 
 @Injectable()
 export class AuthService {
+  public profileChange$ = new EventEmitter();
   private loggedIn;
   private store = new Storage();
   private authStorageKey = 'auth';
-  public profileChange$ = new EventEmitter();
 
   constructor(private http: HttpClient) {
     this.loggedIn = new BehaviorSubject<boolean>(this.isvalidAuthDataPresent());

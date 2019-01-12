@@ -5,6 +5,7 @@ import {TimeSheet} from '../../../../models/time-sheet';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
 import {Util} from '../../../../helpers/util';
 import {AuthService} from '../../../../services/auth.service';
+import {NotificationService} from '../../../../services/notification.service';
 
 @Component({
   selector: 'app-time-sheet-grid',
@@ -39,7 +40,7 @@ export class TimeSheetGridComponent implements OnInit {
   private date;
   @ViewChild('table') private table;
 
-  constructor(private timeSheetService: TimeSheetService, private authService: AuthService) {
+  constructor(private timeSheetService: TimeSheetService, private authService: AuthService, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -82,7 +83,8 @@ export class TimeSheetGridComponent implements OnInit {
       .subscribe(timeSheets => {
           this.dataSource.data = timeSheets;
         },
-        err => {
+        error => {
+          this.notificationService.error('Failed to load time sheets');
         },
         () => {
           this.loading = false;

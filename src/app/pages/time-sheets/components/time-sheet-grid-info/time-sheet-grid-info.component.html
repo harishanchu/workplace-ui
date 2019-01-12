@@ -3,8 +3,11 @@
 </mat-toolbar>
 <mat-tab-group>
   <mat-tab label="Task summary">
-    <mat-card class="message-card info margin-top-20" [style.display]="dataSource._renderData.getValue().length != 0 ? 'none' : 'block'">
-      <div class="icon"><mat-icon>info</mat-icon></div>
+    <mat-card class="message-card info margin-top-20"
+              [style.display]="dataSource._renderData.getValue().length != 0 ? 'none' : 'block'">
+      <div class="icon">
+        <mat-icon>info</mat-icon>
+      </div>
       <div class="text">No time sheets selected.</div>
     </mat-card>
 

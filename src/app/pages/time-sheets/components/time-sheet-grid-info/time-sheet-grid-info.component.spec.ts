@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TimeSheetGridInfoComponent } from './time-sheet-grid-info.component';
+import {TimeSheetGridInfoComponent} from './time-sheet-grid-info.component';
 
 describe('TimeSheetGridInfoComponent', () => {
   let component: TimeSheetGridInfoComponent;
@@ -8,9 +8,9 @@ describe('TimeSheetGridInfoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TimeSheetGridInfoComponent ]
+      declarations: [TimeSheetGridInfoComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

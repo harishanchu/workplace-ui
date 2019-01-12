@@ -67,11 +67,14 @@ export class TimeSheetEntryComponent implements OnInit {
 
   ngOnInit() {
     this.appService.getClients(false).subscribe(clients => {
-      this.clients = clients;
-    });
+        this.clients = clients;
+      },
+      error => {
+        this.notificationService.error('Failed to load clients');
+      });
     this.appService.getTaskTypes().subscribe(types => {
       this.taskTypes = types;
-      if(!this.form.controls['type'].value) {
+      if (!this.form.controls['type'].value) {
         this.form.controls['type'].setValue(types[0]);
       }
     });
@@ -81,14 +84,17 @@ export class TimeSheetEntryComponent implements OnInit {
 
   loadComboStores() {
     this.appService.getProjects().subscribe(projects => {
-      this.projectsUnfiltered = projects;
+        this.projectsUnfiltered = projects;
 
-      /**
-       * If client is already selected filter projects list
-       * (In case of edit client will be loaded already).
-       */
-      this.populateProjectsBasedOnClient();
-    });
+        /**
+         * If client is already selected filter projects list
+         * (In case of edit client will be loaded already).
+         */
+        this.populateProjectsBasedOnClient();
+      },
+      error => {
+        this.notificationService.error('Failed to load projects');
+      });
   }
 
   populateProjectsBasedOnClient() {

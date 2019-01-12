@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { TaskEntryComponent } from './task-entry.component';
+import {TaskEntryComponent} from './task-entry.component';
 
 describe('TaskEntryComponent', () => {
   let component: TaskEntryComponent;
@@ -8,9 +8,9 @@ describe('TaskEntryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskEntryComponent ]
+      declarations: [TaskEntryComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

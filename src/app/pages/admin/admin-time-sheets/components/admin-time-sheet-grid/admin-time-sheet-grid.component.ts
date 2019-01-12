@@ -9,6 +9,7 @@ import {catchError, map, switchMap} from 'rxjs/operators';
 import {Util} from '../../../../../helpers/util';
 import {FormControl} from '@angular/forms';
 import {AuthService} from '../../../../../services/auth.service';
+import {NotificationService} from '../../../../../services/notification.service';
 
 @Component({
   selector: 'app-admin-time-sheet-grid',
@@ -16,7 +17,6 @@ import {AuthService} from '../../../../../services/auth.service';
   styleUrls: ['../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss']
 })
 export class AdminTimeSheetGridComponent implements AfterViewInit {
-  @ViewChild('infoPanel') private infoPanel;
   static filterableFields = {
     'employee': 'user.name',
     'status': 'status',
@@ -30,6 +30,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   public loading = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('infoPanel') private infoPanel;
   private enableRowSelection = true;
   private displayedColumns = ['select', 'date', 'user', 'client', 'project', 'description', 'type', 'comment', 'status', 'duration'];
   private displayedColumnsProperties = {
@@ -94,7 +95,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   private advancedFilterTooltip;
   @ViewChild('table') private table;
 
-  constructor(private timeSheetService: TimeSheetService, private authService: AuthService) {
+  constructor(private timeSheetService: TimeSheetService, private authService: AuthService, private notificationService: NotificationService) {
     this.advancedFilterTooltip =
       'Supports filtering of fileds: ' +
       Object.keys(AdminTimeSheetGridComponent.filterableFields).join(', ') +
@@ -121,6 +122,8 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
         }),
         catchError((err, caught): any => {
           this.loading = false;
+          this.notificationService.success('Failed to load time sheets');
+
           return observableOf([]);
         })
       ).subscribe((data) => {
@@ -197,7 +200,7 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   }
 
   export(advanced) {
-    if(advanced) {
+    if (advanced) {
       alert('WIP');
     } else {
       return this.timeSheetService.downloadAllUserTimeSheets(this.filters, true,

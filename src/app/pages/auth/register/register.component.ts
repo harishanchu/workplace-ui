@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
 
       this.authService.register(user).subscribe(
         data => {
-          this.notificationService.error('Registration successful. Please verify your email to login', '', true);
+          this.notificationService.success('Registration successful. Please verify your email to login', '', true);
           this.router.navigate(['/login']);
         },
         error => {

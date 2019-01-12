@@ -51,7 +51,8 @@
           <button mat-menu-item (click)="exportTimeSheets()" >Basic format</button>
           <button mat-menu-item (click)="exportTimeSheets(true)" >Advanced format</button>
         </mat-menu>-->
-        <button mat-button color="primary" (click)="exportTimeSheets()" [disabled]="grid.dataSource._renderData.getValue().length == 0">
+        <button mat-button color="primary" (click)="exportTimeSheets()"
+                [disabled]="grid.dataSource._renderData.getValue().length == 0">
           <mat-icon aria-label="Download">get_app</mat-icon>
           Download
         </button>

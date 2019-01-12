@@ -5,6 +5,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {TaskService} from '../../../../services/task.service';
+import {NotificationService} from '../../../../services/notification.service';
 
 @Component({
   selector: 'app-task-grid',
@@ -19,6 +20,8 @@ export class TaskGridComponent implements AfterViewInit {
     'project': 'project.name'
   };
   static filterOpertors = ['!=', '=', '>', '<'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   private enableRowSelection = true;
   private enableGridFooter = true;
   private displayedColumns = ['select', 'description', 'type', 'client', 'project', 'status'];
@@ -60,10 +63,8 @@ export class TaskGridComponent implements AfterViewInit {
   private filters: any = {};
   private advancedFilterTooltip;
   @ViewChild('table') private table;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private notificationService: NotificationService) {
     this.advancedFilterTooltip =
       'Supports filtering of fileds: ' +
       Object.keys(TaskGridComponent.filterableFields).join(', ') +
@@ -90,6 +91,8 @@ export class TaskGridComponent implements AfterViewInit {
         }),
         catchError((err, caught): any => {
           this.loading = false;
+          this.notificationService.error('Failed to load tasks grid');
+
           return observableOf([]);
         })
       ).subscribe((data) => {

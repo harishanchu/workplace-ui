@@ -30,7 +30,8 @@ export class MainToolbarComponent implements OnInit {
         this.router.navigate(['/login']);
       },
       error => {
-        this.notificationService.error(error.error.error.message);
+        this.authService.clearAuthData();
+        this.router.navigate(['/login']);
       }
     );
   }

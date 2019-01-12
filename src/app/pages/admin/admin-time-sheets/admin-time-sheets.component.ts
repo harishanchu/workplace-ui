@@ -52,7 +52,11 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
          * (In case of edit client will be loaded already).
          */
         this.populateProjectsBasedOnClient();
+      }, error => {
+        this.notificationService.error('Failed to load projects');
       });
+    }, error => {
+      this.notificationService.error('Failed to load clients');
     });
   }
 

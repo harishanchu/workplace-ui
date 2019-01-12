@@ -5,6 +5,7 @@ import {ChartEvent, ChartType} from 'ng-chartist';
 import {AppService} from '../../services/app.service';
 import {UserStats} from '../../models/UserStats';
 import {Globals} from '../../globals';
+import {NotificationService} from '../../services/notification.service';
 
 export interface Chart {
   type: ChartType;
@@ -71,7 +72,7 @@ export class DsashboardComponent implements OnInit {
     }
   };
 
-  constructor(private appService: AppService, private globals: Globals) {
+  constructor(private appService: AppService, private globals: Globals, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -87,7 +88,8 @@ export class DsashboardComponent implements OnInit {
           this.stats = stats;
           this.refreshChartData();
         },
-        err => {
+        error => {
+          this.notificationService.error('Failed to load stats');
         },
         () => {
           this.loading = false;

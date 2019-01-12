@@ -3,6 +3,7 @@ import {MatDialogRef, MatTableDataSource} from '@angular/material';
 import {Task} from '../../../../models/task';
 import {SelectionModel} from '@angular/cdk/collections';
 import {TimeSheetService} from '../../../../services/time-sheet.service';
+import {NotificationService} from '../../../../services/notification.service';
 
 @Component({
   selector: 'app-open-tasks-list',
@@ -17,7 +18,7 @@ export class OpenTasksListComponent implements OnInit {
   @ViewChild('table') private table;
 
   constructor(private timeSheetService: TimeSheetService,
-              public dialogRef: MatDialogRef<OpenTasksListComponent>) {
+              public dialogRef: MatDialogRef<OpenTasksListComponent>, private notificationService: NotificationService) {
   }
 
   ngOnInit() {
@@ -32,7 +33,8 @@ export class OpenTasksListComponent implements OnInit {
         tasks => {
           this.dataSource.data = tasks;
         },
-        err => {
+        error => {
+          this.notificationService.error('Failed to load open tasks');
         },
         () => {
           this.loading = false;

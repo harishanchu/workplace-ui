@@ -3,19 +3,20 @@
     <app-time-sheet-grid-info [gridSelection]="this.selection" [panel]="infoPanel"></app-time-sheet-grid-info>
   </mat-drawer>
   <mat-drawer-content class="timesheet-grid-container">
-      <div class="timesheet-grid-header">
-        <mat-form-field *ngIf="!advancedFilter">
-          <input matInput (keyup)="applyLocalFilter($event.target.value)" placeholder="Filter time sheets">
-        </mat-form-field>
-        <tag-input [matTooltip]="advancedFilterTooltip" [(ngModel)]="filterValue" [modelAsStrings]="true"
-                   secondaryPlaceholder="Filter time sheets" placeholder="+ Add more filters" #filterInput
-                   *ngIf="advancedFilter" (onAdd)="advancedFilterChange()" (onRemove)="advancedFilterChange()"
-                   [validators]="filterValidator" [errorMessages]="filterErrorMessages">
-          <!--<tag-input-dropdown [autocompleteItems]="['iTem1', 'item2', 'item3']"></tag-input-dropdown>-->
-        </tag-input>
-      </div>
-      <div class="time-sheet-grid-body">
-      <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear matSortDirection="asc">
+    <div class="timesheet-grid-header">
+      <mat-form-field *ngIf="!advancedFilter">
+        <input matInput (keyup)="applyLocalFilter($event.target.value)" placeholder="Filter time sheets">
+      </mat-form-field>
+      <tag-input [matTooltip]="advancedFilterTooltip" [(ngModel)]="filterValue" [modelAsStrings]="true"
+                 secondaryPlaceholder="Filter time sheets" placeholder="+ Add more filters" #filterInput
+                 *ngIf="advancedFilter" (onAdd)="advancedFilterChange()" (onRemove)="advancedFilterChange()"
+                 [validators]="filterValidator" [errorMessages]="filterErrorMessages">
+        <!--<tag-input-dropdown [autocompleteItems]="['iTem1', 'item2', 'item3']"></tag-input-dropdown>-->
+      </tag-input>
+    </div>
+    <div class="time-sheet-grid-body">
+      <mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear
+                 matSortDirection="asc">
 
         <!-- Checkbox Column -->
         <ng-container matColumnDef="select" *ngIf="enableRowSelection">
@@ -46,7 +47,8 @@
               displayedColumnsProperties[column].title: column | titlecase}}
             </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{displayedColumnsProperties[column] &&
-              displayedColumnsProperties[column].formatter? displayedColumnsProperties[column].formatter(element[column]):
+              displayedColumnsProperties[column].formatter?
+              displayedColumnsProperties[column].formatter(element[column]):
               element[column]}}
             </mat-cell>
             <ng-container *ngIf="enableGridFooter">
@@ -78,8 +80,9 @@
                      [length]="totalCount"
                      [pageSize]="10"
                      [pageSizeOptions]="[5, 10, 20]"
-                     [showFirstLastButtons]="true" [style.display]="dataSource._renderData.getValue().length == 0 ? 'none' : ''">
+                     [showFirstLastButtons]="true"
+                     [style.display]="dataSource._renderData.getValue().length == 0 ? 'none' : ''">
       </mat-paginator>
-      </div>
+    </div>
   </mat-drawer-content>
 </mat-drawer-container>

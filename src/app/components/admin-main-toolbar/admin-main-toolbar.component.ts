@@ -26,10 +26,10 @@ export class AdminMainToolbarComponent implements OnInit {
   logout() {
     this.authService.logout().subscribe(
       data => {
-        this.router.navigate(['/login']);
       },
       error => {
-        this.notificationService.error(error.error.error.message);
+        this.authService.clearAuthData();
+        this.router.navigate(['/login']);
       }
     );
   }

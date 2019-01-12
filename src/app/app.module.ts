@@ -52,7 +52,7 @@ import {TasksComponent} from './pages/tasks/tasks.component';
 import {TaskGridComponent} from './pages/tasks/components/task-grid/task-grid.component';
 import {TaskService} from './services/task.service';
 import {TaskEntryComponent} from './pages/tasks/components/task-entry/task-entry.component';
-import { ConfirmComponent } from './components/confirm/confirm.component';
+import {ConfirmComponent} from './components/confirm/confirm.component';
 
 @NgModule({
   declarations: [

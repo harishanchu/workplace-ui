@@ -23,7 +23,7 @@ export class AppService {
     };
   }
 
-  getClientConfig () {
+  getClientConfig() {
     return this.http.get('config');
   }
 
