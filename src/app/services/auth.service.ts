@@ -2,7 +2,7 @@ import {map, tap} from 'rxjs/operators';
 import {EventEmitter, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Storage} from '../helpers/storage';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Profile} from '../models/Profile';
 
 // import { User } from './user';
@@ -75,6 +75,16 @@ export class AuthService {
         return response;
       }
     ));
+  }
+
+  forgotPassword(email): Observable<any> {
+    return this.http.post('users/reset', {email});
+  }
+
+  resetPassword(password, token): Observable<any> {
+    return this.http.put('users/reset-password', {newPassword: password}, {
+      headers: new HttpHeaders().set('Authorization', token),
+    });
   }
 
   getAuthData() {

@@ -31,7 +31,7 @@
 
       <div class="form-header">
         <h1>Sign in</h1>
-        <p>With your {{globals.appName}} Account</p>
+        <p>With your {{globals.appName}} account</p>
       </div>
 
       <form (ngSubmit)="login()" [formGroup]="form">
@@ -48,7 +48,7 @@
             <mat-error *ngIf="hasError('password'); let error">{{error}}</mat-error>
           </mat-form-field>
 
-          <a routerLink="." mat-button color="primary" fxFlexAlign="end" class="forgot-btn">Forgot password?</a>
+          <a routerLink="/forgot" mat-button color="primary" fxFlexAlign="end" class="forgot-btn">Forgot password?</a>
 
         </mat-card-content>
 

@@ -15,8 +15,15 @@ import {AdminDashboardComponent} from './pages/admin/admin-dashboard/admin-dashb
 import {AdminConfigurationComponent} from './pages/admin/admin-configuration/admin-configuration.component';
 import {ProfileComponent} from './pages/profile/profile.component';
 import {TasksComponent} from './pages/tasks/tasks.component';
+import {ServerErrorComponent} from './pages/errors/server-error/server-error.component';
+import {ForgotComponent} from './pages/auth/forgot/forgot.component';
+import {ResetComponent} from './pages/auth/reset/reset.component';
 
 const routes: Routes = [
+  {
+    path: 'errors/500',
+    component: ServerErrorComponent
+  },
   {
     path: '',
     component: HomeLayoutComponent,
@@ -46,6 +53,8 @@ const routes: Routes = [
     canActivate: [GuestGuard],
     children: [
       {path: 'login', component: LoginComponent},
+      {path: 'forgot', component: ForgotComponent},
+      {path: 'resetpassword/:token', component: ResetComponent},
       {path: 'register', component: RegisterComponent}
     ]
   },

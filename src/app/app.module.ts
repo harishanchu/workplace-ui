@@ -53,6 +53,9 @@ import {TaskGridComponent} from './pages/tasks/components/task-grid/task-grid.co
 import {TaskService} from './services/task.service';
 import {TaskEntryComponent} from './pages/tasks/components/task-entry/task-entry.component';
 import {ConfirmComponent} from './components/confirm/confirm.component';
+import { ServerErrorComponent } from './pages/errors/server-error/server-error.component';
+import { ForgotComponent } from './pages/auth/forgot/forgot.component';
+import { ResetComponent } from './pages/auth/reset/reset.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +85,10 @@ import {ConfirmComponent} from './components/confirm/confirm.component';
     TasksComponent,
     TaskGridComponent,
     TaskEntryComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ServerErrorComponent,
+    ForgotComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,
