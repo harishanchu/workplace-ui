@@ -13,14 +13,15 @@ import {NotificationService} from '../../../services/notification.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
-  private form: FormGroup;
-  private loading = false;
+export class LoginComponent extends ValidationMixin implements OnInit {
+  public form: FormGroup;
+  public loading = false;
   private returnUrl: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private globals: Globals,
+  constructor(private router: Router, private route: ActivatedRoute, public globals: Globals,
               private authService: AuthService, private fb: FormBuilder,
               private notificationService: NotificationService) {
+    super();
     this.form = fb.group({
       'email': ['', Validators.required],
       'password': ['', Validators.required]
@@ -48,5 +49,3 @@ export class LoginComponent implements OnInit {
     }
   }
 }
-
-Util.mixin(LoginComponent, [ValidationMixin]);

@@ -13,15 +13,15 @@ import {Task} from '../../../../models/task';
   templateUrl: './task-entry.component.html',
   styleUrls: ['./task-entry.component.scss']
 })
-export class TaskEntryComponent implements OnInit {
-  private title;
-  private form: FormGroup;
+export class TaskEntryComponent extends ValidationMixin implements OnInit {
+  public title;
+  public form: FormGroup;
   private editFormData;
   private gridCmp;
   private type: string;
-  private clients = <any>[];
-  private projects = <any>[];
-  private taskTypes = <any>[];
+  public clients = <any>[];
+  public projects = <any>[];
+  public taskTypes = <any>[];
   private projectsUnfiltered = <any>[];
 
   constructor(public dialogRef: MatDialogRef<TaskEntryComponent>,
@@ -30,6 +30,7 @@ export class TaskEntryComponent implements OnInit {
               private taskService: TaskService,
               private notificationService: NotificationService,
               private appService: AppService) {
+    super();
     this.title = data.title;
     this.type = data.type;
     this.gridCmp = data.gridCmp;
@@ -114,5 +115,3 @@ export class TaskEntryComponent implements OnInit {
     );
   }
 }
-
-Util.mixin(TaskEntryComponent, [ValidationMixin]);

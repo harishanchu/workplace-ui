@@ -10,8 +10,8 @@ import {TaskEntryComponent} from './components/task-entry/task-entry.component';
   styleUrls: ['./tasks.component.scss']
 })
 export class TasksComponent implements OnInit {
-  private title = 'Tasks';
-  @ViewChild('taskGrid') private grid;
+  public title = 'Tasks';
+  @ViewChild('taskGrid') public grid;
 
   constructor(public dialog: MatDialog, private taskService: TaskService,
               private notificationService: NotificationService) {

@@ -20,7 +20,7 @@ export class TimeSheetGridInfoComponent implements OnInit {
   private panelState: EventEmitter<boolean>;
   private isOpened: boolean;
   private infoLoaded = false;
-  private displayedColumns = ['description', 'status', 'count', 'duration'];
+  public displayedColumns = ['description', 'status', 'count', 'duration'];
   private displayedColumnsProperties = {
     duration: {
       formatter: Util.formatTimeDuration,
@@ -41,7 +41,7 @@ export class TimeSheetGridInfoComponent implements OnInit {
       title: 'Time sheet entries'
     }
   };
-  private dataSource = new MatTableDataSource();
+  public dataSource = new MatTableDataSource();
 
   constructor(private taskService: TaskService, private authService: AuthService) {
   }

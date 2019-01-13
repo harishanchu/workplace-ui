@@ -31,8 +31,9 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('infoPanel') private infoPanel;
-  private enableRowSelection = true;
-  private displayedColumns = ['select', 'date', 'user', 'client', 'project', 'description', 'type', 'comment', 'status', 'duration'];
+  public enableRowSelection = true;
+  public enableGridFooter = false;
+  public displayedColumns = ['select', 'date', 'user', 'client', 'project', 'description', 'type', 'comment', 'status', 'duration'];
   private displayedColumnsProperties = {
     date: {
       sortable: true,
@@ -80,14 +81,14 @@ export class AdminTimeSheetGridComponent implements AfterViewInit {
       sortable: true
     }
   };
-  private defaultSort = 'status';
+  public defaultSort = 'status';
   private refreshGrid = new EventEmitter();
-  private enablePagination = true;
-  private advancedFilter = true;
+  public enablePagination = true;
+  public advancedFilter = true;
   private totalCount = 0;
   private filterValue: any;
   private filters: any = {};
-  private filterErrorMessages = {
+  public filterErrorMessages = {
     'operator': 'Provided operator is not supported.',
     'key': 'Provided filter key is not supported',
     'error': 'Please provide a valid filter'

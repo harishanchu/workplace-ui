@@ -15,15 +15,16 @@ import {matchValidator} from '../../../validators/match.validator';
   templateUrl: './reset.component.html',
   styleUrls: ['./reset.component.scss']
 })
-export class ResetComponent implements OnInit {
-  private form: FormGroup;
-  private loading = false;
+export class ResetComponent extends ValidationMixin implements OnInit {
+  public form: FormGroup;
+  public loading = false;
   private returnUrl = '/login';
   private token: string;
 
-  constructor(private router: Router, private route: ActivatedRoute, private globals: Globals,
+  constructor(private router: Router, private route: ActivatedRoute, public globals: Globals,
               private authService: AuthService, private fb: FormBuilder,
               private notificationService: NotificationService) {
+    super();
     this.form = fb.group({
       'password': ['', [Validators.minLength(6), Validators.required]],
       'confirmPassword': ['', [Validators.required, matchValidator('password')]]
@@ -53,5 +54,3 @@ export class ResetComponent implements OnInit {
     }
   }
 }
-
-Util.mixin(ResetComponent, [ValidationMixin]);

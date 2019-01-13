@@ -1,7 +1,13 @@
 import {Injectable} from '@angular/core';
+import {environment} from '../environments/environment';
 
 @Injectable()
 export class Globals {
   appName = 'Workplace';
-  baseApiUrl = 'http://localhost:3000/api/v1/';
+  maxWorkHoursPerWeek = 0;
+  baseApiUrl: string
+
+  constructor() {
+    this.baseApiUrl = environment.baseApiUrl;
+  }
 }

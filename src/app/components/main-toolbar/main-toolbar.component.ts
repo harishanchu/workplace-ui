@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 
 import {AuthService} from '../../services/auth.service';
 import {NotificationService} from '../../services/notification.service';
+import {Profile} from '../../models/Profile';
 
 @Component({
   selector: 'app-main-toolbar',
@@ -11,9 +12,9 @@ import {NotificationService} from '../../services/notification.service';
   styleUrls: ['./main-toolbar.component.scss']
 })
 export class MainToolbarComponent implements OnInit {
-  private user: object;
+  public user: Profile;
 
-  constructor(private globals: Globals, private authService: AuthService, private router: Router,
+  constructor(public globals: Globals, public authService: AuthService, private router: Router,
               private notificationService: NotificationService) {
     this.user = this.authService.getUserDetails();
     this.authService.profileChange$.subscribe((user) => {

@@ -3,6 +3,7 @@ import {Globals} from '../../globals';
 import {AuthService} from '../../services/auth.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../services/notification.service';
+import {Profile} from '../../models/Profile';
 
 @Component({
   selector: 'app-admin-main-toolbar',
@@ -10,9 +11,9 @@ import {NotificationService} from '../../services/notification.service';
   styleUrls: ['../main-toolbar/main-toolbar.component.scss']
 })
 export class AdminMainToolbarComponent implements OnInit {
-  private user: object;
+  public user: Profile;
 
-  constructor(private globals: Globals, private authService: AuthService, private router: Router,
+  constructor(public globals: Globals, public authService: AuthService, private router: Router,
               private notificationService: NotificationService) {
     this.user = this.authService.getUserDetails();
     this.authService.profileChange$.subscribe((user) => {

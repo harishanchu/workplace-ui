@@ -14,7 +14,7 @@ export class OpenTasksListComponent implements OnInit {
   private displayedColumns = ['client', 'project', 'type', 'description'];
   private dataSource = new MatTableDataSource();
   private selection = new SelectionModel<Task>(true, []);
-  private loading = false;
+  public loading = false;
   @ViewChild('table') private table;
 
   constructor(private timeSheetService: TimeSheetService,

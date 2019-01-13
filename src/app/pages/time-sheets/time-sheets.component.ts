@@ -13,10 +13,10 @@ import {ConfirmComponent} from '../../components/confirm/confirm.component';
   styleUrls: ['./time-sheets.component.scss']
 })
 export class TimeSheetsComponent implements OnInit {
-  private title: string;
-  @ViewChild('timeSheetGrid') private grid;
-  @Input('date') private date: Date = new Date();
-  private maxDate: Date = new Date();
+  public title: string;
+  @ViewChild('timeSheetGrid') public grid;
+  @Input('date') public date: Date = new Date();
+  public maxDate: Date = new Date();
 
   constructor(public dialog: MatDialog, private datePipe: DatePipe,
               private timeSheetService: TimeSheetService,

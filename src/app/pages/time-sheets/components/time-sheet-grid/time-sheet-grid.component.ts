@@ -14,9 +14,11 @@ import {NotificationService} from '../../../../services/notification.service';
 })
 export class TimeSheetGridComponent implements OnInit {
   @ViewChild('infoPanel') private infoPanel;
-  private enableRowSelection = true;
-  private enableGridFooter = true;
-  private displayedColumns = ['select', 'client', 'project', 'description', 'comment', 'status', 'duration'];
+  public enableRowSelection = true;
+  public enablePagination = false;
+  public advancedFilter = false;
+  public enableGridFooter = true;
+  public displayedColumns = ['select', 'client', 'project', 'description', 'comment', 'status', 'duration'];
   private displayedColumnsProperties = {
     duration: {
       formatter: Util.formatTimeDuration
@@ -33,10 +35,10 @@ export class TimeSheetGridComponent implements OnInit {
       }
     }
   };
-  private defaultSort = 'status';
-  private dataSource = new MatTableDataSource();
-  private selection = new SelectionModel<TimeSheet>(true, []);
-  private loading = false;
+  public defaultSort = 'status';
+  public dataSource = new MatTableDataSource();
+  public selection = new SelectionModel<TimeSheet>(true, []);
+  public loading = false;
   private date;
   @ViewChild('table') private table;
 

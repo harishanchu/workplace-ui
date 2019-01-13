@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./admin-configuration.component.scss']
 })
 export class AdminConfigurationComponent implements OnInit {
-  private title = 'Configuration';
+  public title = 'Configuration';
 
   constructor() {
   }

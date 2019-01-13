@@ -16,8 +16,8 @@ export interface Chart {
   styleUrls: ['./admin-dashboard.component.scss']
 })
 export class AdminDashboardComponent implements OnInit {
-  private title = 'Dashboard';
-  private hoursChart = <Chart> {
+  public title = 'Dashboard';
+  public hoursChart = <Chart> {
     type: 'Line',
     options: {
       lineSmooth: Chartist.Interpolation.cardinal({
@@ -35,7 +35,7 @@ export class AdminDashboardComponent implements OnInit {
     }
   };
 
-  private resourceAllocationChart = <Chart> {
+  public resourceAllocationChart = <Chart> {
     data: {
       series: [20, 10, 30, 40]
     },
@@ -49,7 +49,7 @@ export class AdminDashboardComponent implements OnInit {
     type: 'Pie'
   };
 
-  private tasksChart = <Chart> {
+  public tasksChart = <Chart> {
     type: 'Line',
     data: {
       'labels': ['M', 'T', 'W', 'T', 'F'],

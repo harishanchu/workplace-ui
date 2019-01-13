@@ -34,7 +34,7 @@ export class ValidationMixin {
     return this[form];
   }
 
-  hasError(field, form) {
+  hasError(field, form = 'form') {
     const control = this.getForm(form).controls[field];
     let message = '';
 

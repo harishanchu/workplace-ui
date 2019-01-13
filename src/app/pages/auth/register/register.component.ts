@@ -14,13 +14,14 @@ import {NotificationService} from '../../../services/notification.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
-  private form: FormGroup;
-  private loading = false;
+export class RegisterComponent extends ValidationMixin implements OnInit {
+  public form: FormGroup;
+  public loading = false;
 
-  constructor(private router: Router, private globals: Globals,
+  constructor(private router: Router, public globals: Globals,
               private authService: AuthService, private fb: FormBuilder,
               private notificationService: NotificationService) {
+    super();
     this.form = fb.group({
       'name': ['', [Validators.required, Validators.min(3), Validators.max(30)]],
       'email': ['', Validators.required],
@@ -52,7 +53,4 @@ export class RegisterComponent implements OnInit {
       );
     }
   }
-
 }
-
-Util.mixin(RegisterComponent, [ValidationMixin]);

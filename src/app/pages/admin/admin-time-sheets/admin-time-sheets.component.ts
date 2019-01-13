@@ -12,13 +12,13 @@ import {Util} from '../../../helpers/util';
   styleUrls: ['../../time-sheets/time-sheets.component.scss', './admin-time-sheets.component.scss']
 })
 export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
-  private title: string;
-  private form;
-  private clients = <any>[];
-  private projects = <any>[];
+  public title: string;
+  public form;
+  public clients = <any>[];
+  public projects = <any>[];
   private projectsUnfiltered = <any>[];
-  @ViewChild('timeSheetGrid') private grid;
-  private maxDate: Date = new Date();
+  @ViewChild('timeSheetGrid') public grid;
+  public maxDate: Date = new Date();
 
   constructor(private timeSheetService: TimeSheetService,
               private notificationService: NotificationService,

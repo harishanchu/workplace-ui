@@ -7,8 +7,8 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./side-nav.component.scss']
 })
 export class SideNavComponent implements OnInit {
-  private navItemList;
-  private menuMode: string;
+  public navItemList;
+  public menuMode: string;
 
   constructor(private authService: AuthService) {
     this.navItemList = [

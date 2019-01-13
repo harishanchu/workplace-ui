@@ -6,6 +6,7 @@ import {merge, of as observableOf} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import {TaskService} from '../../../../services/task.service';
 import {NotificationService} from '../../../../services/notification.service';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-task-grid',
@@ -22,9 +23,9 @@ export class TaskGridComponent implements AfterViewInit {
   static filterOpertors = ['!=', '=', '>', '<'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  private enableRowSelection = true;
-  private enableGridFooter = true;
-  private displayedColumns = ['select', 'description', 'type', 'client', 'project', 'status'];
+  public enableRowSelection = true;
+  public enableGridFooter = true;
+  public displayedColumns = ['select', 'description', 'type', 'client', 'project', 'status'];
   private displayedColumnsProperties = {
     description: {
       sortable: true
@@ -53,16 +54,17 @@ export class TaskGridComponent implements AfterViewInit {
       }
     }
   };
-  private dataSource = new MatTableDataSource();
+  public dataSource = new MatTableDataSource();
   private selection = new SelectionModel<Task>(true, []);
-  private loading = true;
+  public loading = true;
   private refreshGrid = new EventEmitter();
-  private enablePagination = true;
+  public enablePagination = true;
   private totalCount = 0;
-  private filterValue: any;
+  public filterValue: any;
   private filters: any = {};
-  private advancedFilterTooltip;
+  public advancedFilterTooltip;
   @ViewChild('table') private table;
+  public filterErrorMessages = {};
 
   constructor(private taskService: TaskService, private notificationService: NotificationService) {
     this.advancedFilterTooltip =
@@ -152,5 +154,8 @@ export class TaskGridComponent implements AfterViewInit {
   reloadGrid() {
     this.selection.clear();
     this.loadGrid(this.filters);
+  }
+
+  filterValidator(control: FormControl) {
   }
 }

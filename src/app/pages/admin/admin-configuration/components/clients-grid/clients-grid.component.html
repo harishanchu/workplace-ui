@@ -22,7 +22,7 @@
           <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"></mat-row>
         </mat-table>
-        <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'" fxFlex>
+        <div class="empty-msg" [style.display]="dataSource.filteredData.length == 0 ? '' : 'none'" fxFlex>
           No items to display
         </div>
         <mat-paginator *ngIf="enablePagination === true" #paginator

@@ -8,14 +8,14 @@ import {SelectionModel} from '@angular/cdk/collections';
   styleUrls: ['./clients-grid.component.scss']
 })
 export class ClientsGridComponent implements OnInit {
-  private displayedColumns = ['sl.no', 'name'];
+  public displayedColumns = ['sl.no', 'name'];
   private displayedColumnsTitles = {};
-  private defaultSort = 'name';
-  private dataSource = new MatTableDataSource();
+  public defaultSort = 'name';
+  public dataSource = new MatTableDataSource();
   private selection = new SelectionModel(true, []);
-  private loading = false;
+  public loading = false;
   private date;
-  private enablePagination = true;
+  public enablePagination = true;
   @ViewChild('table') private table;
 
   constructor() {

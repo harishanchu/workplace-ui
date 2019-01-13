@@ -12,9 +12,9 @@ import {NotificationService} from '../../services/notification.service';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit {
-  private form: FormGroup;
-  private genders = [
+export class ProfileComponent extends ValidationMixin implements OnInit {
+  public form: FormGroup;
+  public genders = [
     {
       id: 'm',
       name: 'Male'
@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private authService: AuthService,
               private notificationService: NotificationService) {
+    super();
     this.form = fb.group({
       'name': ['', [Validators.required, Validators.min(3), Validators.max(30)]],
       'email': [''],
@@ -91,5 +92,3 @@ export class ProfileComponent implements OnInit {
     this.loadForm();
   }
 }
-
-Util.mixin(ProfileComponent, [ValidationMixin]);

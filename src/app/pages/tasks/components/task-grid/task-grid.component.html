@@ -48,7 +48,7 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"
                (click)="enableRowSelection && selection.toggle(row)"></mat-row>
     </mat-table>
-    <div class="empty-msg" [style.display]="dataSource._renderData.getValue().length == 0 ? '' : 'none'">
+    <div class="empty-msg" [style.display]="dataSource.filteredData.length == 0 ? '' : 'none'">
       No items to display
     </div>
     <mat-paginator *ngIf="enablePagination === true" #paginator
@@ -56,7 +56,7 @@
                    [pageSize]="10"
                    [pageSizeOptions]="[5, 10, 20]"
                    [showFirstLastButtons]="true"
-                   [style.display]="dataSource._renderData.getValue().length == 0 ? 'none' : ''">
+                   [style.display]="dataSource.filteredData.length == 0 ? 'none' : ''">
     </mat-paginator>
   </div>
 </div>

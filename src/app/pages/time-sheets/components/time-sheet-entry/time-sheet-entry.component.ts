@@ -16,19 +16,19 @@ import {TaskService} from '../../../../services/task.service';
   templateUrl: './time-sheet-entry.component.html',
   styleUrls: ['./time-sheet-entry.component.scss']
 })
-export class TimeSheetEntryComponent implements OnInit {
-  private title;
+export class TimeSheetEntryComponent extends ValidationMixin implements OnInit {
+  public title;
   private date;
-  private form: FormGroup;
+  public form: FormGroup;
   private editFormData;
   private gridCmp;
   private type: string;
-  private taskId;
-  private clients = <any>[];
-  private projects = <any>[];
-  private taskTypes = <any>[];
+  public taskId;
+  public clients = <any>[];
+  public projects = <any>[];
+  public taskTypes = <any>[];
   private projectsUnfiltered = <any>[];
-  private statuses = [
+  public statuses = [
     {name: 'Completed', value: 'completed'},
     {name: 'In Progress', value: 'inProgress'}
   ];
@@ -41,6 +41,7 @@ export class TimeSheetEntryComponent implements OnInit {
               private notificationService: NotificationService,
               private appService: AppService,
               public dialog: MatDialog) {
+    super();
     this.title = data.title;
     this.type = data.type;
     this.gridCmp = data.gridCmp;
@@ -251,5 +252,3 @@ export class TimeSheetEntryComponent implements OnInit {
     return Util.formatTimeDuration(value);
   }
 }
-
-Util.mixin(TimeSheetEntryComponent, [ValidationMixin]);

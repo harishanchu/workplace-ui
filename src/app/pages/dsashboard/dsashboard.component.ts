@@ -21,13 +21,13 @@ export interface Chart {
   styleUrls: ['./dsashboard.component.scss']
 })
 export class DsashboardComponent implements OnInit {
-  private title = 'Dashboard';
-  private loading = false;
-  private stats = {} as UserStats;
-  private hoursChartCaption: string;
-  private tasksChartCaption: string;
-  private resourceAllocationChartCaption: string;
-  private hoursChart = <Chart> {
+  public title = 'Dashboard';
+  public loading = false;
+  public stats = {} as UserStats;
+  public hoursChartCaption: string;
+  public tasksChartCaption: string;
+  public resourceAllocationChartCaption: string;
+  public hoursChart = <Chart> {
     type: 'Line',
     options: {
       lineSmooth: Chartist.Interpolation.cardinal({
@@ -42,7 +42,7 @@ export class DsashboardComponent implements OnInit {
       'series': []
     }
   };
-  private resourceAllocationChart = <Chart> {
+  public resourceAllocationChart = <Chart> {
     data: {
       series: []
     },
@@ -64,7 +64,7 @@ export class DsashboardComponent implements OnInit {
     },
     type: 'Pie'
   };
-  private tasksChart = <Chart> {
+  public tasksChart = <Chart> {
     type: 'Line',
     data: {
       'labels': [],
@@ -72,7 +72,7 @@ export class DsashboardComponent implements OnInit {
     }
   };
 
-  constructor(private appService: AppService, private globals: Globals, private notificationService: NotificationService) {
+  constructor(private appService: AppService, public globals: Globals, private notificationService: NotificationService) {
   }
 
   ngOnInit() {

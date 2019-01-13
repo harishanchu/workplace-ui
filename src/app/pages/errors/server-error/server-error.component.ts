@@ -8,7 +8,7 @@ import {Component, OnInit} from '@angular/core';
 })
 
 export class ServerErrorComponent implements OnInit {
-  private loading = true;
+  public loading = true;
 
   constructor() {
     setTimeout(() => this.loading = false, 1000);

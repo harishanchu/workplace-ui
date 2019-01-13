@@ -4,7 +4,7 @@
 <mat-tab-group>
   <mat-tab label="Task summary">
     <mat-card class="message-card info margin-top-20"
-              [style.display]="dataSource._renderData.getValue().length != 0 ? 'none' : 'block'">
+              [style.display]="dataSource.filteredData.length != 0 ? 'none' : 'block'">
       <div class="icon">
         <mat-icon>info</mat-icon>
       </div>
@@ -12,7 +12,7 @@
     </mat-card>
 
     <mat-table #table [dataSource]="dataSource"
-               [style.display]="dataSource._renderData.getValue().length != 0 ? '' : 'none'">
+               [style.display]="dataSource.filteredData.length != 0 ? '' : 'none'">
       <!-- Rest of the Columns -->
       <ng-container *ngFor="let column of displayedColumns; index as i">
         <ng-container [matColumnDef]="column">
@@ -40,7 +40,7 @@
       <mat-row *matRowDef="let row; columns: displayedColumns;"
                (click)="enableRowSelection && selection.toggle(row)"></mat-row>
       <mat-footer-row *matFooterRowDef="displayedColumns"
-                      [style.display]="dataSource._renderData.getValue().length > 1 ? '' : 'none'"></mat-footer-row>
+                      [style.display]="dataSource.filteredData.length > 1 ? '' : 'none'"></mat-footer-row>
     </mat-table>
   </mat-tab>
 </mat-tab-group>
