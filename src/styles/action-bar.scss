@@ -1,4 +1,4 @@
-.action-bar {
+.action-bar, .grid-action-bar mat-toolbar-row {
   .action-bar-title {
     font-weight: 400;
     letter-spacing: .005em;
@@ -37,5 +37,15 @@
         padding: 2px;
       }
     }
+  }
+}
+
+.grid-action-bar {
+  min-height: 51px;
+  mat-toolbar-row {
+    height: 51px;
+  }
+  .action-bar-title {
+    font-size: 17px;
   }
 }

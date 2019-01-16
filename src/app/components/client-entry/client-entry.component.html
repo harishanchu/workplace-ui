@@ -1,0 +1,15 @@
+<div class="container">
+  <h3 mat-dialog-title>{{title}}</h3>
+  <form (ngSubmit)="onSaveFormClick()" [formGroup]="form">
+    <div class="form-body">
+      <mat-form-field class="full-width form-item">
+        <input matInput placeholder="Client name" formControlName="name">
+        <mat-error *ngIf="hasError('name'); let error">{{error}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-raised-button matDialogClose>Cancel</button>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+  </form>
+</div>

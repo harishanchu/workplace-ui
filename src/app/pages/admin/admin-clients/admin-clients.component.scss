@@ -1,0 +1,10 @@
+@import "../../../../styles/themeing";
+
+mat-toolbar {
+  border-bottom: $primaryBorder;
+  background: rgb(255, 255, 255);
+}
+
+.container-body {
+  padding: 10px;
+}

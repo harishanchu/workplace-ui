@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {UserStats} from '../models/UserStats';
 import {Observable} from 'rxjs/Rx';
+import {Client} from '../models/client';
 
 @Injectable()
 export class AppService {
@@ -53,5 +54,13 @@ export class AppService {
 
   getUserStats(userId): Observable<UserStats> {
     return this.http.get(`users/${userId}/stats`);
+  }
+
+  createClient (client: Client) {
+    return this.http.post(`clients`, client);
+  }
+
+  updateClient (id, client: Client) {
+    return this.http.post(`clients/${id}`, client);
   }
 }

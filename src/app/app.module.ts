@@ -41,11 +41,7 @@ import {AdminMainToolbarModule} from './components/admin-main-toolbar/admin-main
 import {AdminTimeSheetsComponent} from './pages/admin/admin-time-sheets/admin-time-sheets.component';
 import {AdminTimeSheetGridComponent} from './pages/admin/admin-time-sheets/components/admin-time-sheet-grid/admin-time-sheet-grid.component';
 import {AdminDashboardComponent} from './pages/admin/admin-dashboard/admin-dashboard.component';
-import {AdminConfigurationComponent} from './pages/admin/admin-configuration/admin-configuration.component';
-import {ClientsGridComponent} from './pages/admin/admin-configuration/components/clients-grid/clients-grid.component';
-import {ProjectsGridComponent} from './pages/admin/admin-configuration/components/projects-grid/projects-grid.component';
-import {TasksGridComponent} from './pages/admin/admin-configuration/components/tasks-grid/tasks-grid.component';
-import {EmployeesGridComponent} from './pages/admin/admin-configuration/components/employees-grid/employees-grid.component';
+
 import {ProfileComponent} from './pages/profile/profile.component';
 import {TimeSheetGridInfoComponent} from './pages/time-sheets/components/time-sheet-grid-info/time-sheet-grid-info.component';
 import {TasksComponent} from './pages/tasks/tasks.component';
@@ -53,9 +49,15 @@ import {TaskGridComponent} from './pages/tasks/components/task-grid/task-grid.co
 import {TaskService} from './services/task.service';
 import {TaskEntryComponent} from './pages/tasks/components/task-entry/task-entry.component';
 import {ConfirmComponent} from './components/confirm/confirm.component';
-import { ServerErrorComponent } from './pages/errors/server-error/server-error.component';
-import { ForgotComponent } from './pages/auth/forgot/forgot.component';
-import { ResetComponent } from './pages/auth/reset/reset.component';
+import {ServerErrorComponent} from './pages/errors/server-error/server-error.component';
+import {ForgotComponent} from './pages/auth/forgot/forgot.component';
+import {ResetComponent} from './pages/auth/reset/reset.component';
+import {AdminEmployeesComponent} from './pages/admin/admin-employees/admin-employees.component';
+import {AdminProjectsComponent} from './pages/admin/admin-projects/admin-projects.component';
+import {AdminClientsComponent} from './pages/admin/admin-clients/admin-clients.component';
+import {GridComponent} from './components/grid/grid.component';
+import { ClientEntryComponent } from './components/client-entry/client-entry.component';
+import { ProjectEntryComponent } from './components/project-entry/project-entry.component';
 
 @NgModule({
   declarations: [
@@ -75,11 +77,6 @@ import { ResetComponent } from './pages/auth/reset/reset.component';
     AdminTimeSheetsComponent,
     AdminTimeSheetGridComponent,
     AdminDashboardComponent,
-    AdminConfigurationComponent,
-    ClientsGridComponent,
-    ProjectsGridComponent,
-    TasksGridComponent,
-    EmployeesGridComponent,
     ProfileComponent,
     TimeSheetGridInfoComponent,
     TasksComponent,
@@ -88,7 +85,13 @@ import { ResetComponent } from './pages/auth/reset/reset.component';
     ConfirmComponent,
     ServerErrorComponent,
     ForgotComponent,
-    ResetComponent
+    ResetComponent,
+    AdminEmployeesComponent,
+    AdminProjectsComponent,
+    AdminClientsComponent,
+    GridComponent,
+    ClientEntryComponent,
+    ProjectEntryComponent
   ],
   imports: [
     BrowserModule,
@@ -132,7 +135,9 @@ import { ResetComponent } from './pages/auth/reset/reset.component';
     TimeSheetEntryComponent,
     OpenTasksListComponent,
     TaskEntryComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    ClientEntryComponent,
+    ProjectEntryComponent
   ],
   bootstrap: [AppComponent]
 })

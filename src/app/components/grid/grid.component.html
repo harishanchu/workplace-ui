@@ -1,0 +1,57 @@
+<mat-table #table [dataSource]="dataSource" matSort [matSortActive]="defaultSort" matSortDisableClear
+           matSortDirection="asc">
+
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select" *ngIf="enableRowSelection">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="$event ? masterToggle() : null"
+                    [checked]="selection.hasValue() && isAllSelected()"
+                    [indeterminate]="selection.hasValue() && !isAllSelected()"
+                    color="primary">&nbsp;
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)"
+                    color="primary">&nbsp;
+      </mat-checkbox>
+    </mat-cell>
+    <mat-footer-cell *matFooterCellDef></mat-footer-cell>
+  </ng-container>
+
+  <!-- Rest of the Columns -->
+  <ng-container *ngFor="let column of displayedColumns; index as i">
+    <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
+      <mat-header-cell *matHeaderCellDef
+                       [mat-sort-header]="displayedColumnsProperties[column] && displayedColumnsProperties[column].sortField? displayedColumnsProperties[column].sortField: column"
+                       [disabled]="!displayedColumnsProperties[column] || !displayedColumnsProperties[column].sortable ? '' : null">
+        {{displayedColumnsProperties[column] && displayedColumnsProperties[column].title?
+        displayedColumnsProperties[column].title: column | titlecase}}
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{displayedColumnsProperties[column] &&
+        displayedColumnsProperties[column].formatter?
+        displayedColumnsProperties[column].formatter(element[column]):
+        element[column]}}
+      </mat-cell>
+    </ng-container>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"
+           (click)="enableRowSelection && selection.toggle(row)"></mat-row>
+  <ng-container *ngIf="enableGridFooter">
+    <mat-footer-row *matFooterRowDef="displayedColumns"
+                    [style.display]="dataSource.filteredData.length != 0 ? '' : 'none'"></mat-footer-row>
+  </ng-container>
+</mat-table>
+<div class="empty-msg" [style.display]="dataSource.filteredData.length == 0 ? '' : 'none'">
+  No items to display
+</div>
+<mat-paginator *ngIf="enablePagination === true" #paginator
+               [length]="totalCount"
+               [pageSize]="10"
+               [pageSizeOptions]="[5, 10, 20]"
+               [showFirstLastButtons]="true"
+               [style.display]="dataSource.filteredData.length == 0 ? 'none' : ''">
+</mat-paginator>
