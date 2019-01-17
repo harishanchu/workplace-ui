@@ -12,9 +12,8 @@ import {Client} from '../../models/client';
   templateUrl: './client-entry.component.html',
   styleUrls: ['./client-entry.component.scss']
 })
-export class ClientEntryComponent  extends ValidationMixin implements OnInit {
+export class ClientEntryComponent extends ValidationMixin implements OnInit {
   public title;
-  private date;
   public form: FormGroup;
   private editFormData;
   private gridCmp;
@@ -35,14 +34,14 @@ export class ClientEntryComponent  extends ValidationMixin implements OnInit {
 
     if (this.type === 'update') {
       this.editFormData = this.data.formData;
-      this.loadClientDataToForm(this.editFormData);
+      this.loadExistingDataToForm(this.editFormData);
     }
   }
 
   ngOnInit() {
   }
 
-  loadClientDataToForm(data) {
+  loadExistingDataToForm(data) {
     this.form.setValue({
       name: data.name
     });
@@ -57,14 +56,14 @@ export class ClientEntryComponent  extends ValidationMixin implements OnInit {
 
 
       if (this.type === 'new') {
-        this.createClient(client);
+        this.create(client);
       } else {
-        this.updateClient(client);
+        this.update(client);
       }
     }
   }
 
-  createClient(client: Client) {
+  create(client: Client) {
     this.appService.createClient(<Client>client).subscribe(
       data => {
         this.gridCmp.appendItem(data);

@@ -1,0 +1,13 @@
+.container {
+  .form-body {
+    max-height: 65vh;
+    overflow-y: auto;
+  }
+}
+.form-item {
+  font-size: 14px;
+  margin: 6px 0;
+  ::ng-deep.mat-form-field-infix {
+    width: 300px;
+  }
+}

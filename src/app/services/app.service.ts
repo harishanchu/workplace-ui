@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {UserStats} from '../models/UserStats';
 import {Observable} from 'rxjs/Rx';
 import {Client} from '../models/client';
+import {Project} from '../models/project';
 
 @Injectable()
 export class AppService {
@@ -56,11 +57,35 @@ export class AppService {
     return this.http.get(`users/${userId}/stats`);
   }
 
-  createClient (client: Client) {
+  createClient(client: Client) {
     return this.http.post(`clients`, client);
   }
 
-  updateClient (id, client: Client) {
-    return this.http.post(`clients/${id}`, client);
+  updateClient(id, client: Client) {
+    return this.http.patch(`clients/${id}`, client);
+  }
+
+  deleteClient(client) {
+    if (client.length === 1) {
+      return this.http.delete(`clients/${client[0].id}`);
+    } else {
+      return this.http.request('delete', 'clients', {body: {id: client.map(clientItem => clientItem.id)}});
+    }
+  }
+
+  createProject(project: Project) {
+    return this.http.post(`projects`, project);
+  }
+
+  updateProject(id, project: Project) {
+    return this.http.patch(`projects/${id}`, project);
+  }
+
+  deleteProject(project) {
+    if (project.length === 1) {
+      return this.http.delete(`projects/${project[0].id}`);
+    } else {
+      return this.http.request('delete', 'projects', {body: {id: project.map(projectItem => projectItem.id)}});
+    }
   }
 }
