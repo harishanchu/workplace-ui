@@ -6,11 +6,14 @@ mat-toolbar {
 }
 
 .container-body {
-  padding: 10px 0 10px 10px;
-  height: calc(100% - 75px)
+  padding: 10px 10px 10px 10px;
+  height: calc(100vh - #{$topbarHeight} - 64px);
 }
 
-.container-body-inner {
-  padding-right: 10px;
-  overflow: auto;
+.grid-container {
+  overflow: hidden;
+
+  ::ng-deep mat-table {
+    height: calc(100% - 51px);
+  }
 }

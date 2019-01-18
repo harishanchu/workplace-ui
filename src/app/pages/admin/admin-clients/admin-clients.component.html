@@ -5,71 +5,69 @@
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
-<div class="container-body">
-  <div fxLayout="row" fxLayoutAlign="space-between stretch" fxLayoutGap="10px" class="container-body-inner">
-    <div fxFlex="50" class="clients-grid mat-elevation-z2">
-      <mat-toolbar class="grid-action-bar">
-        <mat-toolbar-row>
-          <div class="action-bar-title">
-            Clients
-          </div>
-          <div class="action-bar-tools" fxLayout="row" fxFlex="1 1 auto" fxLayoutAlign="end center">
-            <button mat-button color="primary" (click)="addEntry(clientsGrid)">
-              <mat-icon aria-label="add">add_circle_outline</mat-icon>
-              Add new
-            </button>
-            <button mat-button color="primary" (click)="editEntry(clientsGrid, clientSelectionModel.selected[0])"
-                    [disabled]="clientSelectionModel.selected.length !== 1">
-              <mat-icon aria-label="Edit">edit</mat-icon>
-              Edit
-            </button>
+<div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px" class="container-body">
+  <div fxFlex="50" class="grid-container mat-elevation-z2">
+    <mat-toolbar class="grid-action-bar">
+      <mat-toolbar-row>
+        <div class="action-bar-title">
+          Clients
+        </div>
+        <div class="action-bar-tools" fxLayout="row" fxFlex="1 1 auto" fxLayoutAlign="end center">
+          <button mat-button color="primary" (click)="addEntry(clientsGrid)">
+            <mat-icon aria-label="add">add_circle_outline</mat-icon>
+            Add new
+          </button>
+          <button mat-button color="primary" (click)="editEntry(clientsGrid, clientSelectionModel.selected[0])"
+                  [disabled]="clientSelectionModel.selected.length !== 1">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+            Edit
+          </button>
 
-            <button mat-button color="primary" (click)="deleteEntry(clientsGrid, clientSelectionModel.selected)"
-                    [disabled]="clientSelectionModel.selected.length == 0">
-              <mat-icon aria-label="Delete">delete</mat-icon>
-              Delete
-            </button>
-          </div>
-        </mat-toolbar-row>
-      </mat-toolbar>
-      <app-grid #clientsGrid
-                type="client"
-                [selection]="clientSelectionModel"
-                [displayedColumns]="clientDisplayedColumns"
-                [retrieveRecords]="retrieveRecords.bind(this, clientsGrid)"
-      ></app-grid>
-    </div>
-    <div fxFlex="50" class="clients-grid mat-elevation-z2">
-      <mat-toolbar class="grid-action-bar">
-        <mat-toolbar-row>
-          <div class="action-bar-title">
-            Projects
-          </div>
-          <div class="action-bar-tools" fxLayout="row" fxFlex="1 1 auto" fxLayoutAlign="end center">
-            <button mat-button color="primary" (click)="addEntry(projectsGrid)">
-              <mat-icon aria-label="add">add_circle_outline</mat-icon>
-              Add new
-            </button>
-            <button mat-button color="primary" (click)="editEntry(projectsGrid, projectSelectionModel.selected[0])"
-                    [disabled]="projectSelectionModel.selected.length !== 1">
-              <mat-icon aria-label="Edit">edit</mat-icon>
-              Edit
-            </button>
+          <button mat-button color="primary" (click)="deleteEntry(clientsGrid, clientSelectionModel.selected)"
+                  [disabled]="clientSelectionModel.selected.length == 0">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+            Delete
+          </button>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <app-grid #clientsGrid
+              type="client"
+              [selection]="clientSelectionModel"
+              [displayedColumns]="clientDisplayedColumns"
+              [retrieveRecords]="retrieveRecords.bind(this, clientsGrid)"
+    ></app-grid>
+  </div>
+  <div fxFlex="50" class="grid-container mat-elevation-z2">
+    <mat-toolbar class="grid-action-bar">
+      <mat-toolbar-row>
+        <div class="action-bar-title">
+          Projects
+        </div>
+        <div class="action-bar-tools" fxLayout="row" fxFlex="1 1 auto" fxLayoutAlign="end center">
+          <button mat-button color="primary" (click)="addEntry(projectsGrid)">
+            <mat-icon aria-label="add">add_circle_outline</mat-icon>
+            Add new
+          </button>
+          <button mat-button color="primary" (click)="editEntry(projectsGrid, projectSelectionModel.selected[0])"
+                  [disabled]="projectSelectionModel.selected.length !== 1">
+            <mat-icon aria-label="Edit">edit</mat-icon>
+            Edit
+          </button>
 
-            <button mat-button color="primary" (click)="deleteEntry(projectsGrid, projectSelectionModel.selected)"
-                    [disabled]="projectSelectionModel.selected.length == 0">
-              <mat-icon aria-label="Delete">delete</mat-icon>
-              Delete
-            </button>
-          </div>
-        </mat-toolbar-row>
-      </mat-toolbar>
-      <app-grid #projectsGrid
-                type="project"
-                [selection]="projectSelectionModel"
-                [displayedColumns]="projectDisplayedColumns"
-                [retrieveRecords]="retrieveRecords.bind(this, projectsGrid)"
-      ></app-grid>
-    </div>
+          <button mat-button color="primary" (click)="deleteEntry(projectsGrid, projectSelectionModel.selected)"
+                  [disabled]="projectSelectionModel.selected.length == 0">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+            Delete
+          </button>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <app-grid #projectsGrid
+              type="project"
+              [selection]="projectSelectionModel"
+              [displayedColumns]="projectDisplayedColumns"
+              [retrieveRecords]="retrieveRecords.bind(this, projectsGrid)"
+    ></app-grid>
   </div>
 </div>
