@@ -1,7 +1,6 @@
 {
   "name": "workplace",
   "version": "1.0.0",
-  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -58,5 +57,12 @@
     "ts-node": "~5.0.1",
     "tslint": "~5.11.0",
     "typescript": "~2.7.2"
-  }
+  },
+  "author": "Harish Anchu <harishanchu@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/harishanchu/workplace-ui"
+  },
+  "license": "MIT",
+  "description": "Timesheet application UI"
 }
