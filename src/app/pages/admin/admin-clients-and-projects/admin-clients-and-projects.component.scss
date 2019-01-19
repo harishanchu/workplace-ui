@@ -18,10 +18,13 @@ mat-toolbar {
     height: calc(100% - 51px);
   }
 
-  app-grid[ng-reflect-enable-pagination] {
+  .projects-grid {
     ::ng-deep {
       .grid-container {
         height: calc(100% - 108px);
+      }
+      mat-table mat-row:last-of-type {
+        border-bottom-width: 0px;
       }
     }
   }

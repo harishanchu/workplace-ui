@@ -15,5 +15,8 @@ app-grid {
 
   ::ng-deep .grid-container {
     height: calc(100% - 51px);
+    mat-table mat-row:last-of-type {
+      border-bottom-width: 0px;
+    }
   }
 }

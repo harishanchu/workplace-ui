@@ -62,10 +62,4 @@
   .mat-paginator {
     border-top: $primaryBorder;
   }
-
-  app-grid[ng-reflect-enable-pagination] {
-    mat-table mat-row:last-of-type {
-      border-bottom-width: 0px;
-    }
-  }
 }

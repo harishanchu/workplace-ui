@@ -88,7 +88,7 @@ export class AuthService {
   }
 
   getAuthData() {
-    return this.store.get(this.authStorageKey) || {};
+    return this.store.get(this.authStorageKey) || {user: {}};
   }
 
 
@@ -101,7 +101,7 @@ export class AuthService {
   }
 
   isAdmin() {
-    return (this.getAuthData().user.roles).indexOf('admin') > -1;
+    return (this.getAuthData().user.roles || []).indexOf('admin') > -1;
   }
 
   getUserEmail() {
