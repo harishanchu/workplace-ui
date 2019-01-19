@@ -14,7 +14,8 @@ import {NotificationService} from '../../../../../services/notification.service'
 @Component({
   selector: 'app-admin-time-sheet-grid',
   templateUrl: '../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.html',
-  styleUrls: ['../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss']
+  styleUrls: ['../../../../time-sheets/components/time-sheet-grid/time-sheet-grid.component.scss',
+    './admin-time-sheets-grid.component.scss']
 })
 export class AdminTimeSheetGridComponent implements AfterViewInit {
   static filterableFields = {

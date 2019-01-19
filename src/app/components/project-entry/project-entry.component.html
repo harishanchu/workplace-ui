@@ -3,6 +3,14 @@
   <form (ngSubmit)="onSaveFormClick()" [formGroup]="form">
     <div class="form-body">
       <mat-form-field class="full-width form-item">
+        <mat-select placeholder="Client" formControlName="clientId" cdkFocusInitial>
+          <mat-option *ngFor="let client of clients" [value]="client.id">
+            {{client.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="hasError('clientId'); let error">{{error}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width form-item">
         <input matInput placeholder="Project name" formControlName="name">
         <mat-error *ngIf="hasError('name'); let error">{{error}}</mat-error>
       </mat-form-field>

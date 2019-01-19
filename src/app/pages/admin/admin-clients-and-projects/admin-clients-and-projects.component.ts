@@ -11,16 +11,31 @@ import {ProjectEntryComponent} from '../../../components/project-entry/project-e
 import {ConfirmComponent} from '../../../components/confirm/confirm.component';
 
 @Component({
-  selector: 'app-admin-clients',
-  templateUrl: './admin-clients.component.html',
-  styleUrls: ['./admin-clients.component.scss']
+  selector: 'app-admin-clients-and-projects',
+  templateUrl: './admin-clients-and-projects.component.html',
+  styleUrls: ['./admin-clients-and-projects.component.scss']
 })
-export class AdminClientsComponent implements OnInit {
+export class AdminClientsAndProjectsComponent implements OnInit {
   public title = 'Clients & Projects';
   public clientSelectionModel = new SelectionModel<Client>(true, []);
   public clientDisplayedColumns = ['select', 'name'];
+  public clientDisplayedColumnsProperties = {
+    'name': {
+      sortable: true
+    }
+  };
   public projectSelectionModel = new SelectionModel<Client>(true, []);
-  public projectDisplayedColumns = ['select', 'name'];
+  public projectDisplayedColumns = ['select', 'name', 'client'];
+  public projectDisplayedColumnsProperties = {
+    'name': {
+      sortable: true
+    },
+    'client': {
+      sortable: true,
+      sortField: 'client.name',
+      formatter: (client: Client) => client && client.name || ''
+    }
+  };
 
   constructor(private appService: AppService, private notificationService: NotificationService,
               public dialog: MatDialog) {
@@ -29,10 +44,17 @@ export class AdminClientsComponent implements OnInit {
   ngOnInit() {
   }
 
-  retrieveRecords(grid) {
+  retrieveRecords(grid, options) {
     const type = grid.type;
+    const args = [options];
 
-    return this.appService[`get${type[0].toUpperCase()}${type.substr(1)}s`](false)
+    if (type === 'project') {
+      args.unshift(true);
+    } else {
+      args.unshift(false);
+    }
+
+    return this.appService[`get${type[0].toUpperCase()}${type.substr(1)}s`](...args)
       .pipe(
         catchError((err, caught): any => {
           this.notificationService.error(`Failed to load ${type}s`);
@@ -42,40 +64,44 @@ export class AdminClientsComponent implements OnInit {
       );
   }
 
-  addEntry(grid) {
+  addEntry(grid, clients = false) {
     let component;
+    let dialogData: any = {
+      title: 'Add new ' + grid.type,
+      type: 'new',
+      gridCmp: grid
+    };
 
     if (grid.type === 'client') {
       component = ClientEntryComponent;
     } else {
       component = ProjectEntryComponent;
+      dialogData.clients = clients;
     }
 
     const dialogRef = this.dialog.open(component, {
-      data: {
-        title: 'Add new ' + grid.type,
-        type: 'new',
-        gridCmp: grid
-      }
+      data: dialogData
     });
   }
 
-  editEntry(grid, client) {
+  editEntry(grid, data, clients = false) {
     let component;
+    let dialogData: any = {
+      title: 'Edit ' + grid.type,
+      type: 'update',
+      gridCmp: grid,
+      formData: data
+    };
 
     if (grid.type === 'client') {
       component = ClientEntryComponent;
     } else {
       component = ProjectEntryComponent;
+      dialogData.clients = clients;
     }
 
     const dialogRef = this.dialog.open(component, {
-      data: {
-        title: 'Edit ' + grid.type,
-        type: 'update',
-        gridCmp: grid,
-        formData: client
-      }
+      data: dialogData
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -53,11 +53,11 @@ import {ServerErrorComponent} from './pages/errors/server-error/server-error.com
 import {ForgotComponent} from './pages/auth/forgot/forgot.component';
 import {ResetComponent} from './pages/auth/reset/reset.component';
 import {AdminEmployeesComponent} from './pages/admin/admin-employees/admin-employees.component';
-import {AdminProjectsComponent} from './pages/admin/admin-projects/admin-projects.component';
-import {AdminClientsComponent} from './pages/admin/admin-clients/admin-clients.component';
 import {GridComponent} from './components/grid/grid.component';
-import { ClientEntryComponent } from './components/client-entry/client-entry.component';
-import { ProjectEntryComponent } from './components/project-entry/project-entry.component';
+import {ClientEntryComponent} from './components/client-entry/client-entry.component';
+import {ProjectEntryComponent} from './components/project-entry/project-entry.component';
+import {AdminClientsAndProjectsComponent} from './pages/admin/admin-clients-and-projects/admin-clients-and-projects.component';
+import {UserService} from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -87,11 +87,10 @@ import { ProjectEntryComponent } from './components/project-entry/project-entry.
     ForgotComponent,
     ResetComponent,
     AdminEmployeesComponent,
-    AdminProjectsComponent,
-    AdminClientsComponent,
     GridComponent,
     ClientEntryComponent,
-    ProjectEntryComponent
+    ProjectEntryComponent,
+    AdminClientsAndProjectsComponent
   ],
   imports: [
     BrowserModule,
@@ -129,7 +128,8 @@ import { ProjectEntryComponent } from './components/project-entry/project-entry.
     TaskService,
     DatePipe,
     AppService,
-    AuthAdminGuard
+    AuthAdminGuard,
+    UserService
   ],
   entryComponents: [
     TimeSheetEntryComponent,

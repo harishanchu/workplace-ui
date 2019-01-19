@@ -38,7 +38,12 @@
 
 .grid-body {
   overflow: auto;
-  height: calc(100% - 79px);
+  height: calc(100% - 134px);
+  ::ng-deep {
+    mat-table mat-row:last-of-type {
+      border-bottom-width: 0px;
+    }
+  }
 }
 
 .mat-header-row {

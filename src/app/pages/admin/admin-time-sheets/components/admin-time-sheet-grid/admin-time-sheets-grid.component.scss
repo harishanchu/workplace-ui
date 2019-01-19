@@ -1,0 +1,12 @@
+@import "../../../../../../styles/themeing";
+
+.time-sheet-grid-body {
+  height: calc(100vh - #{$topbarHeight} - 198px);
+  ::ng-deep {
+    mat-table mat-row:last-of-type {
+      border-bottom-width: 0px;
+    }
+  }
+}
+
+

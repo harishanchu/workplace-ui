@@ -7,7 +7,8 @@
 .form-item {
   font-size: 14px;
   margin: 6px 0;
+  max-width: 300px;
   ::ng-deep.mat-form-field-infix {
-    width: 300px;
+    //width: 300px;
   }
 }

@@ -1,43 +1,44 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
-import {SelectionModel} from '@angular/cdk/collections';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
+import {merge} from 'rxjs';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss']
 })
-export class GridComponent implements OnInit {
+export class GridComponent implements AfterViewInit {
   public enableRowSelection = true;
-  public enablePagination = false;
+  @Input() enablePagination = false;
+  @Input() enableFilter = false;
+  private totalCount = 0;
   public advancedFilter = false;
   // public enableGridFooter = true;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   @Input() public type: string;
   @Input() public displayedColumns: Array<string>;
-  private displayedColumnsProperties = {
-    status: {
-      formatter: function (value: string) {
-        if (value === 'inProgress') {
-          value = 'In progress';
-        } else {
-          value = 'Completed';
-        }
-
-        return value;
-      }
-    }
-  };
+  @Input() public displayedColumnsProperties = {};
   public defaultSort = false;
   public dataSource = new MatTableDataSource();
   @Input() public selection;
   @Input() public retrieveRecords;
-  public loading = false;
+  public loading = true;
 
   constructor() {
   }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.loadGrid();
+
+    const eventsToListen: Array<any> = [this.sort.sortChange];
+
+    if (this.enablePagination) {
+      eventsToListen.push(this.paginator.page);
+      this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    }
+
+    merge(...eventsToListen).subscribe(() => this.loadGrid());
   }
 
   /**
@@ -76,8 +77,30 @@ export class GridComponent implements OnInit {
   }
 
   loadGrid() {
-    this.retrieveRecords().subscribe(records => {
-      this.dataSource.data = records;
+    let options: any = {};
+    this.loading = true;
+
+    if (this.sort.active) {
+      options = {
+        'sort': this.sort.active,
+        'sortDirection': this.sort.direction
+      };
+    }
+
+    if (this.enablePagination) {
+      options.pageIndex = this.paginator.pageIndex;
+      options.pageSize = this.paginator.pageSize;
+    }
+
+    this.retrieveRecords(options).subscribe(data => {
+      if(!this.enablePagination) {
+        this.dataSource.data = data;
+      } else {
+        this.dataSource.data = data.items;
+        this.totalCount = data.total;
+      }
+
+      this.loading = false;
     });
   }
 }

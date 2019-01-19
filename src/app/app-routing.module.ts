@@ -17,9 +17,8 @@ import {TasksComponent} from './pages/tasks/tasks.component';
 import {ServerErrorComponent} from './pages/errors/server-error/server-error.component';
 import {ForgotComponent} from './pages/auth/forgot/forgot.component';
 import {ResetComponent} from './pages/auth/reset/reset.component';
-import {AdminClientsComponent} from './pages/admin/admin-clients/admin-clients.component';
-import {AdminProjectsComponent} from './pages/admin/admin-projects/admin-projects.component';
 import {AdminEmployeesComponent} from './pages/admin/admin-employees/admin-employees.component';
+import {AdminClientsAndProjectsComponent} from './pages/admin/admin-clients-and-projects/admin-clients-and-projects.component';
 
 const routes: Routes = [
   {
@@ -46,8 +45,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'time-sheets', pathMatch: 'full'},
       {path: 'dashboard', component: AdminDashboardComponent},
       {path: 'time-sheets', component: AdminTimeSheetsComponent},
-      {path: 'clients', component: AdminClientsComponent},
-      {path: 'projects', component: AdminProjectsComponent},
+      {path: 'clients-and-projects', component: AdminClientsAndProjectsComponent},
       {path: 'employees', component: AdminEmployeesComponent}
     ]
   },

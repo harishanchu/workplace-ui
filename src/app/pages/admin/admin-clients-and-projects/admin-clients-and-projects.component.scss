@@ -1,0 +1,28 @@
+@import "../../../../styles/themeing";
+
+mat-toolbar {
+  border-bottom: $primaryBorder;
+  background: rgb(255, 255, 255);
+}
+
+.container-body {
+  padding: 10px 10px 10px 10px;
+  height: calc(100vh - #{$topbarHeight} - 64px);
+}
+
+.grid-container {
+  overflow: hidden;
+  position: relative;
+
+  ::ng-deep .grid-container {
+    height: calc(100% - 51px);
+  }
+
+  app-grid[ng-reflect-enable-pagination] {
+    ::ng-deep {
+      .grid-container {
+        height: calc(100% - 108px);
+      }
+    }
+  }
+}

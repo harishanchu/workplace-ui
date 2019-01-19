@@ -14,8 +14,7 @@ export class AdminSideNavComponent implements OnInit {
     this.navItemList = [
       // {title: 'Dashboard', url: '/admin/dashboard', icon: 'dashboard'},
       {title: 'Time Sheets', url: '/admin/time-sheets', icon: 'av_timer'},
-      {title: 'Clients', url: '/admin/clients', icon: 'business'},
-      {title: 'Projects', url: '/admin/projects', icon: 'assignment'},
+      {title: 'Clients & Projects', url: '/admin/clients-and-projects', icon: 'business'},
       {title: 'Employees', url: '/admin/employees', icon: 'people'}
     ];
     this.menuMode = this.authService.getUserPreference('menuMode') || 'full';

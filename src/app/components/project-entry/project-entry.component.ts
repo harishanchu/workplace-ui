@@ -18,6 +18,7 @@ export class ProjectEntryComponent extends ValidationMixin implements OnInit {
   private editFormData;
   private gridCmp;
   private type: string;
+  public clients = <any>[];
 
   constructor(public dialogRef: MatDialogRef<ProjectEntryComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
@@ -29,7 +30,9 @@ export class ProjectEntryComponent extends ValidationMixin implements OnInit {
     this.title = data.title;
     this.type = data.type;
     this.gridCmp = data.gridCmp;
+    this.clients = data.clients;
     this.form = fb.group({
+      'clientId': ['', Validators.required],
       'name': ['', [Validators.required, Validators.min(3), Validators.max(20)]]
     });
 
@@ -44,6 +47,7 @@ export class ProjectEntryComponent extends ValidationMixin implements OnInit {
 
   loadExistingDataToForm(data) {
     this.form.setValue({
+      clientId: data.clientId,
       name: data.name
     });
   }
@@ -53,7 +57,7 @@ export class ProjectEntryComponent extends ValidationMixin implements OnInit {
       const formValues = this.form.value;
       const project: Project = {
         name: formValues.name,
-        clientId: 1
+        clientId: formValues.clientId
       };
 
 

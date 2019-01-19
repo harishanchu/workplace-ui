@@ -6,7 +6,10 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <div fxLayout="row" fxLayoutAlign="space-between" fxLayoutGap="10px" class="container-body">
-  <div fxFlex="50" class="grid-container mat-elevation-z2">
+  <div fxFlex="40" class="grid-container mat-elevation-z2">
+    <div class="load-mask" *ngIf="clientsGrid.loading">
+      <mat-spinner diameter=40></mat-spinner>
+    </div>
     <mat-toolbar class="grid-action-bar">
       <mat-toolbar-row>
         <div class="action-bar-title">
@@ -36,20 +39,24 @@
               [selection]="clientSelectionModel"
               [displayedColumns]="clientDisplayedColumns"
               [retrieveRecords]="retrieveRecords.bind(this, clientsGrid)"
+              [displayedColumnsProperties]="clientDisplayedColumnsProperties"
     ></app-grid>
   </div>
-  <div fxFlex="50" class="grid-container mat-elevation-z2">
+  <div fxFlex class="grid-container mat-elevation-z2">
+    <div class="load-mask" *ngIf="projectsGrid.loading">
+      <mat-spinner diameter=40></mat-spinner>
+    </div>
     <mat-toolbar class="grid-action-bar">
       <mat-toolbar-row>
         <div class="action-bar-title">
           Projects
         </div>
         <div class="action-bar-tools" fxLayout="row" fxFlex="1 1 auto" fxLayoutAlign="end center">
-          <button mat-button color="primary" (click)="addEntry(projectsGrid)">
+          <button mat-button color="primary" (click)="addEntry(projectsGrid, clientsGrid.dataSource.data)">
             <mat-icon aria-label="add">add_circle_outline</mat-icon>
             Add new
           </button>
-          <button mat-button color="primary" (click)="editEntry(projectsGrid, projectSelectionModel.selected[0])"
+          <button mat-button color="primary" (click)="editEntry(projectsGrid, projectSelectionModel.selected[0], clientsGrid.dataSource.data)"
                   [disabled]="projectSelectionModel.selected.length !== 1">
             <mat-icon aria-label="Edit">edit</mat-icon>
             Edit
@@ -68,6 +75,8 @@
               [selection]="projectSelectionModel"
               [displayedColumns]="projectDisplayedColumns"
               [retrieveRecords]="retrieveRecords.bind(this, projectsGrid)"
+              [displayedColumnsProperties]="projectDisplayedColumnsProperties"
+              [enablePagination]=true
     ></app-grid>
   </div>
 </div>

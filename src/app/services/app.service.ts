@@ -29,21 +29,79 @@ export class AppService {
     return this.http.get('config');
   }
 
-  getClients(includeProjects = false) {
+  getClients(includeProjects = false, options: any = {}) {
     const params: any = {};
+    const httpOptions: any = {};
 
     if (includeProjects) {
-      params.filter = JSON.stringify({include: 'projects'});
+      params.filter = {include: 'projects'};
     }
 
-    return this.http.get('clients', {params}).pipe(map(res => {
-      return res;
+    if (options.sort) {
+      params.filter = params.filter || {};
+      params.filter.order = [options.sort + ' ' + options.sortDirection, 'id asc'];
+    }
+
+    if (options.pageIndex !== undefined) {
+      params.filter = params.filter || {};
+      params.filter.skip = options.pageIndex * options.pageSize;
+      params.filter.limit = options.pageSize;
+      httpOptions.observe = 'response';
+    }
+
+    if (params.filter) {
+      params.filter = JSON.stringify(params.filter);
+    }
+
+    httpOptions.params = params;
+
+    return this.http.get('clients', httpOptions).pipe(map(res => {
+      if (options.pageIndex !== undefined) {
+        return {
+          items: res.body,
+          total: res.headers.get('x-total-count') || 0
+        };
+      } else {
+        return res;
+      }
     }));
   }
 
-  getProjects() {
-    return this.http.get('projects').pipe(map(res => {
-      return res;
+  getProjects(includeClients = false, options: any = {}) {
+    const params: any = {};
+    const httpOptions: any = {};
+
+    if (includeClients) {
+      params.filter = {include: 'client'};
+    }
+
+    if (options.sort) {
+      params.filter = params.filter || {};
+      params.filter.order = [options.sort + ' ' + options.sortDirection, 'id asc'];
+    }
+
+    if (options.pageIndex !== undefined) {
+      params.filter = params.filter || {};
+      params.filter.skip = options.pageIndex * options.pageSize;
+      params.filter.limit = options.pageSize;
+      httpOptions.observe = 'response';
+    }
+
+    if (params.filter) {
+      params.filter = JSON.stringify(params.filter);
+    }
+
+    httpOptions.params = params;
+
+    return this.http.get('projects', httpOptions).pipe(map(res => {
+      if (options.pageIndex !== undefined) {
+        return {
+          items: res.body,
+          total: res.headers.get('x-total-count') || 0
+        };
+      } else {
+        return res;
+      }
     }));
   }
 
