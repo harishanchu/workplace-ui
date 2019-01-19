@@ -28,7 +28,8 @@ export class AdminEmployeesComponent implements OnInit {
     }
   };
 
-  constructor(private notificationService: NotificationService, private userService: UserService) { }
+  constructor(private notificationService: NotificationService, private userService: UserService) {
+  }
 
   ngOnInit() {
   }
@@ -44,7 +45,7 @@ export class AdminEmployeesComponent implements OnInit {
       );
   }
 
-  promoteAsAdmin (grid, id) {
+  promoteAsAdmin(grid, id) {
     this.userService.promoteAsAdmin(id).subscribe(
       data => {
         this.notificationService.success('Promted user as Admin');

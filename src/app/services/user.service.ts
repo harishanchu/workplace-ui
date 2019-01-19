@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   getUsers(includeRoles = false, options: any = {}) {
     const params: any = {};

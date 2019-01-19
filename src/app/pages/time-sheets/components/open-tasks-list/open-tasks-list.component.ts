@@ -11,10 +11,10 @@ import {NotificationService} from '../../../../services/notification.service';
   styleUrls: ['./open-tasks-list.component.scss']
 })
 export class OpenTasksListComponent implements OnInit {
+  public loading = false;
   private displayedColumns = ['client', 'project', 'type', 'description'];
   private dataSource = new MatTableDataSource();
   private selection = new SelectionModel<Task>(true, []);
-  public loading = false;
   @ViewChild('table') private table;
 
   constructor(private timeSheetService: TimeSheetService,

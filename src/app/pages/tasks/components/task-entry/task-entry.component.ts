@@ -5,7 +5,6 @@ import {TaskService} from '../../../../services/task.service';
 import {NotificationService} from '../../../../services/notification.service';
 import {AppService} from '../../../../services/app.service';
 import {ValidationMixin} from '../../../../mixins/validation.mixin';
-import {Util} from '../../../../helpers/util';
 import {Task} from '../../../../models/task';
 
 @Component({
@@ -16,12 +15,12 @@ import {Task} from '../../../../models/task';
 export class TaskEntryComponent extends ValidationMixin implements OnInit {
   public title;
   public form: FormGroup;
-  private editFormData;
-  private gridCmp;
-  private type: string;
   public clients = <any>[];
   public projects = <any>[];
   public taskTypes = <any>[];
+  private editFormData;
+  private gridCmp;
+  private type: string;
   private projectsUnfiltered = <any>[];
 
   constructor(public dialogRef: MatDialogRef<TaskEntryComponent>,

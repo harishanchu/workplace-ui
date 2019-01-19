@@ -5,7 +5,6 @@ import {Globals} from '../../../globals';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../../services/auth.service';
 import {ValidationMixin} from '../../../mixins/index';
-import {Util} from '../../../helpers/util';
 import {NotificationService} from '../../../services/notification.service';
 
 @Component({

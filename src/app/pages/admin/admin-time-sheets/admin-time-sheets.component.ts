@@ -16,9 +16,9 @@ export class AdminTimeSheetsComponent implements OnInit, AfterViewInit {
   public form;
   public clients = <any>[];
   public projects = <any>[];
-  private projectsUnfiltered = <any>[];
   @ViewChild('timeSheetGrid') public grid;
   public maxDate: Date = new Date();
+  private projectsUnfiltered = <any>[];
 
   constructor(private timeSheetService: TimeSheetService,
               private notificationService: NotificationService,

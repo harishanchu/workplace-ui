@@ -26,6 +26,12 @@ export class TaskGridComponent implements AfterViewInit {
   public enableRowSelection = true;
   public enableGridFooter = true;
   public displayedColumns = ['select', 'description', 'type', 'client', 'project', 'status'];
+  public dataSource = new MatTableDataSource();
+  public loading = true;
+  public enablePagination = true;
+  public filterValue: any;
+  public advancedFilterTooltip;
+  public filterErrorMessages = {};
   private displayedColumnsProperties = {
     description: {
       sortable: true
@@ -54,17 +60,11 @@ export class TaskGridComponent implements AfterViewInit {
       }
     }
   };
-  public dataSource = new MatTableDataSource();
   private selection = new SelectionModel<Task>(true, []);
-  public loading = true;
   private refreshGrid = new EventEmitter();
-  public enablePagination = true;
   private totalCount = 0;
-  public filterValue: any;
   private filters: any = {};
-  public advancedFilterTooltip;
   @ViewChild('table') private table;
-  public filterErrorMessages = {};
 
   constructor(private taskService: TaskService, private notificationService: NotificationService) {
     this.advancedFilterTooltip =

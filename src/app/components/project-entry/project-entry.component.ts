@@ -15,10 +15,10 @@ import {Project} from '../../models/project';
 export class ProjectEntryComponent extends ValidationMixin implements OnInit {
   public title;
   public form: FormGroup;
+  public clients = <any>[];
   private editFormData;
   private gridCmp;
   private type: string;
-  public clients = <any>[];
 
   constructor(public dialogRef: MatDialogRef<ProjectEntryComponent>,
               @Inject(MAT_DIALOG_DATA) public data,

@@ -18,20 +18,20 @@ import {TaskService} from '../../../../services/task.service';
 })
 export class TimeSheetEntryComponent extends ValidationMixin implements OnInit {
   public title;
-  private date;
   public form: FormGroup;
-  private editFormData;
-  private gridCmp;
-  private type: string;
   public taskId;
   public clients = <any>[];
   public projects = <any>[];
   public taskTypes = <any>[];
-  private projectsUnfiltered = <any>[];
   public statuses = [
     {name: 'Completed', value: 'completed'},
     {name: 'In Progress', value: 'inProgress'}
   ];
+  private date;
+  private editFormData;
+  private gridCmp;
+  private type: string;
+  private projectsUnfiltered = <any>[];
 
   constructor(public dialogRef: MatDialogRef<TimeSheetEntryComponent>,
               @Inject(MAT_DIALOG_DATA) public data,

@@ -13,12 +13,16 @@ import {NotificationService} from '../../../../services/notification.service';
   styleUrls: ['./time-sheet-grid.component.scss']
 })
 export class TimeSheetGridComponent implements OnInit {
-  @ViewChild('infoPanel') private infoPanel;
   public enableRowSelection = true;
   public enablePagination = false;
   public advancedFilter = false;
   public enableGridFooter = true;
   public displayedColumns = ['select', 'client', 'project', 'description', 'comment', 'status', 'duration'];
+  public defaultSort = 'status';
+  public dataSource = new MatTableDataSource();
+  public selection = new SelectionModel<TimeSheet>(true, []);
+  public loading = false;
+  @ViewChild('infoPanel') private infoPanel;
   private displayedColumnsProperties = {
     duration: {
       formatter: Util.formatTimeDuration
@@ -35,10 +39,6 @@ export class TimeSheetGridComponent implements OnInit {
       }
     }
   };
-  public defaultSort = 'status';
-  public dataSource = new MatTableDataSource();
-  public selection = new SelectionModel<TimeSheet>(true, []);
-  public loading = false;
   private date;
   @ViewChild('table') private table;
 

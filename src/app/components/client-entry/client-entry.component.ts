@@ -18,6 +18,7 @@ export class ClientEntryComponent extends ValidationMixin implements OnInit {
   private editFormData;
   private gridCmp;
   private type: string;
+
   constructor(public dialogRef: MatDialogRef<ClientEntryComponent>,
               @Inject(MAT_DIALOG_DATA) public data,
               private fb: FormBuilder,

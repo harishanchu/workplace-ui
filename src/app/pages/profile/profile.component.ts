@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {Validators} from '../../helpers/Validators';
 import {ValidationMixin} from '../../mixins/validation.mixin';
-import {Util} from '../../helpers/util';
 import {Profile} from '../../models/Profile';
 import {NotificationService} from '../../services/notification.service';
 

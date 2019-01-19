@@ -17,10 +17,11 @@ import {TaskService} from '../../../../services/task.service';
 export class TimeSheetGridInfoComponent implements OnInit {
   @Input() gridSelection: SelectionModel<TimeSheet>;
   @Input() panel: MatDrawer;
+  public displayedColumns = ['description', 'status', 'count', 'duration'];
+  public dataSource = new MatTableDataSource();
   private panelState: EventEmitter<boolean>;
   private isOpened: boolean;
   private infoLoaded = false;
-  public displayedColumns = ['description', 'status', 'count', 'duration'];
   private displayedColumnsProperties = {
     duration: {
       formatter: Util.formatTimeDuration,
@@ -41,7 +42,6 @@ export class TimeSheetGridInfoComponent implements OnInit {
       title: 'Time sheet entries'
     }
   };
-  public dataSource = new MatTableDataSource();
 
   constructor(private taskService: TaskService, private authService: AuthService) {
   }

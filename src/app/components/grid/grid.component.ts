@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
 import {merge} from 'rxjs';
 
@@ -11,7 +11,6 @@ export class GridComponent implements AfterViewInit {
   public enableRowSelection = true;
   @Input() enablePagination = false;
   @Input() enableFilter = false;
-  private totalCount = 0;
   public advancedFilter = false;
   // public enableGridFooter = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -24,6 +23,7 @@ export class GridComponent implements AfterViewInit {
   @Input() public selection;
   @Input() public retrieveRecords;
   public loading = true;
+  private totalCount = 0;
 
   constructor() {
   }
@@ -93,7 +93,7 @@ export class GridComponent implements AfterViewInit {
     }
 
     this.retrieveRecords(options).subscribe(data => {
-      if(!this.enablePagination) {
+      if (!this.enablePagination) {
         this.dataSource.data = data;
       } else {
         this.dataSource.data = data.items;

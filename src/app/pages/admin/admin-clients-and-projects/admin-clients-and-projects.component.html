@@ -56,7 +56,8 @@
             <mat-icon aria-label="add">add_circle_outline</mat-icon>
             Add new
           </button>
-          <button mat-button color="primary" (click)="editEntry(projectsGrid, projectSelectionModel.selected[0], clientsGrid.dataSource.data)"
+          <button mat-button color="primary"
+                  (click)="editEntry(projectsGrid, projectSelectionModel.selected[0], clientsGrid.dataSource.data)"
                   [disabled]="projectSelectionModel.selected.length !== 1">
             <mat-icon aria-label="Edit">edit</mat-icon>
             Edit

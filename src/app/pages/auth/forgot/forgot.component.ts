@@ -5,7 +5,6 @@ import {Globals} from '../../../globals';
 import {AuthService} from '../../../services/auth.service';
 import {NotificationService} from '../../../services/notification.service';
 import {Validators} from '../../../helpers/Validators';
-import {Util} from '../../../helpers/util';
 import {ValidationMixin} from '../../../mixins/validation.mixin';
 
 @Component({

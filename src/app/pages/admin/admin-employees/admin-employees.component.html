@@ -15,11 +15,11 @@
 </mat-toolbar>
 <div fxLayout="column" class="container-body">
   <app-grid #userGrid
-    type="user"
-    [selection]="userSelectionModel"
-    [displayedColumns]="userDisplayedColumns"
-    [displayedColumnsProperties]="displayedColumnsProperties"
-    [retrieveRecords]="retrieveRecords.bind(this, userGrid)"
-    [enablePagination]=true
+            type="user"
+            [selection]="userSelectionModel"
+            [displayedColumns]="userDisplayedColumns"
+            [displayedColumnsProperties]="displayedColumnsProperties"
+            [retrieveRecords]="retrieveRecords.bind(this, userGrid)"
+            [enablePagination]=true
   ></app-grid>
 </div>
