@@ -34,7 +34,7 @@ export class UserService {
 
     httpOptions.params = params;
 
-    return this.http.get('users', httpOptions).pipe(map(res => {
+    return this.http.get('users', httpOptions).pipe(map((res: any) => {
       if (options.pageIndex !== undefined) {
         return {
           items: res.body,

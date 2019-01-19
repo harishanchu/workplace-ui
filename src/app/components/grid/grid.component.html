@@ -41,10 +41,6 @@
     <mat-header-row *matHeaderRowDef="displayedColumns;sticky:true"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"
              (click)="enableRowSelection && selection.toggle(row)"></mat-row>
-    <ng-container *ngIf="enableGridFooter">
-      <mat-footer-row *matFooterRowDef="displayedColumns"
-                      [style.display]="dataSource.filteredData.length != 0 ? '' : 'none'"></mat-footer-row>
-    </ng-container>
   </mat-table>
   <div class="empty-msg" [style.display]="dataSource.filteredData.length == 0 ? '' : 'none'">
     No items to display

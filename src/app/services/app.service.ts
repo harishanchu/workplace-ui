@@ -55,7 +55,7 @@ export class AppService {
 
     httpOptions.params = params;
 
-    return this.http.get('clients', httpOptions).pipe(map(res => {
+    return this.http.get('clients', httpOptions).pipe(map((res: any) => {
       if (options.pageIndex !== undefined) {
         return {
           items: res.body,
@@ -93,7 +93,7 @@ export class AppService {
 
     httpOptions.params = params;
 
-    return this.http.get('projects', httpOptions).pipe(map(res => {
+    return this.http.get('projects', httpOptions).pipe(map((res: any) => {
       if (options.pageIndex !== undefined) {
         return {
           items: res.body,
