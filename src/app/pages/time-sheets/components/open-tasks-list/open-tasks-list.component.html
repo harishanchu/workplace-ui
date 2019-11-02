@@ -5,9 +5,18 @@
     <mat-table #table [dataSource]="dataSource">
       <!-- Columns -->
       <ng-container *ngFor="let column of displayedColumns">
-        <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
+        <ng-container *ngIf="column !== 'select'" [matColumnDef]="column">
           <mat-header-cell *matHeaderCellDef> {{column | titlecase}}</mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
+          <ng-container *ngIf="column !== 'action'">
+            <mat-cell *matCellDef="let element"> {{element[column]}}</mat-cell>
+          </ng-container>
+          <ng-container *ngIf="column == 'action'">
+            <mat-cell *matCellDef="let element">
+              <button mat-icon-button matTooltip="Mark as done" (click)="closeTask(element.id)">
+                <mat-icon area-label="Close Task">done</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
         </ng-container>
       </ng-container>
 

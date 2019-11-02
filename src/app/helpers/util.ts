@@ -108,7 +108,7 @@ export class Util {
    * @param value
    */
   static objectSet(obj, path, value) {
-    if (typeof(path) === 'string') {
+    if (typeof (path) === 'string') {
       path = path.split('.');
     }
     if (!Util.isset(obj[path[0]])) {
@@ -122,7 +122,7 @@ export class Util {
   }
 
   static objectPush(obj, path, value) {
-    if (typeof(path) === 'string') {
+    if (typeof (path) === 'string') {
       path = path.split('.');
     }
     if (!Util.isset(obj[path[0]])) {
@@ -180,32 +180,34 @@ export class Util {
     filters.forEach(function (item) {
       const bits = item.match(/^\s*([a-z]+?)\s*([!=><]+)\s*([a-z0-9A-Z* ]+)$/);
 
-      bits[3] = bits[3].trim();
+      if (bits) {
+        bits[3] = bits[3].trim();
 
-      switch (bits[2]) {
-        case '=':
-          if (bits[3].indexOf('*') > -1) {
-            Util.objectSet(where, `${filterableFields[bits[1]]}.like`, bits[3].replace(/\*/g, '%'));
-          } else {
-            Util.objectPush(where, `${filterableFields[bits[1]]}.inq`, bits[3]);
-          }
-          break;
+        switch (bits[2]) {
+          case '=':
+            if (bits[3].indexOf('*') > -1) {
+              Util.objectSet(where, `${filterableFields[bits[1]]}.like`, bits[3].replace(/\*/g, '%'));
+            } else {
+              Util.objectPush(where, `${filterableFields[bits[1]]}.inq`, bits[3]);
+            }
+            break;
 
-        case '!=':
-          if (bits[3].indexOf('*') > -1) {
-            Util.objectSet(where, `${filterableFields[bits[1]]}.nlike`, bits[3].replace(/\*/g, '%'));
-          } else {
-            Util.objectPush(where, `${filterableFields[bits[1]]}.nin`, bits[3]);
-          }
-          break;
+          case '!=':
+            if (bits[3].indexOf('*') > -1) {
+              Util.objectSet(where, `${filterableFields[bits[1]]}.nlike`, bits[3].replace(/\*/g, '%'));
+            } else {
+              Util.objectPush(where, `${filterableFields[bits[1]]}.nin`, bits[3]);
+            }
+            break;
 
-        case '>':
-          Util.objectPush(where, `${filterableFields[bits[1]]}.gt`, bits[3]);
-          break;
+          case '>':
+            Util.objectPush(where, `${filterableFields[bits[1]]}.gt`, bits[3]);
+            break;
 
-        case '<':
-          Util.objectPush(where, `${filterableFields[bits[1]]}.lt`, bits[3]);
-          break;
+          case '<':
+            Util.objectPush(where, `${filterableFields[bits[1]]}.lt`, bits[3]);
+            break;
+        }
       }
     });
 

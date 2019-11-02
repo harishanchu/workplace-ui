@@ -82,20 +82,24 @@ export class TaskGridComponent implements AfterViewInit {
         switchMap(() => {
           this.loading = true;
           this.selection.clear();
-          return this.taskService.getCurrentUserTasks(this.filters, true,
-            this.sort.active, this.sort.direction, this.paginator.pageIndex, this.paginator.pageSize);
+          return this.taskService.getCurrentUserTasks(
+            this.filters, true,
+            this.sort.active, this.sort.direction,
+            this.paginator.pageIndex, this.paginator.pageSize
+          ).pipe(catchError(err => {
+            this.notificationService.error('Failed to load tasks grid');
+
+            return observableOf({
+              total: 0,
+              items: []
+            });
+          }));
         }),
         map(data => {
           this.loading = false;
           this.totalCount = data.total;
 
           return data.items;
-        }),
-        catchError((err, caught): any => {
-          this.loading = false;
-          this.notificationService.error('Failed to load tasks grid');
-
-          return observableOf([]);
         })
       ).subscribe((data) => {
       this.dataSource.data = data;

@@ -3,6 +3,7 @@ import {MatDialog} from '@angular/material';
 import {TaskService} from '../../services/task.service';
 import {NotificationService} from '../../services/notification.service';
 import {TaskEntryComponent} from './components/task-entry/task-entry.component';
+import {Task} from '../../models/task';
 
 @Component({
   selector: 'app-tasks',
@@ -44,6 +45,18 @@ export class TasksComponent implements OnInit {
     this.taskService.deleteTask(taskId).subscribe(
       data => {
         this.grid.reloadGrid();
+      },
+      error => {
+        this.notificationService.error(error.error.error.message);
+      }
+    );
+  }
+
+  updateStatus(taskId, status) {
+    this.taskService.updateTask(taskId, {status} as Task).subscribe(
+      data => {
+        this.grid.reloadGrid();
+        // this.grid.
       },
       error => {
         this.notificationService.error(error.error.error.message);

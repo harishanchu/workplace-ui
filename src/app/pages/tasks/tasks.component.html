@@ -16,11 +16,29 @@
           Edit
         </button>
 
-        <button mat-button color="primary" (click)="deleteEntry(grid.selection.selected[0].id)"
+        <button mat-button color="primary" (click)="deleteEntry(grid.selection.selected[0].status)"
                 [disabled]="grid.selection.selected.length !== 1">
           <mat-icon aria-label="Delete">delete</mat-icon>
           Delete
         </button>
+
+        <ng-container *ngIf="grid.selection.selected[0]">
+          <button mat-button color="primary" (click)="updateStatus(
+          grid.selection.selected[0].id,
+          grid.selection.selected[0].status === 'open'? 'closed': 'open'
+          )"
+                  [disabled]="grid.selection.selected.length !== 1">
+            <ng-container *ngIf="grid.selection.selected[0].status === 'open'">
+              <mat-icon aria-label="Close">close</mat-icon>
+              Close
+            </ng-container>
+
+            <ng-container *ngIf="grid.selection.selected[0].status === 'closed'">
+              <mat-icon aria-label="Open">done</mat-icon>
+              Open
+            </ng-container>
+          </button>
+        </ng-container>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>
